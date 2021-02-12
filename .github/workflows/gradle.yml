@@ -40,6 +40,7 @@ jobs:
       uses: EnricoMi/publish-unit-test-result-action@v1
       if: always()
       with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
         files: build/test-results/**/*.xml
     - name: Cleanup Gradle Cache
       # Remove some files from the Gradle cache, so they aren't cached by GitHub Actions.
