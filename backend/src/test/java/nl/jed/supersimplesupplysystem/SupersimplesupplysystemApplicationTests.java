@@ -8,7 +8,6 @@ class SupersimplesupplysystemApplicationTests {
 
 	@Test
 	void contextLoads() {
-		assert 1 + 3 == 2;
+		assert false;
 	}
-
 }
