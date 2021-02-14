@@ -34,8 +34,11 @@ jobs:
         key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
         restore-keys: |
           ${{ runner.os }}-gradle-
+    - run: 'echo "$WORKFLOW_IMAGE_PAT" > key'
+        env:
+          WORKFLOW_IMAGE_PAT: ${{secrets.WORKFLOW_IMAGE_PAT}}
     - name: Build with Gradle
-      run: ./gradlew build
+      run: ./gradlew ci
     - name: Publish Unit Test Results
       uses: EnricoMi/publish-unit-test-result-action@v1
       if: always()
