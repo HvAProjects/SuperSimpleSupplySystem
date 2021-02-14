@@ -4,12 +4,18 @@ plugins {
 	id 'java'
 	id 'jacoco'
 <<<<<<< HEAD
+<<<<<<< HEAD
 	id 'com.google.cloud.tools.jib' version '2.8.0'
 	id 'de.fuerstenau.buildconfig' version '1.1.8'
 	id 'idea'
 	id 'info.solidsoft.pitest' version '1.5.1'
 =======
 >>>>>>> Add test coverage check and unittest parser
+=======
+	id 'com.google.cloud.tools.jib' version '2.7.1'
+	id 'de.fuerstenau.buildconfig' version '1.1.8'
+	id 'idea'
+>>>>>>> Add docker image build and registry push to CI
 }
 
 group = 'nl.jed'
@@ -36,12 +42,21 @@ ext {
 		}
 		return stdout.toString().trim()
 	}
+<<<<<<< HEAD
 }
 
 buildConfig {
 	buildConfigField "String", "GitHash", "${getGitHash()}"
 }
 
+=======
+}
+
+buildConfig {
+	buildConfigField "String", "GitHash", "${getGitHash()}"
+}
+
+>>>>>>> Add docker image build and registry push to CI
 sourceSets.main.java.srcDirs += "build/gen/buildconfig/src/main"
 
 dependencies {
@@ -137,3 +152,24 @@ jacocoTestCoverageVerification {
 }
 
 check.dependsOn(jacocoTestCoverageVerification)
+
+tasks.register('ci'){
+	dependsOn tasks.build
+	dependsOn tasks.jib
+}
+
+jib {
+	to {
+		image = 'ghcr.io/hvaprojects/ssss_backend'
+		auth {
+			username = 'davidsoff'
+			password = file('key').text
+		}
+		tags = ["${getGitHash()}"]
+	}
+	container {
+		ports = ['8081']
+		labels = ['org.opencontainers.image.source':'https://github.com/HvAProjects/SuperSimpleSupplySystem']
+		format = 'OCI'
+	}
+}
