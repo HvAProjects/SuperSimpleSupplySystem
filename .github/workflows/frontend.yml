@@ -16,5 +16,6 @@ jobs:
         with:
           angular_project_dir: frontend/supersimplesupplysystem
           build_configuration: production
-          base_href: /my-project/
+          base_href: /SuperSimpleSupplySystem/
           deploy_branch: gh-pages
+          angular_dist_build_folder: docs
