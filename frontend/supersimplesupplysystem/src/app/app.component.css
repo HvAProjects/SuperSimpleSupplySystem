@@ -1,0 +1,13 @@
+
+.centered {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  font-family: "Montserrat";
+  text-transform: capitalize;
+  letter-spacing: -2px;
+
+}
+
+
