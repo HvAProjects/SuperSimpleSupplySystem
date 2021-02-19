@@ -71,7 +71,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .authenticationEntryPoint(new RestAuthenticationEntryPoint())
                 .and()
                 .authorizeRequests()
-                .antMatchers("/", "/error", "/api/all", "/api/auth/**", "/oauth2/**").permitAll()
+                .antMatchers("/", "/error", "/api/all", "/api/auth/**", "/oauth2/**", "/h2-console/**", "/api/household/**").permitAll()
                 .anyRequest()
                 .authenticated()
                 .and()
@@ -90,6 +90,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .successHandler(oAuth2AuthenticationSuccessHandler)
                 .failureHandler(oAuth2AuthenticationFailureHandler);
+
+                 http.headers().frameOptions().disable();
+
 
         // Add our custom Token based authentication filter
         http.addFilterBefore(tokenAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);

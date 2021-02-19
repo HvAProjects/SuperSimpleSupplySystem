@@ -1,18 +1,107 @@
 /* You can add global styles to this file, and also import other style files */
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
 
 body, html {
-  background: #34e89e; /* fallback for old browsers */
-  background: -webkit-linear-gradient(to top, #0f3443, #34e89e);
-  background: linear-gradient(to top, #0f3443, #34e89e);
+  background: #005AA7;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to bottom, #FFFDE4, #005AA7);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to bottom, #FFFDE4, #005AA7); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
   background-repeat: no-repeat;
   height: 100%
 }
 
 /*Fonts:*/
 @font-face {
-  font-family: "Montserrat";
+  font-family: "Montserrat", sans-serif;
   src: local("Montserrat"), url(./assets/fonts/Montserrat-Bold.ttf) format("truetype");
 }
 
+.h1{
+  font-family: "Montserrat", serif;
+  font-weight: bolder;
+  font-size: 28px !important;
+  color: #005AA7;
+}
 
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+
+/* tables */
+
+.ss-table{
+  width: 80%;
+  text-align: left;
+}
+
+.table-container{
+  display: flex;
+  justify-content: center
+}
+
+.th mat-header-cell{
+  text-align: center;
+}
+
+.bottombar{
+  margin-top: 20px;
+  width: 80% !important;
+
+}
+
+.align-right{
+  text-align: right;
+}
+
+/* icons */
+
+.tripleMenuIcon {
+  content: url("../src/assets/icons/triplemenu.svg");
+  height: 20px;
+  color: #ffffff;
+}
+
+
+/* cards */
+/* login */
+
+.ss-contain{
+  justify-content: center;
+  width: 50%;
+  margin: auto;
+  border-radius: 20px;
+}
+
+.ss-form{
+  padding: 20px;
+  border: 0.5px solid lightgray ;
+  width: 40rem ;
+  margin: auto;
+  border-radius: 5px;
+  background-color: whitesmoke;
+}
+
+.ss-input{
+  margin: auto;
+}
+
+.ss-horizontal{
+  width: 100%;
+  text-align: center;
+  border-bottom: 1px solid lightgray;
+  line-height: 0.1em;
+  margin: 10px 0 20px;
+  margin-top: 20px;
+}
+
+.ss-horizontal span{
+  background: whitesmoke;
+  padding:0 10px;
+}
+
+.ss-forgot{
+  font-size: 11px;
+}
 
