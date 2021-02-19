@@ -3,6 +3,6 @@ package nl.jed.supersimplesupplysystem.configuration;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 @Configuration
-@PropertySource("classpath:secrets.properties")
+@PropertySource(value = "classpath:secrets.properties", ignoreResourceNotFound = true)
 public class Secrets {
 }
