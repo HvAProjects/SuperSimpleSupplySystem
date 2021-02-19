@@ -142,10 +142,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 
 
-//    @Bean
-//    public ClientRegistrationRepository clientRegistrationRepository() {
-//        return null;
-//    }
 
     private OAuth2AccessTokenResponseClient<OAuth2AuthorizationCodeGrantRequest> authorizationCodeTokenResponseClient() {
         OAuth2AccessTokenResponseHttpMessageConverter tokenResponseHttpMessageConverter = new OAuth2AccessTokenResponseHttpMessageConverter();
