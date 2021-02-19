@@ -3,6 +3,8 @@ package nl.jed.supersimplesupplysystem.dto;
 import java.util.Collection;
 import java.util.Map;
 
+import lombok.Getter;
+import lombok.Setter;
 import nl.jed.supersimplesupplysystem.util.GeneralUtils;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.User;

@@ -1,5 +1,5 @@
 export class AppConstants {
-  private static API_BASE_URL = 'http://localhost:8080/';
+  private static API_BASE_URL = 'http://localhost:8081/';
   private static OAUTH2_URL = AppConstants.API_BASE_URL + 'oauth2/authorization/';
 
   // LETOP, Port moet nog aangepast worden in productie, deze moet overeen komen met de url in de backend in application.properties
