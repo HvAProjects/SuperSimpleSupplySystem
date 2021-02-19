@@ -18,9 +18,13 @@ public class LocalUser extends User implements OAuth2User, OidcUser {
      *
      */
     private static final long serialVersionUID = -2845160792248762779L;
+    @Getter
     private final OidcIdToken idToken;
+    @Getter
     private final OidcUserInfo userInfo;
+    @Getter @Setter
     private Map<String, Object> attributes;
+    @Getter
     private nl.jed.supersimplesupplysystem.models.User user;
 
     public LocalUser(final String userID, final String password, final boolean enabled, final boolean accountNonExpired, final boolean credentialsNonExpired,
