@@ -4,6 +4,9 @@ import {AuthService} from '../../services/auth.service';
 import {ActivatedRoute} from '@angular/router';
 import {UserService} from '../../services/user.service';
 import {TokenStorageService} from '../../services/token-storage.service';
+import {FormControl, Validators} from '@angular/forms';
+import {MatIconRegistry} from '@angular/material/icon';
+import {DomSanitizer} from '@angular/platform-browser';
 
 
 @Component({
@@ -12,6 +15,11 @@ import {TokenStorageService} from '../../services/token-storage.service';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
+
+  emailFormControl = new FormControl('', [
+    Validators.required,
+    Validators.email,
+  ]);
 
   form: any = {};
   isLoggedIn = false;
@@ -23,7 +31,18 @@ export class LoginComponent implements OnInit {
   githubURL = AppConstants.GITHUB_AUTH_URL;
   linkedinURL = AppConstants.LINKEDIN_AUTH_URL;
 
-  constructor(private authService: AuthService, private tokenStorage: TokenStorageService, private route: ActivatedRoute, private userService: UserService) {}
+
+  constructor(private authService: AuthService,
+              private tokenStorage: TokenStorageService,
+              private route: ActivatedRoute,
+              private userService: UserService,
+              private matIconRegistry: MatIconRegistry,
+              private domSanitizer: DomSanitizer) {
+    this.matIconRegistry.addSvgIcon('google', this.domSanitizer.bypassSecurityTrustResourceUrl('assets/icons/google.svg'));
+    this.matIconRegistry.addSvgIcon('facebook', this.domSanitizer.bypassSecurityTrustResourceUrl('assets/icons/facebook.svg'));
+    this.matIconRegistry.addSvgIcon('github', this.domSanitizer.bypassSecurityTrustResourceUrl('assets/icons/github.svg'));
+    this.matIconRegistry.addSvgIcon('linkedin', this.domSanitizer.bypassSecurityTrustResourceUrl('assets/icons/linked.svg'));
+  }
 
   ngOnInit(): void {
     const token: string = this.route.snapshot.queryParamMap.get('token');
@@ -32,7 +51,7 @@ export class LoginComponent implements OnInit {
       this.isLoggedIn = true;
       this.currentUser = this.tokenStorage.getUser();
     }
-    else if(token){
+    else if (token){
       this.tokenStorage.saveToken(token);
       this.userService.getCurrentUser().subscribe(
         data => {
@@ -44,7 +63,7 @@ export class LoginComponent implements OnInit {
         }
       );
     }
-    else if(error){
+    else if (error){
       this.errorMessage = error;
       this.isLoginFailed = true;
     }
@@ -70,5 +89,7 @@ export class LoginComponent implements OnInit {
     this.currentUser = this.tokenStorage.getUser();
     window.location.reload();
   }
+
+
 
 }
