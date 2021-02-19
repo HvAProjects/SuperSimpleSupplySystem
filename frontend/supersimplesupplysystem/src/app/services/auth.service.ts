@@ -29,4 +29,20 @@ export class AuthService {
       socialProvider: 'LOCAL'
     }, httpOptions);
   }
+
+  forgotPassword(emailAddress): Observable<any> {
+    return this.http.post(AppConstants.AUTH_API + 'forgot-password', {
+      email: emailAddress
+    }, httpOptions);
+  }
+
+  // From a reset password url (with password reset token)
+  changePasswordWithToken(oldPassword, newPassword, confirmNewPassword, token): Observable<any> {
+    return this.http.post(AppConstants.AUTH_API + 'change-password-with-token', {
+      oldPassword,
+      newPassword,
+      confirmNewPassword,
+      token
+    }, httpOptions);
+  }
 }

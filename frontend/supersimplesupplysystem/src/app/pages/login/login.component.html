@@ -30,8 +30,14 @@
 
         <div class="ss-button-container">
           <button mat-button color="primary" class="ss-btn-blue">Login</button>
-          <div class="ss-forgot">
-            <a href="#">Forgot password?</a>
+          <div class="forgot-signup-container">
+            <div class="ss-forgot forgot-signup-item">
+              <a routerLink="/forgot-password">Forgot password</a>
+            </div>
+            <span>|</span>
+            <div class="ss-forgot forgot-signup-item">
+              <a routerLink="/register">Register</a>
+            </div>
           </div>
           <div style="margin: 10px" class="alert alert-danger" role="alert" *ngIf="isLoginFailed"> Login failed, please try again. {{ errorMessage }} </div>
 

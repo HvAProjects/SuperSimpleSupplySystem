@@ -20,6 +20,15 @@ export class HeaderComponent implements OnInit {
   constructor(private tokenStorageService: TokenStorageService) { }
 
   ngOnInit(): void {
+    this.checkLoginStatus();
+  }
+
+  logout(): void {
+    this.tokenStorageService.signOut();
+    this.checkLoginStatus();
+  }
+
+  checkLoginStatus(): void {
     this.isLoggedIn = !!this.tokenStorageService.getToken();
 
     if (this.isLoggedIn) {
@@ -31,11 +40,6 @@ export class HeaderComponent implements OnInit {
 
       this.username = user.displayName;
     }
-  }
-
-  logout(): void {
-    this.tokenStorageService.signOut();
-    window.location.reload();
   }
 
 }

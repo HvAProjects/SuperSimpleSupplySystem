@@ -8,10 +8,14 @@ import {HomeComponent} from './pages/home/home.component';
 import {BoardUserComponent} from './pages/board-user/board-user.component';
 import {BoardModeratorComponent} from './pages/board-moderator/board-moderator.component';
 import {HouseholdComponent} from './pages/household/household.component';
+import {ForgotPasswordComponent} from './pages/forgot-password/forgot-password.component';
+import {ChangePasswordComponent} from './pages/change-password/change-password.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'login', component: LoginComponent },
+  { path: 'forgot-password', component: ForgotPasswordComponent },
+  { path: 'change-password', component: ChangePasswordComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'profile', component: ProfileComponent },
   { path: 'user', component: BoardUserComponent },

@@ -2,7 +2,7 @@ package nl.jed.supersimplesupplysystem.security.oauth2;
 
 import lombok.Generated;
 import nl.jed.supersimplesupplysystem.exception.OAuth2AuthenticationProcessingException;
-import nl.jed.supersimplesupplysystem.services.UserService;
+import nl.jed.supersimplesupplysystem.services.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.oauth2.client.userinfo.DefaultOAuth2UserService;

@@ -1,13 +1,13 @@
 <div class="header overlay">
   <div class="overlay">
     <div class="logo">
-      <img src="assets/images/logo.png" alt="Logo SSSS" class="logo" >
+      <img src="../../../assets/images/logo.png" alt="Logo SSSS" class="logo" >
     </div>
     <div class="socials">
-      <a href="#"><img src="assets/icons/facebook-icon.png" alt="facebook" class="social-icons"></a>
-      <a href="#"><img src="assets/icons/insta-icon.png" alt="instagram" class="social-icons"></a>
-      <a href="#"><img src="assets/icons/linked-icon.png" alt="linkedin" class="social-icons"></a>
-      <a href="#"><img src="assets/icons/twitter-icon.png" alt="twitter" class="social-icons"></a>
+      <a href="#"><img src="../../../assets/icons/facebook-icon.png" alt="facebook" class="social-icons"></a>
+      <a href="#"><img src="../../../assets/icons/insta-icon.png" alt="instagram" class="social-icons"></a>
+      <a href="#"><img src="../../../assets/icons/linked-icon.png" alt="linkedin" class="social-icons"></a>
+      <a href="#"><img src="../../../assets/icons/twitter-icon.png" alt="twitter" class="social-icons"></a>
     </div>
   </div>
 </div>
@@ -25,7 +25,7 @@
       </mat-menu>
     </div>
     <div class="ss-welcome" *ngIf="isLoggedIn">Welcome {{username}} ! |
-      <span> <a href="#"> Logout</a> </span>
+      <span> <a (click)="logout()" href="#"> Logout</a> </span>
     </div>
   </mat-toolbar>
 
