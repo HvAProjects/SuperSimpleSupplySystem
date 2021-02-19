@@ -11,7 +11,9 @@ import org.springframework.stereotype.Component;
 @ConfigurationProperties(prefix = "app")
 @EnableConfigurationProperties(AppProperties.class)
 public class AppProperties {
+    @Getter
     private final Auth auth = new Auth();
+    @Getter
     private final OAuth2 oauth2 = new OAuth2();
 
     public static class Auth {
