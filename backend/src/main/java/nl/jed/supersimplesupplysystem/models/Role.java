@@ -9,6 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 
+import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -18,8 +19,7 @@ import lombok.Setter;
  *
  */
 @Entity
-@Getter
-@Setter
+@Data
 @NoArgsConstructor
 public class Role implements Serializable {
     private static final long serialVersionUID = 1L;
@@ -76,47 +76,4 @@ public class Role implements Serializable {
         return builder.toString();
     }
 
-    public static long getSerialVersionUID() {
-        return serialVersionUID;
-    }
-
-    public static String getUSER() {
-        return USER;
-    }
-
-    public static String getRoleUser() {
-        return ROLE_USER;
-    }
-
-    public static String getRoleAdmin() {
-        return ROLE_ADMIN;
-    }
-
-    public static String getRoleModerator() {
-        return ROLE_MODERATOR;
-    }
-
-    public Long getRoleId() {
-        return roleId;
-    }
-
-    public void setRoleId(Long roleId) {
-        this.roleId = roleId;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public Set<User> getUsers() {
-        return users;
-    }
-
-    public void setUsers(Set<User> users) {
-        this.users = users;
-    }
 }
