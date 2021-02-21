@@ -23,7 +23,6 @@ import org.springframework.security.oauth2.core.oidc.OidcIdToken;
 import org.springframework.security.oauth2.core.oidc.OidcUserInfo;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.util.StringUtils;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -59,7 +58,7 @@ public class UserServiceImpl implements UserService {
         user.setDisplayName(formDTO.getDisplayName());
         user.setEmail(formDTO.getEmail());
         user.setPassword(passwordEncoder.encode(formDTO.getPassword()));
-        final HashSet<Role> roles = new HashSet<Role>();
+        final HashSet<Role> roles = new HashSet<>();
         roles.add(roleRepository.findByName(Role.ROLE_USER));
         user.setRoles(roles);
         user.setProvider(formDTO.getSocialProvider().getProviderType());
@@ -77,9 +76,9 @@ public class UserServiceImpl implements UserService {
     @Transactional
     public LocalUser processUserRegistration(String registrationId, Map<String, Object> attributes, OidcIdToken idToken, OidcUserInfo userInfo) {
         OAuth2UserInfo oAuth2UserInfo = OAuth2UserInfoFactory.getOAuth2UserInfo(registrationId, attributes);
-        if (StringUtils.isEmpty(oAuth2UserInfo.getName())) {
+        if (oAuth2UserInfo.getName().isBlank()) {
             throw new OAuth2AuthenticationProcessingException("Name not found from OAuth2 provider");
-        } else if (StringUtils.isEmpty(oAuth2UserInfo.getEmail())) {
+        } else if (oAuth2UserInfo.getEmail().isBlank()) {
             throw new OAuth2AuthenticationProcessingException("Email not found from OAuth2 provider");
         }
         SignUpRequest userDetails = toUserRegistrationObject(registrationId, oAuth2UserInfo);

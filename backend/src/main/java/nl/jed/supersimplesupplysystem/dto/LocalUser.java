@@ -27,7 +27,7 @@ public class LocalUser extends User implements OAuth2User, OidcUser {
     @Getter @Setter
     private Map<String, Object> attributes;
     @Getter
-    private nl.jed.supersimplesupplysystem.models.User user;
+    private final nl.jed.supersimplesupplysystem.models.User user;
 
     public LocalUser(final String userID, final String password, final boolean enabled, final boolean accountNonExpired, final boolean credentialsNonExpired,
                      final boolean accountNonLocked, final Collection<? extends GrantedAuthority> authorities, final nl.jed.supersimplesupplysystem.models.User user) {

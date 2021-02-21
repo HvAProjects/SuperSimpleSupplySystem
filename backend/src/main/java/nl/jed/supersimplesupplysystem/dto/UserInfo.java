@@ -6,8 +6,10 @@ import lombok.Value;
 
 @Value
 public class UserInfo {
-    private String id, displayName, email;
-    private List<String> roles;
+    String id;
+    String displayName;
+    String email;
+    List<String> roles;
 
     public UserInfo(String id, String displayName, String email, List<String> roles) {
         this.id = id;

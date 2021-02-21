@@ -3,6 +3,7 @@ package nl.jed.supersimplesupplysystem.security.oauth2;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 import nl.jed.supersimplesupplysystem.dto.SocialProvider;
 import nl.jed.supersimplesupplysystem.exception.OAuth2AuthenticationProcessingException;
@@ -61,7 +62,7 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
         headers.add(HttpHeaders.AUTHORIZATION, "Bearer " + oAuth2UserRequest.getAccessToken().getTokenValue());
         HttpEntity<?> entity = new HttpEntity<>("", headers);
         ResponseEntity<Map> response = restTemplate.exchange(emailEndpointUri, HttpMethod.GET, entity, Map.class);
-        List<?> list = (List<?>) response.getBody().get("elements");
+        List<?> list = (List<?>) Objects.requireNonNull(response.getBody()).get("elements");
         Map map = (Map<?, ?>) ((Map<?, ?>) list.get(0)).get("handle~");
         attributes.putAll(map);
     }

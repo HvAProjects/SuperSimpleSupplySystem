@@ -10,9 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 
 import lombok.Data;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 /**
  * The persistent class for the role database table.
@@ -63,10 +61,7 @@ public class Role implements Serializable {
             return false;
         }
         final Role role = (Role) obj;
-        if (!role.equals(role.name)) {
-            return false;
-        }
-        return true;
+        return this.name.equals(role.name);
     }
 
     @Override
