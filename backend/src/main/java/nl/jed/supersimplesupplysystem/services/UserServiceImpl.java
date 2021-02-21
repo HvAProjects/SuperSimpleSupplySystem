@@ -102,8 +102,12 @@ public class UserServiceImpl implements UserService {
     }
 
     private SignUpRequest toUserRegistrationObject(String registrationId, OAuth2UserInfo oAuth2UserInfo) {
-        return SignUpRequest.getBuilder().addProviderUserID(oAuth2UserInfo.getId()).addDisplayName(oAuth2UserInfo.getName()).addEmail(oAuth2UserInfo.getEmail())
-                .addSocialProvider(GeneralUtils.toSocialProvider(registrationId)).addPassword("changeit").build();
+        return SignUpRequest.builder()
+                .providerUserId(oAuth2UserInfo.getId())
+                .displayName(oAuth2UserInfo.getName())
+                .email(oAuth2UserInfo.getEmail())
+                .socialProvider(GeneralUtils.toSocialProvider(registrationId))
+                .password("changeit").build();
     }
 
     @Override

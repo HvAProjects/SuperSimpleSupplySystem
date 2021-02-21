@@ -5,6 +5,7 @@ import nl.jed.supersimplesupplysystem.dto.SignUpRequest;
 import nl.jed.supersimplesupplysystem.repository.UserRepository;
 import nl.jed.supersimplesupplysystem.validator.PasswordMatchesValidator;
 import org.junit.Assert;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -24,33 +25,26 @@ class SupersimplesupplysystemApplicationTests {
 	private UserRepository mockedUserRepository;
 
 	@Test
-	void contextLoads() {
-		assert true;
-	}
-
-	@Test
 	void TestValidPassword() {
 
-		SignUpRequest signUpRequest = new SignUpRequest
-				.Builder()
-				.addDisplayName("test")
-				.addEmail("test@email.com")
-				.addPassword("test")
+		SignUpRequest signUpRequest = SignUpRequest.builder()
+				.displayName("test")
+				.email("test@email.com")
+				.password("test")
+				.matchingPassword("test")
 				.build();
-		signUpRequest.setMatchingPassword("test");
 		boolean isValid = new PasswordMatchesValidator().isValid(signUpRequest, null);
-		Assert.assertTrue(isValid);
+		Assertions.assertTrue(isValid);
 	}
 	@Test
 	void TestInvalidPassword() {
-		SignUpRequest signUpRequest = new SignUpRequest
-				.Builder()
-				.addDisplayName("test")
-				.addEmail("test@email.com")
-				.addPassword("test")
+		SignUpRequest signUpRequest = SignUpRequest.builder()
+				.displayName("test")
+				.email("test@email.com")
+				.password("test")
+				.matchingPassword("test1")
 				.build();
-		signUpRequest.setMatchingPassword("test1");
 		boolean isValid = new PasswordMatchesValidator().isValid(signUpRequest, null);
-		Assert.assertFalse(isValid);
+		Assertions.assertFalse(isValid);
 	}
 }

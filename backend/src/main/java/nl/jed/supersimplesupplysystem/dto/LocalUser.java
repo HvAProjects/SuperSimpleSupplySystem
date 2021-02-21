@@ -3,6 +3,7 @@ package nl.jed.supersimplesupplysystem.dto;
 import java.util.Collection;
 import java.util.Map;
 
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 import nl.jed.supersimplesupplysystem.util.GeneralUtils;
@@ -13,7 +14,7 @@ import org.springframework.security.oauth2.core.oidc.OidcUserInfo;
 import org.springframework.security.oauth2.core.oidc.user.OidcUser;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 
-
+@EqualsAndHashCode
 public class LocalUser extends User implements OAuth2User, OidcUser {
 
     /**
