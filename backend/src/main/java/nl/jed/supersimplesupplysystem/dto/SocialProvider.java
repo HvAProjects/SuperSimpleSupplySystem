@@ -1,15 +1,15 @@
 package nl.jed.supersimplesupplysystem.dto;
 
 import lombok.Getter;
+import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
 
+@RequiredArgsConstructor
 public enum SocialProvider {
 
     FACEBOOK("facebook"), TWITTER("twitter"), LINKEDIN("linkedin"), GOOGLE("google"), GITHUB("github"), LOCAL("local");
 
-    @Getter
-    private String providerType;
+    @Getter @NonNull
+    private final String providerType;
 
-    SocialProvider(final String providerType) {
-        this.providerType = providerType;
-    }
 }

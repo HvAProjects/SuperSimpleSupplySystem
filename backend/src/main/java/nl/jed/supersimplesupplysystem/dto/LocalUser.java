@@ -14,7 +14,7 @@ import org.springframework.security.oauth2.core.oidc.OidcUserInfo;
 import org.springframework.security.oauth2.core.oidc.user.OidcUser;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 
-@EqualsAndHashCode
+@EqualsAndHashCode(callSuper = true)
 public class LocalUser extends User implements OAuth2User, OidcUser {
 
     /**

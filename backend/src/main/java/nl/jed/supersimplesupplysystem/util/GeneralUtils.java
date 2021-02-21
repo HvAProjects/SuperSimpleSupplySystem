@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import lombok.experimental.UtilityClass;
 import nl.jed.supersimplesupplysystem.dto.LocalUser;
 import nl.jed.supersimplesupplysystem.dto.SocialProvider;
 import nl.jed.supersimplesupplysystem.dto.UserInfo;
@@ -13,13 +14,10 @@ import nl.jed.supersimplesupplysystem.models.User;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
+@UtilityClass
 public class GeneralUtils {
 
-    private GeneralUtils (){
-        throw new IllegalStateException("Utility class");
-    }
-
-    public static List<SimpleGrantedAuthority> buildSimpleGrantedAuthorities(final Set<Role> roles) {
+    public List<SimpleGrantedAuthority> buildSimpleGrantedAuthorities(final Set<Role> roles) {
         List<SimpleGrantedAuthority> authorities = new ArrayList<>();
         for (Role role : roles) {
             authorities.add(new SimpleGrantedAuthority(role.getName()));
@@ -27,7 +25,7 @@ public class GeneralUtils {
         return authorities;
     }
 
-    public static SocialProvider toSocialProvider(String providerId) {
+    public SocialProvider toSocialProvider(String providerId) {
         for (SocialProvider socialProvider : SocialProvider.values()) {
             if (socialProvider.getProviderType().equals(providerId)) {
                 return socialProvider;
@@ -36,7 +34,7 @@ public class GeneralUtils {
         return SocialProvider.LOCAL;
     }
 
-    public static UserInfo buildUserInfo(LocalUser localUser) {
+    public UserInfo buildUserInfo(LocalUser localUser) {
         List<String> roles = localUser.getAuthorities().stream()
                 .map(GrantedAuthority::getAuthority)
                 .collect(Collectors.toList());

@@ -3,6 +3,7 @@ package nl.jed.supersimplesupplysystem.dto;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -11,6 +12,7 @@ import nl.jed.supersimplesupplysystem.validator.PasswordMatches;
 @Data
 @PasswordMatches
 @NoArgsConstructor
+@AllArgsConstructor
 @Builder
 public class SignUpRequest {
 
@@ -31,13 +33,5 @@ public class SignUpRequest {
 
     @NotEmpty
     private String matchingPassword;
-
-    public SignUpRequest(String providerUserId, String displayName, String email, String password, SocialProvider socialProvider) {
-        this.providerUserId = providerUserId;
-        this.displayName = displayName;
-        this.email = email;
-        this.password = password;
-        this.socialProvider = socialProvider;
-    }
 
 }

@@ -9,10 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 
 /**
  * The persistent class for the role database table.
@@ -21,6 +18,7 @@ import lombok.ToString;
 @Entity
 @Data
 @NoArgsConstructor
+@RequiredArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @ToString(onlyExplicitlyIncluded = true)
 public class Role implements Serializable {
@@ -38,15 +36,12 @@ public class Role implements Serializable {
 
     @EqualsAndHashCode.Include
     @ToString.Include
+    @NonNull
     private String name;
 
     // bi-directional many-to-many association to User
     @ManyToMany(mappedBy = "roles")
     private Set<User> users;
-
-    public Role(String name) {
-        this.name = name;
-    }
 
 
 }

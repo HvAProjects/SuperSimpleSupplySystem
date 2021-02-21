@@ -2,6 +2,9 @@ package nl.jed.supersimplesupplysystem.security.jwt;
 
 import java.util.Date;
 
+import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import nl.jed.supersimplesupplysystem.configuration.AppProperties;
 import nl.jed.supersimplesupplysystem.dto.LocalUser;
 import org.slf4j.Logger;
@@ -18,15 +21,12 @@ import io.jsonwebtoken.SignatureException;
 import io.jsonwebtoken.UnsupportedJwtException;
 
 @Service
+@Slf4j
+@RequiredArgsConstructor
 public class TokenProvider {
 
-    private static final Logger logger = LoggerFactory.getLogger(TokenProvider.class);
-
-    private AppProperties appProperties;
-
-    public TokenProvider(AppProperties appProperties) {
-        this.appProperties = appProperties;
-    }
+    @NonNull
+    private final AppProperties appProperties;
 
     public String createToken(Authentication authentication) {
         LocalUser userPrincipal = (LocalUser) authentication.getPrincipal();
@@ -49,15 +49,15 @@ public class TokenProvider {
             Jwts.parser().setSigningKey(appProperties.getAuth().getTokenSecret()).parseClaimsJws(authToken);
             return true;
         } catch (SignatureException ex) {
-            logger.error("Invalid JWT signature");
+            log.error("Invalid JWT signature");
         } catch (MalformedJwtException ex) {
-            logger.error("Invalid JWT token");
+            log.error("Invalid JWT token");
         } catch (ExpiredJwtException ex) {
-            logger.error("Expired JWT token");
+            log.error("Expired JWT token");
         } catch (UnsupportedJwtException ex) {
-            logger.error("Unsupported JWT token");
+            log.error("Unsupported JWT token");
         } catch (IllegalArgumentException ex) {
-            logger.error("JWT claims string is empty.");
+            log.error("JWT claims string is empty.");
         }
         return false;
     }
