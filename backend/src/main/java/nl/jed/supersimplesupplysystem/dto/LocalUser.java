@@ -50,36 +50,13 @@ public class LocalUser extends User implements OAuth2User, OidcUser {
         return localUser;
     }
 
-    public void setAttributes(Map<String, Object> attributes) {
-        this.attributes = attributes;
-    }
-
     @Override
     public String getName() {
         return this.user.getDisplayName();
     }
 
     @Override
-    public Map<String, Object> getAttributes() {
-        return this.attributes;
-    }
-
-    @Override
     public Map<String, Object> getClaims() {
         return this.attributes;
-    }
-
-    @Override
-    public OidcUserInfo getUserInfo() {
-        return this.userInfo;
-    }
-
-    @Override
-    public OidcIdToken getIdToken() {
-        return this.idToken;
-    }
-
-    public nl.jed.supersimplesupplysystem.models.User getUser() {
-        return user;
     }
 }
