@@ -2,6 +2,7 @@ package nl.jed.supersimplesupplysystem.configuration;
 
 import java.util.Arrays;
 
+import lombok.AllArgsConstructor;
 import nl.jed.supersimplesupplysystem.security.jwt.TokenAuthenticationFilter;
 import nl.jed.supersimplesupplysystem.security.oauth2.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,27 +34,25 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 @Configuration
 @EnableWebSecurity
+@AllArgsConstructor(onConstructor = @__({@Autowired}))
 @EnableGlobalMethodSecurity(prePostEnabled = true, securedEnabled = true, jsr250Enabled = true)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
-    @Autowired
-    private UserDetailsService localUserDetailService;
+    private final UserDetailsService localUserDetailService;
 
-    @Autowired
-    private CustomOAuth2UserService customOAuth2UserService;
+    private final CustomOAuth2UserService customOAuth2UserService;
 
-    @Autowired
     CustomOidcUserService customOidcUserService;
 
-    @Autowired
-    private OAuth2AuthenticationSuccessHandler oAuth2AuthenticationSuccessHandler;
+    private final OAuth2AuthenticationSuccessHandler oAuth2AuthenticationSuccessHandler;
 
-    @Autowired
-    private OAuth2AuthenticationFailureHandler oAuth2AuthenticationFailureHandler;
+    private final OAuth2AuthenticationFailureHandler oAuth2AuthenticationFailureHandler;
+
+    private final PasswordEncoder passwordEncoder;
 
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(localUserDetailService).passwordEncoder(passwordEncoder());
+        auth.userDetailsService(localUserDetailService).passwordEncoder(passwordEncoder);
     }
 
 
@@ -126,19 +125,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         return localUserDetailService;
     }
 
-    @Bean
-    public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder(10);
-    }
 
     @Bean(BeanIds.AUTHENTICATION_MANAGER)
     @Override
     public AuthenticationManager authenticationManagerBean() throws Exception {
         return super.authenticationManagerBean();
     }
-
-
-
 
     private OAuth2AccessTokenResponseClient<OAuth2AuthorizationCodeGrantRequest> authorizationCodeTokenResponseClient() {
         OAuth2AccessTokenResponseHttpMessageConverter tokenResponseHttpMessageConverter = new OAuth2AccessTokenResponseHttpMessageConverter();

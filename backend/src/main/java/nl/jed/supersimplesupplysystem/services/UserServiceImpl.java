@@ -18,6 +18,7 @@ import nl.jed.supersimplesupplysystem.security.oauth2.user.OAuth2UserInfo;
 import nl.jed.supersimplesupplysystem.security.oauth2.user.OAuth2UserInfoFactory;
 import nl.jed.supersimplesupplysystem.util.GeneralUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.core.oidc.OidcIdToken;
 import org.springframework.security.oauth2.core.oidc.OidcUserInfo;
