@@ -1,6 +1,6 @@
 package nl.jed.supersimplesupplysystem.services.household;
 
-import nl.jed.supersimplesupplysystem.models.Household;
+import nl.jed.supersimplesupplysystem.models.household.Household;
 
 import java.util.List;
 

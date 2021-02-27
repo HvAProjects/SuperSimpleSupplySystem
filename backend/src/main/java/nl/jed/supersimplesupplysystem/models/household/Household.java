@@ -1,4 +1,4 @@
-package nl.jed.supersimplesupplysystem.models;
+package nl.jed.supersimplesupplysystem.models.household;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;

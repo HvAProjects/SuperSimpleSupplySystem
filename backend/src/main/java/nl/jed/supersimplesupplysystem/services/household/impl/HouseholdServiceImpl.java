@@ -1,8 +1,7 @@
 package nl.jed.supersimplesupplysystem.services.household.impl;
 
 import lombok.val;
-import nl.jed.supersimplesupplysystem.models.Household;
-import nl.jed.supersimplesupplysystem.models.User;
+import nl.jed.supersimplesupplysystem.models.household.Household;
 import nl.jed.supersimplesupplysystem.repository.household.HouseholdRepository;
 import nl.jed.supersimplesupplysystem.services.household.HouseholdService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,8 +28,8 @@ public class HouseholdServiceImpl implements HouseholdService {
 
     @Override
     public Household getHousehold(Long id) {
-        val household = householdRepository.getOne(id);
-        return household;
+        val household = householdRepository.findById(id);
+        return household.orElse(null);
     }
 
     @Override
@@ -41,6 +40,5 @@ public class HouseholdServiceImpl implements HouseholdService {
     @Override
     public void removeHousehold(Long id) {
         householdRepository.deleteById(id);
-
     }
 }
