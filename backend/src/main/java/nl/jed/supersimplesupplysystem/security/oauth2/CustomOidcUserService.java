@@ -1,5 +1,6 @@
 package nl.jed.supersimplesupplysystem.security.oauth2;
 
+import lombok.Generated;
 import nl.jed.supersimplesupplysystem.exception.OAuth2AuthenticationProcessingException;
 import nl.jed.supersimplesupplysystem.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,7 @@ import org.springframework.security.oauth2.core.oidc.user.OidcUser;
 import org.springframework.stereotype.Service;
 
 @Service
+@Generated
 public class CustomOidcUserService extends OidcUserService {
 
     @Autowired
@@ -18,7 +20,7 @@ public class CustomOidcUserService extends OidcUserService {
 
     @Override
     public OidcUser loadUser(OidcUserRequest userRequest) throws OAuth2AuthenticationException {
-        OidcUser oidcUser = super.loadUser(userRequest);
+        OidcUser oidcUser = fetchUserFromSuper(userRequest);
         try {
             return userService.processUserRegistration(userRequest.getClientRegistration().getRegistrationId(), oidcUser.getAttributes(), oidcUser.getIdToken(),
                     oidcUser.getUserInfo());
@@ -31,4 +33,10 @@ public class CustomOidcUserService extends OidcUserService {
             throw new OAuth2AuthenticationProcessingException(ex.getMessage(), ex.getCause());
         }
     }
+
+    @Generated
+    OidcUser fetchUserFromSuper(OidcUserRequest userRequest) throws OAuth2AuthenticationException {
+        return super.loadUser(userRequest);
+    }
+
 }

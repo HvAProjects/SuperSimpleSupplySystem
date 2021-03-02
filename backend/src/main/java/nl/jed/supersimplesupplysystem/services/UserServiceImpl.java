@@ -1,13 +1,7 @@
 package nl.jed.supersimplesupplysystem.services;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Optional;
 
 import nl.jed.supersimplesupplysystem.dto.LocalUser;
 import nl.jed.supersimplesupplysystem.dto.SignUpRequest;
-import nl.jed.supersimplesupplysystem.dto.SocialProvider;
 import nl.jed.supersimplesupplysystem.exception.OAuth2AuthenticationProcessingException;
 import nl.jed.supersimplesupplysystem.exception.UserAlreadyExistAuthenticationException;
 import nl.jed.supersimplesupplysystem.models.Role;
@@ -18,12 +12,13 @@ import nl.jed.supersimplesupplysystem.security.oauth2.user.OAuth2UserInfo;
 import nl.jed.supersimplesupplysystem.security.oauth2.user.OAuth2UserInfoFactory;
 import nl.jed.supersimplesupplysystem.util.GeneralUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Lazy;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.core.oidc.OidcIdToken;
 import org.springframework.security.oauth2.core.oidc.OidcUserInfo;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.*;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -85,9 +80,9 @@ public class UserServiceImpl implements UserService {
         SignUpRequest userDetails = toUserRegistrationObject(registrationId, oAuth2UserInfo);
         User user = findUserByEmail(oAuth2UserInfo.getEmail());
         if (user != null) {
-            if (!user.getProvider().equals(registrationId) && !user.getProvider().equals(SocialProvider.LOCAL.getProviderType())) {
+            if (!user.getProvider().equals(registrationId)) {
                 throw new OAuth2AuthenticationProcessingException(
-                        "Looks like you're signed up with " + user.getProvider() + " account. Please use your " + user.getProvider() + " account to login.");
+                        "Looks like you're signed up with " + registrationId + " account. Please use your " + user.getProvider() + " account to login.");
             }
             user = updateExistingUser(user, oAuth2UserInfo);
         } else {

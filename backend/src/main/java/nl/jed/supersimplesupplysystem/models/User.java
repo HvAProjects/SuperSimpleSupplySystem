@@ -1,25 +1,16 @@
 package nl.jed.supersimplesupplysystem.models;
-import java.io.Serializable;
-import java.util.Date;
-import java.util.Set;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import lombok.Data;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
+import javax.persistence.*;
+import java.io.Serializable;
+import java.util.Collection;
+import java.util.Date;
+import java.util.Set;
 
 /**
  * The persistent class for the user database table.
@@ -28,7 +19,7 @@ import lombok.Setter;
 @Entity
 @NoArgsConstructor
 @Data
-public class User implements Serializable {
+public class User implements Serializable, UserDetails {
 
     /**
      *
@@ -47,6 +38,12 @@ public class User implements Serializable {
 
     @Column(name = "enabled", columnDefinition = "BIT", length = 1)
     private boolean enabled;
+
+    @Column(name = "password_expired", columnDefinition = "BIT", length = 1)
+    private boolean passwordExpired;
+
+    @Column(name = "expired", columnDefinition = "BIT", length = 1)
+    private boolean expired;
 
     @Column(name = "DISPLAY_NAME")
     private String displayName;
@@ -67,4 +64,30 @@ public class User implements Serializable {
     @ManyToMany
     @JoinTable(name = "user_role", joinColumns = { @JoinColumn(name = "USER_ID") }, inverseJoinColumns = { @JoinColumn(name = "ROLE_ID") })
     private Set<Role> roles;
+
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return this.roles;
+    }
+
+    @Override
+    public String getUsername() {
+        return this.email;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return this.expired;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return this.enabled;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return this.passwordExpired;
+    }
 }

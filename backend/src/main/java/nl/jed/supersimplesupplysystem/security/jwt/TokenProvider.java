@@ -1,25 +1,17 @@
 package nl.jed.supersimplesupplysystem.security.jwt;
 
-import java.util.Date;
-
+import io.jsonwebtoken.*;
+import lombok.Generated;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import nl.jed.supersimplesupplysystem.configuration.AppProperties;
 import nl.jed.supersimplesupplysystem.dto.LocalUser;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 
-import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.ExpiredJwtException;
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.MalformedJwtException;
-import io.jsonwebtoken.SignatureAlgorithm;
-import io.jsonwebtoken.SignatureException;
-import io.jsonwebtoken.UnsupportedJwtException;
+import java.util.Date;
 
+@Generated
 @Service
 @Slf4j
 @RequiredArgsConstructor
@@ -28,8 +20,7 @@ public class TokenProvider {
     @NonNull
     private final AppProperties appProperties;
 
-    public String createToken(Authentication authentication) {
-        LocalUser userPrincipal = (LocalUser) authentication.getPrincipal();
+    public String createToken(LocalUser userPrincipal) {
 
         Date now = new Date();
         Date expiryDate = new Date(now.getTime() + appProperties.getAuth().getTokenExpirationMsec());

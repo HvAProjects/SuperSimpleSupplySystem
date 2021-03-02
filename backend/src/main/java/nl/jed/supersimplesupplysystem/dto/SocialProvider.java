@@ -7,7 +7,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public enum SocialProvider {
 
-    FACEBOOK("facebook"), TWITTER("twitter"), LINKEDIN("linkedin"), GOOGLE("google"), GITHUB("github"), LOCAL("local");
+    FACEBOOK("facebook"), TWITTER("twitter"), GOOGLE("google"), GITHUB("github"), LOCAL("local");
 
     @Getter @NonNull
     private final String providerType;

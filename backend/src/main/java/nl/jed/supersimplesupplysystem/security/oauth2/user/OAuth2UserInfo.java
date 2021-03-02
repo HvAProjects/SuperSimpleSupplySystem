@@ -1,17 +1,15 @@
 package nl.jed.supersimplesupplysystem.security.oauth2.user;
 
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+
 import java.util.Map;
 
+@AllArgsConstructor(access = AccessLevel.PROTECTED)
 public abstract class OAuth2UserInfo {
+    @Getter(AccessLevel.PROTECTED)
     protected Map<String, Object> attributes;
-
-    protected OAuth2UserInfo(Map<String, Object> attributes) {
-        this.attributes = attributes;
-    }
-
-    public Map<String, Object> getAttributes() {
-        return attributes;
-    }
 
     public abstract String getId();
 

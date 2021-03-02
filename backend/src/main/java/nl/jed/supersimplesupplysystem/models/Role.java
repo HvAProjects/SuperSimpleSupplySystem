@@ -1,15 +1,11 @@
 package nl.jed.supersimplesupplysystem.models;
-import java.io.Serializable;
-import java.util.Set;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToMany;
 
 import lombok.*;
+import org.springframework.security.core.GrantedAuthority;
+
+import javax.persistence.*;
+import java.io.Serializable;
+import java.util.Set;
 
 /**
  * The persistent class for the role database table.
@@ -21,7 +17,7 @@ import lombok.*;
 @RequiredArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @ToString(onlyExplicitlyIncluded = true)
-public class Role implements Serializable {
+public class Role implements Serializable, GrantedAuthority {
     private static final long serialVersionUID = 1L;
     public static final String USER = "USER";
     public static final String ROLE_USER = "ROLE_USER";
@@ -44,4 +40,8 @@ public class Role implements Serializable {
     private Set<User> users;
 
 
+    @Override
+    public String getAuthority() {
+        return name;
+    }
 }

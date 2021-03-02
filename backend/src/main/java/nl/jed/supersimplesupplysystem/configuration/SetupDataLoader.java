@@ -1,9 +1,6 @@
 package nl.jed.supersimplesupplysystem.configuration;
 
-import java.util.Calendar;
-import java.util.Date;
-import java.util.Set;
-
+import lombok.Generated;
 import nl.jed.supersimplesupplysystem.dto.SocialProvider;
 import nl.jed.supersimplesupplysystem.models.Role;
 import nl.jed.supersimplesupplysystem.models.User;
@@ -11,13 +8,16 @@ import nl.jed.supersimplesupplysystem.repository.RoleRepository;
 import nl.jed.supersimplesupplysystem.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
-import org.springframework.context.annotation.Lazy;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Set;
 
+@Generated
 @Component
 public class SetupDataLoader implements ApplicationListener<ContextRefreshedEvent> {
 

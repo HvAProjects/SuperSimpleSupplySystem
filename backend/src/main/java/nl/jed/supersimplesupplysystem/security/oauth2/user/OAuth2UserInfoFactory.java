@@ -1,5 +1,6 @@
 package nl.jed.supersimplesupplysystem.security.oauth2.user;
 
+import lombok.Generated;
 import nl.jed.supersimplesupplysystem.dto.SocialProvider;
 import nl.jed.supersimplesupplysystem.exception.OAuth2AuthenticationProcessingException;
 
@@ -8,6 +9,7 @@ import java.util.Map;
 
 public class OAuth2UserInfoFactory {
 
+    @Generated
     private OAuth2UserInfoFactory(){
         throw new IllegalStateException("Utility class");
     }
@@ -19,8 +21,6 @@ public class OAuth2UserInfoFactory {
             return new FacebookOAuth2UserInfo(attributes);
         } else if (registrationId.equalsIgnoreCase(SocialProvider.GITHUB.getProviderType())) {
             return new GithubOAuth2UserInfo(attributes);
-        } else if (registrationId.equalsIgnoreCase(SocialProvider.LINKEDIN.getProviderType())) {
-            return new LinkedinOAuth2UserInfo(attributes);
         } else if (registrationId.equalsIgnoreCase(SocialProvider.TWITTER.getProviderType())) {
             return new GithubOAuth2UserInfo(attributes);
         } else {

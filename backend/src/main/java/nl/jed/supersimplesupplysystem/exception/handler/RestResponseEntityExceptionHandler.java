@@ -1,7 +1,6 @@
 package nl.jed.supersimplesupplysystem.exception.handler;
 
-import java.util.stream.Collectors;
-
+import lombok.Generated;
 import nl.jed.supersimplesupplysystem.dto.ApiResponse;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -13,7 +12,9 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
+import java.util.stream.Collectors;
 
+@Generated
 @ControllerAdvice
 public class RestResponseEntityExceptionHandler extends ResponseEntityExceptionHandler {
 

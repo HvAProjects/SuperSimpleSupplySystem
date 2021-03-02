@@ -1,13 +1,5 @@
 package nl.jed.supersimplesupplysystem.security.oauth2;
 
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.LinkedHashMap;
-import java.util.Map;
-import java.util.Set;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
-
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
@@ -16,6 +8,10 @@ import org.springframework.security.oauth2.core.OAuth2AccessToken;
 import org.springframework.security.oauth2.core.endpoint.OAuth2AccessTokenResponse;
 import org.springframework.security.oauth2.core.endpoint.OAuth2ParameterNames;
 import org.springframework.util.StringUtils;
+
+import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Slf4j
 public class OAuth2AccessTokenResponseConverterWithDefaults implements Converter<Map<String, String>, OAuth2AccessTokenResponse> {
@@ -55,6 +51,12 @@ public class OAuth2AccessTokenResponseConverterWithDefaults implements Converter
         tokenResponseParameters.entrySet().stream().filter(e -> !TOKEN_RESPONSE_PARAMETER_NAMES.contains(e.getKey()))
                 .forEach(e -> additionalParameters.put(e.getKey(), e.getValue()));
 
-        return OAuth2AccessTokenResponse.withToken(accessToken).tokenType(accessTokenType).expiresIn(expiresIn).scopes(scopes).additionalParameters(additionalParameters).build();
+        return OAuth2AccessTokenResponse
+                .withToken(accessToken)
+                .tokenType(accessTokenType)
+                .expiresIn(expiresIn)
+                .scopes(scopes)
+                .additionalParameters(additionalParameters)
+                .build();
     }
 }

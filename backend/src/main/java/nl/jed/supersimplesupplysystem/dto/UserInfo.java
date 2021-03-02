@@ -1,9 +1,9 @@
 package nl.jed.supersimplesupplysystem.dto;
 
-import java.util.List;
-
 import lombok.AllArgsConstructor;
 import lombok.Value;
+
+import java.util.List;
 
 @Value
 @AllArgsConstructor
