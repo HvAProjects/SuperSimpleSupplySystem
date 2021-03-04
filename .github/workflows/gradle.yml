@@ -38,6 +38,10 @@ jobs:
       run: echo ${WORKFLOW_IMAGE_PAT} > key
       env:
         WORKFLOW_IMAGE_PAT: ${{secrets.WORKFLOW_IMAGE_PAT}}
+    - name: Set secrets.properties
+      run: echo ${SECRETS_PROPERTIES} > src/main/resources/secrets.properties
+      env:
+        SECRETS_PROPERTIES: ${{secrets.SECRETS_PROPERTIES}}
     - name: Build with Gradle
       run: ./gradlew ci
     - name: Publish Unit Test Results
