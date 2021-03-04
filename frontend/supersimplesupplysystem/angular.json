@@ -24,6 +24,7 @@
               "src/assets"
             ],
             "styles": [
+              "node_modules/bootstrap/dist/css/bootstrap.min.css",
               "src/styles.css"
             ],
             "scripts": []
@@ -120,5 +121,8 @@
       }
     }
   },
-  "defaultProject": "supersimplesupplysystem"
+  "defaultProject": "supersimplesupplysystem",
+  "cli": {
+    "analytics": "7d3412d3-bd2b-446e-9db5-1557ab79e231"
+  }
 }
