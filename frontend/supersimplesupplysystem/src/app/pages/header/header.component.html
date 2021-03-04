@@ -17,12 +17,15 @@
       <button mat-button routerLink="/">Home</button>
       <button mat-button routerLink="/household">Households</button>
     </div>
-    <div class="login">
+    <div class="login" *ngIf="!isLoggedIn">
       <button mat-button [matMenuTriggerFor]="menu">Login / Register</button>
       <mat-menu #menu="matMenu">
-        <button mat-menu-item>Login</button>
-        <button mat-menu-item>Register</button>
+        <button routerLink="/login" mat-menu-item>Login</button>
+        <button routerLink="/register" mat-menu-item>Register</button>
       </mat-menu>
+    </div>
+    <div class="ss-welcome" *ngIf="isLoggedIn">Welcome {{username}} ! |
+      <span> <a href="#"> Logout</a> </span>
     </div>
   </mat-toolbar>
 
