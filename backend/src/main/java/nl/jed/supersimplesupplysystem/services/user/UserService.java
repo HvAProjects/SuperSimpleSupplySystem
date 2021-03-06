@@ -13,7 +13,7 @@ import java.util.Optional;
 
 public interface UserService {
 
-    public User registerNewUser(SignUpRequest signUpRequest) throws UserAlreadyExistAuthenticationException;
+    User registerNewUser(SignUpRequest signUpRequest) throws UserAlreadyExistAuthenticationException;
 
     User findUserByEmail(String email);
 
@@ -22,5 +22,6 @@ public interface UserService {
     LocalUser processUserRegistration(String registrationId, Map<String, Object> attributes, OidcIdToken idToken, OidcUserInfo userInfo);
 
     void resetPassword(String emailAddress);
-    void changePassword(ChangePasswordRequest request);
+    void changePassword(User user, String newPassword);
+    void activateAccount(User user);
 }

@@ -1,12 +1,15 @@
 package nl.jed.supersimplesupplysystem.controllers;
 
+import nl.jed.supersimplesupplysystem.dto.ForgotPasswordRequest;
 import nl.jed.supersimplesupplysystem.dto.LoginRequest;
 import nl.jed.supersimplesupplysystem.dto.SignUpRequest;
 import nl.jed.supersimplesupplysystem.dto.SocialProvider;
+import nl.jed.supersimplesupplysystem.services.user.UserService;
 import nl.jed.supersimplesupplysystem.testconfigurations.TestUserConfiguration;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
@@ -17,6 +20,7 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
 import static nl.jed.supersimplesupplysystem.helpers.JSONWriter.asJsonString;
+import static org.mockito.Mockito.*;
 import static org.springframework.security.test.web.servlet.setup.SecurityMockMvcConfigurers.springSecurity;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -30,6 +34,9 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 class AuthControllerTest{
     @Autowired
     private WebApplicationContext webApplicationContext;
+
+    @Mock
+    private UserService userService;
 
     private MockMvc mockMvc;
     @BeforeEach
@@ -86,5 +93,16 @@ class AuthControllerTest{
             .contentType(MediaType.APPLICATION_JSON)
         )
         .andExpect(status().isBadRequest());
+    }
+
+    @Test
+    void testForgotPassword() throws Exception {
+        ForgotPasswordRequest request = new ForgotPasswordRequest();
+        request.setEmail("user@email.com");
+        doNothing().when(userService).resetPassword(request.getEmail());
+        mockMvc.perform(post("/api/auth/forgot-password")
+                .content(asJsonString(request))
+                .contentType(MediaType.APPLICATION_JSON)
+        ).andExpect(status().isOk());
     }
 }

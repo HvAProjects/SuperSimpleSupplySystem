@@ -41,7 +41,12 @@ export class AuthService {
     return this.http.post(AppConstants.AUTH_API + 'change-password-with-token', {
       oldPassword,
       newPassword,
-      confirmNewPassword,
+      token
+    }, httpOptions);
+  }
+
+  activateAccount(token): Observable<any> {
+    return this.http.post(AppConstants.AUTH_API + 'activate-account', {
       token
     }, httpOptions);
   }

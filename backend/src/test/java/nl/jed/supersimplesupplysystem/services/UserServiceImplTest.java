@@ -9,6 +9,7 @@ import nl.jed.supersimplesupplysystem.models.Role;
 import nl.jed.supersimplesupplysystem.models.User;
 import nl.jed.supersimplesupplysystem.repository.RoleRepository;
 import nl.jed.supersimplesupplysystem.repository.UserRepository;
+import nl.jed.supersimplesupplysystem.services.user.UserServiceImpl;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;

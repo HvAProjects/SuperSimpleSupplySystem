@@ -10,12 +10,14 @@ import {BoardModeratorComponent} from './pages/board-moderator/board-moderator.c
 import {HouseholdComponent} from './pages/household/household.component';
 import {ForgotPasswordComponent} from './pages/forgot-password/forgot-password.component';
 import {ChangePasswordComponent} from './pages/change-password/change-password.component';
+import {ActivateAccountComponent} from './pages/activate-account/activate-account.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'login', component: LoginComponent },
   { path: 'forgot-password', component: ForgotPasswordComponent },
   { path: 'change-password', component: ChangePasswordComponent },
+  { path: 'activate-account', component: ActivateAccountComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'profile', component: ProfileComponent },
   { path: 'user', component: BoardUserComponent },

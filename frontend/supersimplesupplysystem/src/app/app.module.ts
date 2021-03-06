@@ -28,6 +28,7 @@ import {MatDividerModule} from '@angular/material/divider';
 import { HouseholdComponent } from './pages/household/household.component';
 import { ForgotPasswordComponent } from './pages/forgot-password/forgot-password.component';
 import { ChangePasswordComponent } from './pages/change-password/change-password.component';
+import { ActivateAccountComponent } from './pages/activate-account/activate-account.component';
 
 
 @NgModule({
@@ -43,7 +44,8 @@ import { ChangePasswordComponent } from './pages/change-password/change-password
     HeaderComponent,
     HouseholdComponent,
     ForgotPasswordComponent,
-    ChangePasswordComponent
+    ChangePasswordComponent,
+    ActivateAccountComponent
   ],
   imports: [
     BrowserModule,

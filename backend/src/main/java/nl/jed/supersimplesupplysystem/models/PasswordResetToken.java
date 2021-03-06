@@ -1,12 +1,10 @@
 package nl.jed.supersimplesupplysystem.models;
 
-import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.beans.ConstructorProperties;
 import java.io.Serializable;
 import java.util.Calendar;
 import java.util.Date;
@@ -30,9 +28,9 @@ public class PasswordResetToken implements Serializable {
     private User user;
 
     @Getter
-    private Date expiryDate = getExpiryDate();
+    private Date expiryDate = expiryDateDefaultValue();
 
-    private Date getExpiryDate() {
+    private Date expiryDateDefaultValue() {
         Date date = new Date();
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(date);

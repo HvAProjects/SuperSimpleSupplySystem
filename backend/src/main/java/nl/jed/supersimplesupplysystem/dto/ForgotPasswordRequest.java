@@ -1,8 +1,8 @@
 package nl.jed.supersimplesupplysystem.dto;
 
-import lombok.Getter;
+import lombok.Data;
 
+@Data
 public class ForgotPasswordRequest {
-    @Getter
     String email;
 }

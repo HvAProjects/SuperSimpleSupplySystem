@@ -87,7 +87,7 @@ class HouseholdControllerTest {
         doNothing().when(householdServiceMock).removeHousehold(1L);
         ResponseEntity result = controller.deleteHousehold(1L);
         verify(householdServiceMock, times(1)).removeHousehold(1L);
-        assertThat(result, is(ResponseEntity.ok("Household has been successfully removed.")));
+        assertThat(result, is(ResponseEntity.ok(any())));
     }
 
     @Test
@@ -97,7 +97,7 @@ class HouseholdControllerTest {
         doNothing().when(householdServiceMock).addHousehold(any());
         ResponseEntity result = controller.addHousehold(householdMock);
         verify(householdServiceMock, times(1)).addHousehold(householdMock);
-        assertThat(result, is(ResponseEntity.ok("Household has been create successfully.")));
+        assertThat(result, is(ResponseEntity.ok(any())));
 
 
     }

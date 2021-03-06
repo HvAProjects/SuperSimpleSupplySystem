@@ -65,11 +65,11 @@ export class ChangePasswordComponent implements OnInit {
       }
       subscription.subscribe(
         data => {
-          this.message = 'If the email address is found, an email is sent to reset the password';
+          this.message = data.message;
           this.error = false;
         },
         err => {
-          this.message = 'Something went horribly wrong!';
+          this.message = err.error.message;
           this.error = true;
         });
     }

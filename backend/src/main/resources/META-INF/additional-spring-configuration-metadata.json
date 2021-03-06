@@ -12,5 +12,10 @@
       "type": "java.lang.String",
       "description": "Description for properties.forgotMailUrl.",
       "sourceType": "nl.jed.supersimplesupplysystem.configuration.CustomProperties"
+    },
+    {
+      "name": "properties.activateAccountUrl",
+      "type": "java.lang.String",
+      "description": "Description for properties.activateAccountUrl."
     }
   ] }

@@ -2,7 +2,7 @@ package nl.jed.supersimplesupplysystem.security.oauth2;
 
 import nl.jed.supersimplesupplysystem.dto.LocalUser;
 import nl.jed.supersimplesupplysystem.models.User;
-import nl.jed.supersimplesupplysystem.services.UserService;
+import nl.jed.supersimplesupplysystem.services.user.UserService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;

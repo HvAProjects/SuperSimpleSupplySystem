@@ -12,4 +12,7 @@ public class CustomProperties {
 
     @Getter @Setter
     public String forgotMailUrl = null;
+
+    @Getter @Setter
+    public String activateAccountUrl = null;
 }
