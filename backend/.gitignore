@@ -261,3 +261,5 @@ gradle-app.setting
 # End of https://www.toptal.com/developers/gitignore/api/gradle,java,intellij,vscode,angular,windows,osx,linux
 
 key
+
+.classpath
