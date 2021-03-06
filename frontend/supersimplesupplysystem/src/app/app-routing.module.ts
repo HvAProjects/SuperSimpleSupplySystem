@@ -7,6 +7,7 @@ import {ProfileComponent} from './pages/profile/profile.component';
 import {HomeComponent} from './pages/home/home.component';
 import {BoardUserComponent} from './pages/board-user/board-user.component';
 import {BoardModeratorComponent} from './pages/board-moderator/board-moderator.component';
+import {HouseholdComponent} from './pages/household/household.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -16,12 +17,13 @@ const routes: Routes = [
   { path: 'user', component: BoardUserComponent },
   { path: 'mod', component: BoardModeratorComponent },
   { path: 'admin', component: BoardAdminComponent },
+  { path: 'household', component: HouseholdComponent},
   { path: '', redirectTo: 'home', pathMatch: 'full' }
 ];
 
 @NgModule({
+  // imports: [RouterModule.forRoot(routes)],
   imports: [RouterModule.forRoot(routes)],
-  // imports: [RouterModule.forRoot(routes, { useHash: true })],
   exports: [RouterModule]
 })
 export class AppRoutingModule {
