@@ -80,7 +80,7 @@ public class AuthController {
     public ResponseEntity<ApiResponse> changePasswordWithToken(@Valid @RequestBody ChangePasswordRequest request) {
         User user = securityService.validatePasswordResetToken(request.getToken());
         if (user == null) {
-            return new ResponseEntity<>(new ApiResponse(false, "Token expired or invalid"), HttpStatus.BAD_REQUEST); // Token expired or invalid
+            return new ResponseEntity<>(new ApiResponse(false, "Token expired or invalid"), HttpStatus.BAD_REQUEST);
         }
         try {
             authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(user.getEmail(), user.getPassword()));

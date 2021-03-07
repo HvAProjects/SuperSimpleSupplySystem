@@ -7,14 +7,20 @@ import nl.jed.supersimplesupplysystem.exception.OAuth2AuthenticationProcessingEx
 import nl.jed.supersimplesupplysystem.exception.UserAlreadyExistAuthenticationException;
 import nl.jed.supersimplesupplysystem.models.Role;
 import nl.jed.supersimplesupplysystem.models.User;
+import nl.jed.supersimplesupplysystem.repository.PasswordResetTokenRepository;
 import nl.jed.supersimplesupplysystem.repository.RoleRepository;
+import nl.jed.supersimplesupplysystem.repository.UserActivationTokenRepository;
 import nl.jed.supersimplesupplysystem.repository.UserRepository;
+import nl.jed.supersimplesupplysystem.services.mail.MailService;
+import nl.jed.supersimplesupplysystem.services.user.UserService;
 import nl.jed.supersimplesupplysystem.services.user.UserServiceImpl;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.core.oidc.OidcIdToken;
 import org.springframework.security.oauth2.core.oidc.OidcUserInfo;
@@ -28,8 +34,7 @@ import java.util.Optional;
 
 import static nl.jed.supersimplesupplysystem.models.Role.ROLE_USER;
 import static org.hibernate.validator.internal.util.CollectionHelper.asSet;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
@@ -41,6 +46,21 @@ class UserServiceImplTest {
     private RoleRepository mockRoleRepository;
     @Mock
     private PasswordEncoder mockPasswordEncoder;
+
+    @Mock
+    private PasswordEncoder passwordEncoder;
+
+    @Mock
+    private Environment env;
+
+    @Mock
+    private UserActivationTokenRepository mockUserActivationRepository;
+
+    @Mock
+    private MailService mailServiceMock;
+
+    @Mock
+    PasswordResetTokenRepository passwordResetTokenRepository;
 
     @InjectMocks
     private UserServiceImpl userServiceImplUnderTest;
@@ -65,7 +85,7 @@ class UserServiceImplTest {
         when(mockPasswordEncoder.encode("password")).thenReturn("result");
         when(mockRoleRepository.findByName(ROLE_USER)).thenReturn(new Role(ROLE_USER));
         when(mockUserRepository.save(any())).thenReturn(expectedResult);
-
+        when(env.getProperty("properties.activateAccountUrl")).thenReturn("");
 
         final SignUpRequest signUpRequest = new SignUpRequest(expectedResult.getId(), expectedResult.getProviderUserId(), expectedResult.getDisplayName(), expectedResult.getEmail(), provider, expectedResult.getPassword(), expectedResult.getPassword());
         // Run the test
@@ -321,5 +341,31 @@ class UserServiceImplTest {
 
         // Verify the results
         assertEquals(expectedResult, result);
+    }
+
+    @Test
+    void testActivateAccount() {
+        User user = new User();
+        user.setEnabled(false);
+        userServiceImplUnderTest.activateAccount(user);
+        assertTrue(user.isEnabled());
+    }
+
+    @Test
+    void testChangePassword() {
+        User user = new User();
+        String newPassword = "newPassword";
+        user.setPassword("old");
+        when(passwordEncoder.encode(newPassword)).thenReturn(newPassword);
+        userServiceImplUnderTest.changePassword(user, newPassword);
+        assertEquals(newPassword, user.getPassword());
+    }
+
+    @Test
+    void testResetPassword() {
+        String emailAddress = "user@gmail.com";
+        when(mockUserRepository.findByEmail(emailAddress)).thenReturn(new User());
+        userServiceImplUnderTest.resetPassword(emailAddress);
+        verify(mailServiceMock, atLeastOnce()).sendEmail(any());
     }
 }

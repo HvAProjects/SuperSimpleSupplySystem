@@ -18,11 +18,7 @@ public class Mail {
 
     private String mailContent;
 
-    private String contentType;
+    private String contentType = "text/plain";
 
     private List<Object> attachments;
-
-    public Mail() {
-        contentType = "text/plain";
-    }
 }
