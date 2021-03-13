@@ -39,7 +39,6 @@ export class AuthService {
   // From a reset password url (with password reset token)
   changePasswordWithToken(oldPassword, newPassword, confirmNewPassword, token): Observable<any> {
     return this.http.post(AppConstants.AUTH_API + 'change-password-with-token', {
-      oldPassword,
       newPassword,
       token
     }, httpOptions);
