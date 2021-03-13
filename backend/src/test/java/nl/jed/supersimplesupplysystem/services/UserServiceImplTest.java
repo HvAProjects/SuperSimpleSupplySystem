@@ -82,7 +82,7 @@ class UserServiceImplTest {
         expectedResult.setPassword("password");
 
         when(mockUserRepository.existsByEmail("email")).thenReturn(false);
-        when(mockPasswordEncoder.encode("password")).thenReturn("result");
+//        when(mockPasswordEncoder.encode("password")).thenReturn("result");
         when(mockRoleRepository.findByName(ROLE_USER)).thenReturn(new Role(ROLE_USER));
         when(mockUserRepository.save(any())).thenReturn(expectedResult);
         when(env.getProperty("properties.activateAccountUrl")).thenReturn("");
