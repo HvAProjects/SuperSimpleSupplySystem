@@ -82,13 +82,6 @@ public class AuthController {
         if (user == null) {
             return new ResponseEntity<>(new ApiResponse(false, "Token expired or invalid"), HttpStatus.BAD_REQUEST);
         }
-        try {
-            authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(user.getEmail(), user.getPassword()));
-        } catch (DisabledException e) {
-            return new ResponseEntity<>(new ApiResponse(false, "Account should be activated first!"), HttpStatus.BAD_REQUEST);
-        } catch (BadCredentialsException e) {
-            return new ResponseEntity<>(new ApiResponse(false, "The combination of email and password are not correct!"), HttpStatus.BAD_REQUEST);
-        }
         userService.changePassword(user, request.getNewPassword());
         return ResponseEntity.ok(new ApiResponse(true, "Password change successful"));
     }
