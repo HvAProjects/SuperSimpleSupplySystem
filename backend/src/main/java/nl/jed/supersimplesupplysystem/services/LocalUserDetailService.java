@@ -3,6 +3,7 @@ package nl.jed.supersimplesupplysystem.services;
 import nl.jed.supersimplesupplysystem.dto.LocalUser;
 import nl.jed.supersimplesupplysystem.exception.ResourceNotFoundException;
 import nl.jed.supersimplesupplysystem.models.User;
+import nl.jed.supersimplesupplysystem.services.user.UserService;
 import nl.jed.supersimplesupplysystem.util.GeneralUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetailsService;

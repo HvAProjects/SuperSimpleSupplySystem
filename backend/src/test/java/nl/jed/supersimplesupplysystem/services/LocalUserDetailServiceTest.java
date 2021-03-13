@@ -4,6 +4,7 @@ import nl.jed.supersimplesupplysystem.dto.LocalUser;
 import nl.jed.supersimplesupplysystem.exception.ResourceNotFoundException;
 import nl.jed.supersimplesupplysystem.models.Role;
 import nl.jed.supersimplesupplysystem.models.User;
+import nl.jed.supersimplesupplysystem.services.user.UserService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;

@@ -14,7 +14,7 @@ import { HomeComponent } from './pages/home/home.component';
 import { BoardUserComponent } from './pages/board-user/board-user.component';
 import { BoardModeratorComponent } from './pages/board-moderator/board-moderator.component';
 import {AuthInterceptor, authInterceptorProviders} from './interceptors/auth.interceptor';
-import { HeaderComponent } from './pages/header/header.component';
+import { HeaderComponent } from './components/header/header.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatIconModule} from '@angular/material/icon';
@@ -26,6 +26,9 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import {MatDividerModule} from '@angular/material/divider';
 import { HouseholdComponent } from './pages/household/household.component';
+import { ForgotPasswordComponent } from './pages/forgot-password/forgot-password.component';
+import { ChangePasswordComponent } from './pages/change-password/change-password.component';
+import { ActivateAccountComponent } from './pages/activate-account/activate-account.component';
 
 
 @NgModule({
@@ -39,7 +42,10 @@ import { HouseholdComponent } from './pages/household/household.component';
     BoardUserComponent,
     BoardModeratorComponent,
     HeaderComponent,
-    HouseholdComponent
+    HouseholdComponent,
+    ForgotPasswordComponent,
+    ChangePasswordComponent,
+    ActivateAccountComponent
   ],
   imports: [
     BrowserModule,

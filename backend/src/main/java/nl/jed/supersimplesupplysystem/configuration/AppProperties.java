@@ -27,6 +27,6 @@ public class AppProperties {
 
     public static final class OAuth2 {
         @Getter
-        private List<String> authorizedRedirectUris = new ArrayList<>();
+        private final List<String> authorizedRedirectUris = new ArrayList<>();
     }
 }

@@ -2,6 +2,7 @@ package nl.jed.supersimplesupplysystem.configuration;
 
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Properties;
 
 import lombok.AllArgsConstructor;
 import lombok.val;
@@ -11,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.converter.FormHttpMessageConverter;
+import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.BeanIds;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -57,7 +59,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(localUserDetailService).passwordEncoder(passwordEncoder);
     }
-
 
 
     @Override
@@ -115,6 +116,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         source.registerCorsConfiguration("/**", cors );
         return source;
     }
+
+
 
     /*
      * By default, Spring OAuth2 uses

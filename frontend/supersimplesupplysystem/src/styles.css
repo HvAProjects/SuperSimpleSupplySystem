@@ -16,7 +16,7 @@ body, html {
 }
 
 .h1{
-  font-family: "Montserrat", serif;
+  font-family: "Montserrat", sans-serif;
   font-weight: bolder;
   font-size: 28px !important;
   color: #005AA7;

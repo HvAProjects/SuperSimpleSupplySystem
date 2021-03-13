@@ -1,5 +1,6 @@
-package nl.jed.supersimplesupplysystem.services;
+package nl.jed.supersimplesupplysystem.services.user;
 
+import nl.jed.supersimplesupplysystem.dto.ChangePasswordRequest;
 import nl.jed.supersimplesupplysystem.dto.LocalUser;
 import nl.jed.supersimplesupplysystem.dto.SignUpRequest;
 import nl.jed.supersimplesupplysystem.exception.UserAlreadyExistAuthenticationException;
@@ -12,11 +13,15 @@ import java.util.Optional;
 
 public interface UserService {
 
-    public User registerNewUser(SignUpRequest signUpRequest) throws UserAlreadyExistAuthenticationException;
+    User registerNewUser(SignUpRequest signUpRequest) throws UserAlreadyExistAuthenticationException;
 
     User findUserByEmail(String email);
 
     Optional<User> findUserById(Long id);
 
     LocalUser processUserRegistration(String registrationId, Map<String, Object> attributes, OidcIdToken idToken, OidcUserInfo userInfo);
+
+    void resetPassword(String emailAddress);
+    void changePassword(User user, String newPassword);
+    void activateAccount(User user);
 }

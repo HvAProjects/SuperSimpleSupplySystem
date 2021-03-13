@@ -30,8 +30,14 @@
 
         <div class="ss-button-container">
           <button mat-button color="primary" class="ss-btn-blue">Login</button>
-          <div class="ss-forgot">
-            <a href="#">Forgot password?</a>
+          <div class="forgot-signup-container">
+            <div class="ss-forgot forgot-signup-item">
+              <a routerLink="/forgot-password">Forgot password</a>
+            </div>
+            <span>|</span>
+            <div class="ss-forgot forgot-signup-item">
+              <a routerLink="/register">Register</a>
+            </div>
           </div>
           <div style="margin: 10px" class="alert alert-danger" role="alert" *ngIf="isLoginFailed"> Login failed, please try again. {{ errorMessage }} </div>
 
@@ -52,10 +58,6 @@
           </a>
         </div>
         <div style="margin-top: 10px">
-          <a href="{{ githubURL }}" mat-button style="padding: 1rem;">
-            <mat-icon style="width: 50px; height:30px"
-                      svgIcon="github"></mat-icon> Login With Github
-          </a>
           <a href="{{ linkedinURL }}" mat-button style="padding: 1rem;">
             <mat-icon style="width: 50px; height:30px"
                       svgIcon="linkedin"></mat-icon> Login With LinkedIn
