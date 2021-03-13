@@ -17,10 +17,11 @@ export class ChangePasswordComponent implements OnInit {
 
   changePasswordForm = new FormGroup({
     oldPassword: new FormControl('', [
-      Validators.required
+      // Validators.required
     ]),
     newPassword: new FormControl('', [
-      Validators.required
+      Validators.required,
+      Validators.minLength(6)
     ]),
     newPasswordConfirm: new FormControl('', [
       Validators.required,
