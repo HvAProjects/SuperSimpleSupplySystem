@@ -26,6 +26,11 @@
       <td mat-cell *matCellDef="let element"> {{element.postalCode}} </td>
     </ng-container>
 
+    <ng-container matColumnDef="city">
+      <th mat-header-cell *matHeaderCellDef> City</th>
+      <td mat-cell *matCellDef="let element"> {{element.city}} </td>
+    </ng-container>
+
 
     <ng-container matColumnDef="country">
       <th mat-header-cell *matHeaderCellDef> Country</th>

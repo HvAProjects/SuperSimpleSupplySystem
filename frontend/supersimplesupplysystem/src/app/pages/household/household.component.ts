@@ -12,7 +12,7 @@ import {AddHouseholdDialogComponent} from '../../components/add-household-dialog
   styleUrls: ['./household.component.css']
 })
 export class HouseholdComponent implements OnInit {
-  displayedColumns: string[] = ['id', 'name', 'address', 'postalCode', 'country', 'action'];
+  displayedColumns: string[] = ['id', 'name', 'address', 'postalCode', 'city', 'country', 'action'];
   households: Household[];
   dataSource;
 

@@ -1,8 +1,9 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, ElementRef, OnChanges, OnInit, SimpleChanges, ViewChild} from '@angular/core';
 import {MatDialog, MatDialogRef} from '@angular/material/dialog';
-import {FormControl, NgForm, Validators} from '@angular/forms';
+import {FormBuilder, FormControl, FormGroup, NgForm, Validators} from '@angular/forms';
 import {Household} from '../../pages/household/household';
 import {HouseholdService} from '../../services/household.service';
+import {Country} from '@angular-material-extensions/select-country';
 
 @Component({
   selector: 'app-add-household-dialog',
@@ -10,22 +11,17 @@ import {HouseholdService} from '../../services/household.service';
   styleUrls: ['./add-household-dialog.component.css'],
 })
 export class AddHouseholdDialogComponent implements OnInit {
-  textValidator = new FormControl('', [
+  countryFormControl = new FormControl('', [
     Validators.required,
-    Validators.minLength(3)
+    Validators.minLength(1)
   ]);
 
   @ViewChild('addForm') public addForm: NgForm;
-
   household: Household = new Household();
 
 
-  textControl = new FormControl('', [
-    Validators.required,
-    Validators.minLength(4)
-  ]);
-
-  constructor(public dialogRef: MatDialogRef<AddHouseholdDialogComponent>, public householdService: HouseholdService) { }
+  constructor(public dialogRef: MatDialogRef<AddHouseholdDialogComponent>, public householdService: HouseholdService) {
+  }
 
   ngOnInit(): void {
   }
@@ -37,6 +33,11 @@ export class AddHouseholdDialogComponent implements OnInit {
   closeDialog() {
     this.dialogRef.close({event: 'close'});
   }
+
+  onCountrySelected($event: Country) {
+    this.household.country = $event.name;
+  }
+
 
 
 
