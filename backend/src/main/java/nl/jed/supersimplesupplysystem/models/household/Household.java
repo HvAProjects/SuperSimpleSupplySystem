@@ -48,6 +48,9 @@ public class Household {
     @Column(name = "COUNTRY")
     private String country;
 
+    @Column(name = "owner")
+    private String owner;
+
     @ManyToMany
     @JoinTable(name = "household_users", joinColumns = {@JoinColumn(name = "HOUSEHOLD_ID")}, inverseJoinColumns = {@JoinColumn(name = "USER_ID")})
     private Set<User> users;

@@ -5,6 +5,7 @@ import nl.jed.supersimplesupplysystem.models.household.Household;
 import nl.jed.supersimplesupplysystem.services.household.HouseholdService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -32,6 +33,7 @@ public class HouseholdController {
     HouseholdService householdService;
 
     @GetMapping("/")
+    @PreAuthorize("hasRole('USER')")
     public List<Household> getAllHouseholds(){
         return householdService.getAllHouseholds();
     }
