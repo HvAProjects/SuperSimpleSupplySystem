@@ -47,12 +47,11 @@ public class HouseholdController {
         return ResponseEntity.ok("Household has been successfully removed.");
     }
 
-    @PostMapping(path = "/", consumes = "application/json")
+    @PostMapping(path = "/")
     public ResponseEntity addHousehold(@Valid @RequestBody Household household){
         householdService.addHousehold(household);
         return ResponseEntity.ok("Household has been create successfully.");
     }
-
 
 
 

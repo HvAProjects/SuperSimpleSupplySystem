@@ -33,6 +33,9 @@ public class Household {
     private String postalCode;
 
     @Column
+    private String city;
+
+    @Column
     private String country;
 
 }
