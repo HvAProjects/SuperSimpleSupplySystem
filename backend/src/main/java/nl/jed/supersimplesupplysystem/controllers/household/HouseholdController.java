@@ -33,7 +33,6 @@ public class HouseholdController {
     HouseholdService householdService;
 
     @GetMapping("/")
-    @PreAuthorize("hasRole('USER')")
     public List<Household> getAllHouseholds(){
         return householdService.getAllHouseholds();
     }
