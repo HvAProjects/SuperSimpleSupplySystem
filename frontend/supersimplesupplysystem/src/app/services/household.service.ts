@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {Household} from '../pages/household/household';
 import {AppConstants} from '../common/app.constants';
@@ -16,13 +16,12 @@ export class HouseholdService {
   }
 
   public deleteHousehold(id: number) {
-    return this.http.delete<Household>(AppConstants.API_URL + `household/${id}`).subscribe(
-      () => {
-        console.log('Household: ' + id + ' has been deleted');
-      },
-      error => {
-        console.log('Error deleting household ' + id + ' - Error: ' + error);
-      }
-    );
+    return this.http.delete<Household>(AppConstants.API_URL + `household/${id}`)
   }
+
+  public addHousehold(household: Household){
+    return this.http.post<Household>(AppConstants.API_URL  + `household/`, household );
+  }
+
+
 }

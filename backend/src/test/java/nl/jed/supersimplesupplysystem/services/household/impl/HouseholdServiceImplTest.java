@@ -1,5 +1,6 @@
 package nl.jed.supersimplesupplysystem.services.household.impl;
 
+import nl.jed.supersimplesupplysystem.models.User;
 import nl.jed.supersimplesupplysystem.models.household.Household;
 import nl.jed.supersimplesupplysystem.repository.household.HouseholdRepository;
 import org.junit.jupiter.api.BeforeEach;
@@ -21,6 +22,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 /**
  * @author joe.vrolijk
@@ -102,5 +104,35 @@ class HouseholdServiceImplTest {
 
         householdService.removeHousehold(1L);
         verify(householdRepositoryMock, times(1)).deleteById(1L);
+    }
+
+    @Test
+    void hasAccessTest() {
+        String username = "joe.vrolijk@ssss.com";
+
+        User user1 = new User();
+        user1.setId(123L);
+        user1.setProviderUserId("TestProviderUserId");
+        user1.setDisplayName("Joe");
+        user1.setEmail("joe.vrolijk@ssss.com");
+
+        User user2 = new User();
+        user2.setId(124L);
+        user2.setProviderUserId("TestProviderUserId22");
+        user2.setDisplayName("Evan");
+        user2.setEmail("evan.plat@ssss.com");
+
+        Household household = new Household();
+        household.setName("Huis1");
+        household.setId(111L);
+        household.setUsers(Set.of(user1, user2));
+
+        boolean result = household.hasAccess(username);
+        assertThat(result, is(true));
+
+        username = "elvis@ssss.com";
+
+        boolean result2 = household.hasAccess(username);
+        assertThat(result2, is(false));
     }
 }

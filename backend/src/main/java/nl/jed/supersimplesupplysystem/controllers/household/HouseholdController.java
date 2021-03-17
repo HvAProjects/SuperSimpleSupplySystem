@@ -5,6 +5,7 @@ import nl.jed.supersimplesupplysystem.models.household.Household;
 import nl.jed.supersimplesupplysystem.services.household.HouseholdService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -47,12 +48,11 @@ public class HouseholdController {
         return ResponseEntity.ok("Household has been successfully removed.");
     }
 
-    @PostMapping(path = "/", consumes = "application/json")
+    @PostMapping(path = "/")
     public ResponseEntity addHousehold(@Valid @RequestBody Household household){
         householdService.addHousehold(household);
         return ResponseEntity.ok("Household has been create successfully.");
     }
-
 
 
 
