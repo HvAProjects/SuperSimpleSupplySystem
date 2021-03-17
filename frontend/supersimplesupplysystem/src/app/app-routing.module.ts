@@ -11,6 +11,7 @@ import {HouseholdComponent} from './pages/household/household.component';
 import {ForgotPasswordComponent} from './pages/forgot-password/forgot-password.component';
 import {ChangePasswordComponent} from './pages/change-password/change-password.component';
 import {ActivateAccountComponent} from './pages/activate-account/activate-account.component';
+import {ScannerComponent} from './pages/scanner/scanner.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -24,6 +25,7 @@ const routes: Routes = [
   { path: 'mod', component: BoardModeratorComponent },
   { path: 'admin', component: BoardAdminComponent },
   { path: 'household', component: HouseholdComponent},
+  { path: 'scanner', component: ScannerComponent},
   { path: '', redirectTo: 'home', pathMatch: 'full' }
 ];
 

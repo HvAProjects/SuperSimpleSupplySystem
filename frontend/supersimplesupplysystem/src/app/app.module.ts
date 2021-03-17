@@ -32,6 +32,10 @@ import { ActivateAccountComponent } from './pages/activate-account/activate-acco
 import { AddHouseholdDialogComponent } from './components/add-household-dialog/add-household-dialog.component';
 import {MatDialogModule, MatDialogRef} from '@angular/material/dialog';
 import {MatSelectCountryModule} from '@angular-material-extensions/select-country';
+import { ScannerComponent } from './pages/scanner/scanner.component';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
 
 
 @NgModule({
@@ -49,7 +53,8 @@ import {MatSelectCountryModule} from '@angular-material-extensions/select-countr
     ForgotPasswordComponent,
     ChangePasswordComponent,
     ActivateAccountComponent,
-    AddHouseholdDialogComponent
+    AddHouseholdDialogComponent,
+    ScannerComponent
   ],
   imports: [
     BrowserModule,
@@ -69,7 +74,9 @@ import {MatSelectCountryModule} from '@angular-material-extensions/select-countr
     MatInputModule,
     MatDividerModule,
     MatDialogModule,
-    MatSelectCountryModule.forRoot('en')
+    MatSnackBarModule,
+    MatSelectCountryModule.forRoot('en'),
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS,

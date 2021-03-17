@@ -16,6 +16,7 @@
     <div>
       <button mat-button routerLink="/">Home</button>
       <button *ngIf="isLoggedIn" mat-button routerLink="/household">Households</button>
+      <button *ngIf="isLoggedIn" mat-button routerLink="/scanner">Scanner</button>
     </div>
     <div class="login" *ngIf="!isLoggedIn">
       <button mat-button [matMenuTriggerFor]="menu">Login / Register</button>
