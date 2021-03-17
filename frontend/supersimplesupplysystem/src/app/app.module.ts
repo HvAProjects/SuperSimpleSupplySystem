@@ -29,6 +29,9 @@ import { HouseholdComponent } from './pages/household/household.component';
 import { ForgotPasswordComponent } from './pages/forgot-password/forgot-password.component';
 import { ChangePasswordComponent } from './pages/change-password/change-password.component';
 import { ActivateAccountComponent } from './pages/activate-account/activate-account.component';
+import { AddHouseholdDialogComponent } from './components/add-household-dialog/add-household-dialog.component';
+import {MatDialogModule, MatDialogRef} from '@angular/material/dialog';
+import {MatSelectCountryModule} from '@angular-material-extensions/select-country';
 
 
 @NgModule({
@@ -45,7 +48,8 @@ import { ActivateAccountComponent } from './pages/activate-account/activate-acco
     HouseholdComponent,
     ForgotPasswordComponent,
     ChangePasswordComponent,
-    ActivateAccountComponent
+    ActivateAccountComponent,
+    AddHouseholdDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -63,7 +67,9 @@ import { ActivateAccountComponent } from './pages/activate-account/activate-acco
     MatFormFieldModule,
     ReactiveFormsModule,
     MatInputModule,
-    MatDividerModule
+    MatDividerModule,
+    MatDialogModule,
+    MatSelectCountryModule.forRoot('en')
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS,
