@@ -35,7 +35,7 @@ jobs:
       uses: actions/checkout@v2
       
     - name: Set image pusher secret
-      run: echo ${WORKFLOW_IMAGE_PAT} > key
+      run: echo ${WORKFLOW_IMAGE_PAT} > backend/key
       env:
         WORKFLOW_IMAGE_PAT: ${{secrets.WORKFLOW_IMAGE_PAT}}
 
