@@ -1,0 +1,18 @@
+.error-message {
+  background-color: black;
+  text-align: center;
+  color: red;
+  padding: 8px;
+}
+
+.viewport {
+  height: 540px;
+}
+
+.viewport::ng-deep video {
+  width: 70%;
+  height: 540px;
+  object-fit: cover;
+}
+
+
