@@ -1,6 +1,7 @@
 package nl.jed.supersimplesupplysystem;
 
 import nl.jed.supersimplesupplysystem.dto.openfoodfacts.GetBrandsResponse;
+import nl.jed.supersimplesupplysystem.dto.openfoodfacts.GetCategoriesResponse;
 import nl.jed.supersimplesupplysystem.dto.openfoodfacts.GetProductResponse;
 import nl.jed.supersimplesupplysystem.repository.OpenFoodFactsRepository;
 import org.junit.Before;
@@ -21,7 +22,7 @@ public class TempOntwikkeltest {
     @BeforeAll
     public void setup() {
         Retrofit retrofit = new Retrofit.Builder()
-            .baseUrl(String.format("https://%s.openfoodfacts.org", "nl"))
+            .baseUrl(String.format("https://%s.openfoodfacts.org", "en"))
             .addConverterFactory(GsonConverterFactory.create())
             .build();
 
@@ -41,4 +42,9 @@ public class TempOntwikkeltest {
         System.out.println();
     }
 
+    @Test
+    public void getCategories() throws  IOException {
+        GetCategoriesResponse response = openFoodFactsRepository.getCategories().execute().body();
+        System.out.println();
+    }
 }
