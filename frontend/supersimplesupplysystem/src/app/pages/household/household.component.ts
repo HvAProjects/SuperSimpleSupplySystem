@@ -23,7 +23,6 @@ export class HouseholdComponent implements OnInit {
     this.getAllHouseholds();
   }
 
-
   getAllHouseholds(){
     this.householdService.getAllHouseholds().pipe(
       tap( households => {

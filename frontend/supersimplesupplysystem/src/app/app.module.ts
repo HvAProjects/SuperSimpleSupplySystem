@@ -36,6 +36,8 @@ import { ScannerComponent } from './pages/scanner/scanner.component';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
+import { LocationComponent } from './pages/location/location.component';
+import { AddLocationDialogComponent } from './dialogs/add-location-dialog/add-location-dialog.component';
 
 
 @NgModule({
@@ -54,7 +56,9 @@ import { environment } from '../environments/environment';
     ChangePasswordComponent,
     ActivateAccountComponent,
     AddHouseholdDialogComponent,
-    ScannerComponent
+    ScannerComponent,
+    LocationComponent,
+    AddLocationDialogComponent
   ],
   imports: [
     BrowserModule,

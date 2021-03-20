@@ -1,6 +1,7 @@
 package nl.jed.supersimplesupplysystem.controllers.household;
 
 import lombok.extern.slf4j.Slf4j;
+import nl.jed.supersimplesupplysystem.dto.ApiResponse;
 import nl.jed.supersimplesupplysystem.models.household.Household;
 import nl.jed.supersimplesupplysystem.services.household.HouseholdService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,20 +44,14 @@ public class HouseholdController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity deleteHousehold(@PathVariable("id") Long id){
+    public ResponseEntity<ApiResponse> deleteHousehold(@PathVariable("id") Long id){
         householdService.removeHousehold(id);
-        return ResponseEntity.ok("Household has been successfully removed.");
+        return ResponseEntity.ok().body(new ApiResponse(true, "Household has been successfully removed."));
     }
 
     @PostMapping(path = "/")
-    public ResponseEntity addHousehold(@Valid @RequestBody Household household){
+    public ResponseEntity<ApiResponse> addHousehold(@Valid @RequestBody Household household){
         householdService.addHousehold(household);
-        return ResponseEntity.ok("Household has been create successfully.");
+        return ResponseEntity.ok().body(new ApiResponse(true, "Household has been created successfully."));
     }
-
-
-
-
-
-
 }

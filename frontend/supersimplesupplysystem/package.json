@@ -26,6 +26,7 @@
     "@angular/service-worker": "~11.2.0",
     "@ng-bootstrap/ng-bootstrap": "^9.0.2",
     "bootstrap": "^4.5.0",
+    "quagga": "^0.12.1",
     "rxjs": "~6.6.0",
     "svg-country-flags": "^1.2.10",
     "tslib": "^2.0.0",

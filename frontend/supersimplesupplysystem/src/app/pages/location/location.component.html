@@ -1,0 +1,51 @@
+<h1>Locations</h1>
+
+<div class="table-container">
+  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 ss-table">
+
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef> ID</th>
+      <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+    </ng-container>
+
+
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef> Name</th>
+      <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="numberOfProducts">
+      <th mat-header-cell *matHeaderCellDef> Number Of Products</th>
+      <td mat-cell *matCellDef="let element"> {{element.numberOfProducts}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="action">
+      <th mat-header-cell *matHeaderCellDef> Action</th>
+      <td mat-cell *matCellDef="let element">
+        <button [matMenuTriggerFor]="beforeMenu" class="btn-transparent" mat-button>
+          <i class="tripleMenuIcon"></i>
+        </button>
+        <mat-menu #beforeMenu="matMenu" xPosition="before">
+          <button (click)="removeLocation(element)"  class="menuItems" mat-menu-item><i class="stacktraceMenuIcon"></i>Remove
+          </button>
+        </mat-menu>
+      </td>
+    </ng-container>
+
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+</div>
+
+<div class="table-container">
+  <mat-toolbar class="bottombar">
+    <mat-toolbar-row>
+
+      <button (click)="openDialog()"  mat-raised-button color="primary">
+        <span>Add a location</span>
+      </button>
+
+    </mat-toolbar-row>
+  </mat-toolbar>
+</div>

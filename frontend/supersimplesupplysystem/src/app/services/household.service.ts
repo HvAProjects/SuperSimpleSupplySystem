@@ -16,7 +16,7 @@ export class HouseholdService {
   }
 
   public deleteHousehold(id: number) {
-    return this.http.delete<Household>(AppConstants.API_URL + `household/${id}`)
+    return this.http.delete<Household>(AppConstants.API_URL + `household/${id}`);
   }
 
   public addHousehold(household: Household){
