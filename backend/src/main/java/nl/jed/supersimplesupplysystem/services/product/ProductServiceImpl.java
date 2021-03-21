@@ -3,7 +3,6 @@ package nl.jed.supersimplesupplysystem.services.product;
 import nl.jed.supersimplesupplysystem.dto.openfoodfacts.GetProductResponse;
 import nl.jed.supersimplesupplysystem.models.product.Product;
 import nl.jed.supersimplesupplysystem.models.product.ProductType;
-import nl.jed.supersimplesupplysystem.repository.LocationRepository;
 import nl.jed.supersimplesupplysystem.repository.OpenFoodFactsRepository;
 import nl.jed.supersimplesupplysystem.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;

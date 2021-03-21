@@ -9,17 +9,19 @@ import javax.persistence.*;
 @Entity
 public class ProductType {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "BARCODE")
     @ToString.Include
-    private Long barcode;
+    private String barcode;
 
     @Column(name = "NAME")
     private String name;
 
-    @Column(name = "UNIT")
-    private String unit;
+    @Column(name = "QUANTITY")
+    private String quantity;
 
-    @Column(name = "UNIT_AMOUNT")
-    private int unit_amount;
+    @Column(name = "BRANDS")
+    private String brands;
+
+    @Column(name = "IMAGE_URL")
+    private String imageUrl;
 }

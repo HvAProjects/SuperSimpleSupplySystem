@@ -1,7 +1,7 @@
 package nl.jed.supersimplesupplysystem.dto.openfoodfacts;
 
 import com.google.gson.annotations.SerializedName;
-import nl.jed.supersimplesupplysystem.models.ProductType;
+import nl.jed.supersimplesupplysystem.models.product.ProductType;
 
 public class GetProductResponse{
 

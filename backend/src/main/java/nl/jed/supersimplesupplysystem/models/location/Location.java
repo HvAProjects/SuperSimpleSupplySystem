@@ -2,8 +2,8 @@ package nl.jed.supersimplesupplysystem.models.location;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import nl.jed.supersimplesupplysystem.models.product.ProductType;
 import nl.jed.supersimplesupplysystem.models.household.Household;
+import nl.jed.supersimplesupplysystem.models.product.ProductType;
 
 import javax.persistence.*;
 import java.util.List;
