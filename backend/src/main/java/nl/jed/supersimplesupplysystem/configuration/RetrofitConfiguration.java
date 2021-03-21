@@ -12,7 +12,7 @@ public class RetrofitConfiguration {
     @Bean
     public OpenFoodFactsRepository ConfigureRetrofit() {
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(String.format("https://%s.openfoodfacts.org", "nl"))
+                .baseUrl(String.format("https://%s.openfoodfacts.org", "en"))
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 

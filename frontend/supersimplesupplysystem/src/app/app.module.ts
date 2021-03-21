@@ -34,8 +34,13 @@ import {MatDialogModule, MatDialogRef} from '@angular/material/dialog';
 import {MatSelectCountryModule} from '@angular-material-extensions/select-country';
 import { ScannerComponent } from './pages/scanner/scanner.component';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
-import { ServiceWorkerModule } from '@angular/service-worker';
+import {ServiceWorkerModule, SwRegistrationOptions} from '@angular/service-worker';
 import { environment } from '../environments/environment';
+import { LocationComponent } from './pages/location/location.component';
+import { AddLocationDialogComponent } from './dialogs/add-location-dialog/add-location-dialog.component';
+import { ProductComponent } from './pages/product/product.component';
+import { AddProductDialogComponent } from './dialogs/add-product-dialog/add-product-dialog.component';
+import { ScannerDialogComponent } from './dialogs/scanner-dialog/scanner-dialog.component';
 
 
 @NgModule({
@@ -54,7 +59,12 @@ import { environment } from '../environments/environment';
     ChangePasswordComponent,
     ActivateAccountComponent,
     AddHouseholdDialogComponent,
-    ScannerComponent
+    ScannerComponent,
+    LocationComponent,
+    AddLocationDialogComponent,
+    ProductComponent,
+    AddProductDialogComponent,
+    ScannerDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -76,13 +86,19 @@ import { environment } from '../environments/environment';
     MatDialogModule,
     MatSnackBarModule,
     MatSelectCountryModule.forRoot('en'),
-    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
+    // ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
+    ServiceWorkerModule.register('ngsw-worker.js')
+    // ServiceWorkerModule.register('ngsw-worker.js', { enabled: true })
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS,
     useClass: AuthInterceptor,
     multi: true
-  }],
+  },
+    {
+      provide: SwRegistrationOptions,
+      useFactory: () => ({ enabled: environment.production }),
+    }],
   bootstrap: [AppComponent]
 })
 export class AppModule {
