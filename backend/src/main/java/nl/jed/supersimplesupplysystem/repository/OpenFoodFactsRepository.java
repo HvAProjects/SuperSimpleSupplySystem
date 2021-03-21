@@ -1,6 +1,8 @@
 package nl.jed.supersimplesupplysystem.repository;
 
 import nl.jed.supersimplesupplysystem.dto.openfoodfacts.GetBrandsResponse;
+import nl.jed.supersimplesupplysystem.dto.openfoodfacts.GetCategoriesResponse;
+import nl.jed.supersimplesupplysystem.dto.openfoodfacts.GetLabelsResponse;
 import nl.jed.supersimplesupplysystem.dto.openfoodfacts.GetProductResponse;
 import org.springframework.stereotype.Repository;
 import retrofit2.Call;
@@ -15,4 +17,10 @@ public interface OpenFoodFactsRepository {
 
     @GET("/api/v0/product/{barcode}.json")
     Call<GetProductResponse> getProduct(@Path("barcode") String barcode);
+
+    @GET("/labels.json")
+    Call<GetLabelsResponse> getLabels();
+
+    @GET("/categories.json")
+    Call<GetCategoriesResponse> getCategories();
 }
