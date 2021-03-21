@@ -1,6 +1,6 @@
 import {AfterViewChecked, AfterViewInit, ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import {MatDialogRef} from '@angular/material/dialog';
-import Quagga from 'quagga';
+import Quagga from '@ericblade/quagga2';
 import {UpdateService} from '../../services/update.service';
 import {MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition,} from '@angular/material/snack-bar';
 
