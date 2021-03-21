@@ -6,6 +6,7 @@ import nl.jed.supersimplesupplysystem.repository.household.HouseholdRepository;
 import nl.jed.supersimplesupplysystem.services.household.HouseholdService;
 import org.apache.catalina.core.ApplicationContext;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PostFilter;
 import org.springframework.security.access.prepost.PreFilter;
 import org.springframework.stereotype.Service;
 
@@ -23,6 +24,7 @@ public class HouseholdServiceImpl implements HouseholdService {
 
 
     @Override
+    @PostFilter("filterObject.hasAccess(authentication.name)")
     public List<Household> getAllHouseholds() {
         
         val households = householdRepository.findAll();
