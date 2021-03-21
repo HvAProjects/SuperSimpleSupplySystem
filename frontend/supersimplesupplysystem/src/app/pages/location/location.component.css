@@ -1,0 +1,55 @@
+.mat-column-action {
+  text-align: right;
+}
+
+.mat-column-address {
+  flex: 0 0 15% !important;
+  width: 25% !important;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+
+  word-break: break-word;
+
+  -ms-hyphens: auto;
+  -moz-hyphens: auto;
+  -webkit-hyphens: auto;
+  hyphens: auto;
+
+}
+
+.mat-column-name {
+  flex: 0 0 15% !important;
+  width: 19% !important;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+
+  word-break: break-word;
+
+  -ms-hyphens: auto;
+  -moz-hyphens: auto;
+  -webkit-hyphens: auto;
+  hyphens: auto;
+
+}
+
+.mat-column-city {
+  flex: 0 0 15% !important;
+  width: 15% !important;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+
+  word-break: break-word;
+
+  -ms-hyphens: auto;
+  -moz-hyphens: auto;
+  -webkit-hyphens: auto;
+  hyphens: auto;
+
+}
+
+tr.clickable-row:hover {
+  background: whitesmoke;
+  cursor: pointer;
+}
+
+

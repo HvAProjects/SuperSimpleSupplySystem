@@ -4,8 +4,12 @@ import lombok.Generated;
 import nl.jed.supersimplesupplysystem.dto.SocialProvider;
 import nl.jed.supersimplesupplysystem.models.Role;
 import nl.jed.supersimplesupplysystem.models.User;
+import nl.jed.supersimplesupplysystem.models.household.Household;
+import nl.jed.supersimplesupplysystem.models.location.Location;
+import nl.jed.supersimplesupplysystem.repository.LocationRepository;
 import nl.jed.supersimplesupplysystem.repository.RoleRepository;
 import nl.jed.supersimplesupplysystem.repository.UserRepository;
+import nl.jed.supersimplesupplysystem.repository.household.HouseholdRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.annotation.Lazy;
@@ -16,6 +20,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Set;
 
 @Generated
@@ -33,6 +38,12 @@ public class SetupDataLoader implements ApplicationListener<ContextRefreshedEven
     @Autowired
     private PasswordEncoder passwordEncoder;
 
+    @Autowired
+    private HouseholdRepository householdRepository;
+
+    @Autowired
+    private LocationRepository locationRepository;
+
     @Override
     @Transactional
     public void onApplicationEvent(final ContextRefreshedEvent event) {
@@ -45,7 +56,9 @@ public class SetupDataLoader implements ApplicationListener<ContextRefreshedEven
         Role modRole = createRoleIfNotFound(Role.ROLE_MODERATOR);
         createUserIfNotFound("admin@supersimplesupplysystem.com", Set.of(userRole, adminRole, modRole));
         createUserIfNotFound("joe@ssss.com", Set.of(userRole, adminRole, modRole));
-        createUserIfNotFound("evan@ssss.com", Set.of(userRole, adminRole, modRole));
+        User evan = createUserIfNotFound("evan@ssss.com", Set.of(userRole, adminRole, modRole));
+        Household household = createHousehold("TestHousehold", evan);
+        Location location = createLocation("TestLocation", household);
         alreadySetup = true;
     }
 
@@ -75,5 +88,25 @@ public class SetupDataLoader implements ApplicationListener<ContextRefreshedEven
             role = roleRepository.save(new Role(name));
         }
         return role;
+    }
+
+    public Household createHousehold(String name, User user) {
+        Household household = new Household();
+        household.setName(name);
+        household.setAddress("TestAddress");
+        household.setPostalCode("3535CZ");
+        HashSet<User> users = new HashSet<>();
+        users.add(user);
+        household.setUsers(users);
+        householdRepository.save(household);
+        return household;
+    }
+
+    public Location createLocation(String name, Household household) {
+        Location location = new Location();
+        location.setName(name);
+        location.setHousehold(household);
+        locationRepository.save(location);
+        return location;
     }
 }

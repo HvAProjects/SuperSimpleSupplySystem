@@ -30,4 +30,10 @@ public class LocationController {
         locationService.addLocationToHousehold(householdId, location);
         return ResponseEntity.ok().body(new ApiResponse(true, "Location has been created successfully."));
     }
+
+    @DeleteMapping("/{locationId}")
+    public ResponseEntity<ApiResponse> deleteLocation(@PathVariable("locationId") long locationId) {
+        locationService.deleteLocation(locationId);
+        return ResponseEntity.ok().body(new ApiResponse(true, "Location deleted successfully."));
+    }
 }

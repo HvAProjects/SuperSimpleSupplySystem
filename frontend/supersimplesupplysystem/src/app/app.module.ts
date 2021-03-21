@@ -38,6 +38,8 @@ import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 import { LocationComponent } from './pages/location/location.component';
 import { AddLocationDialogComponent } from './dialogs/add-location-dialog/add-location-dialog.component';
+import { ProductComponent } from './pages/product/product.component';
+import { AddProductDialogComponent } from './dialogs/add-product-dialog/add-product-dialog.component';
 
 
 @NgModule({
@@ -58,7 +60,9 @@ import { AddLocationDialogComponent } from './dialogs/add-location-dialog/add-lo
     AddHouseholdDialogComponent,
     ScannerComponent,
     LocationComponent,
-    AddLocationDialogComponent
+    AddLocationDialogComponent,
+    ProductComponent,
+    AddProductDialogComponent
   ],
   imports: [
     BrowserModule,

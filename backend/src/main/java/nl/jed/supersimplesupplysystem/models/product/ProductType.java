@@ -1,4 +1,4 @@
-package nl.jed.supersimplesupplysystem.models;
+package nl.jed.supersimplesupplysystem.models.product;
 
 import lombok.Data;
 import lombok.ToString;

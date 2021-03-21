@@ -30,4 +30,9 @@ public class LocationServiceImpl implements LocationService {
         location.setHousehold(household);
         locationRepository.save(location);
     }
+
+    @Override
+    public void deleteLocation(long locationId) {
+        locationRepository.deleteById(locationId);
+    }
 }

@@ -19,4 +19,8 @@ export class LocationService {
   addLocationToHousehold(householdId: number, location: ProductsLocation): Observable<any> {
     return this.http.post<ProductsLocation>(AppConstants.API_URL + `location/${householdId}`, location);
   }
+
+  deleteLocation(locationId: number): Observable<any> {
+    return this.http.delete(AppConstants.API_URL + `location/${locationId}`);
+  }
 }

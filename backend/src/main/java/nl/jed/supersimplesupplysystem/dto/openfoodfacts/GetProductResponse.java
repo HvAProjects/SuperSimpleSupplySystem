@@ -2,7 +2,7 @@ package nl.jed.supersimplesupplysystem.dto.openfoodfacts;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import nl.jed.supersimplesupplysystem.models.ProductType;
+import nl.jed.supersimplesupplysystem.models.product.ProductType;
 
 @JsonInclude(JsonInclude.Include.NON_DEFAULT)
 public class GetProductResponse {

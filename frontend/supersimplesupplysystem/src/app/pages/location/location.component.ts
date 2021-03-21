@@ -15,9 +15,9 @@ import {Household} from '../household/household';
 })
 export class LocationComponent implements OnInit {
 
-  displayedColumns: string[] = ['id', 'name', 'numberOfProducts'];
+  displayedColumns: string[] = ['id', 'name', 'numberOfProducts', 'action'];
   householdId;
-  dataSource;
+  dataSource: MatTableDataSource<ProductsLocation>;
 
   constructor(
     private route: ActivatedRoute,
@@ -26,7 +26,7 @@ export class LocationComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.route.params.subscribe((params: Params) => this.householdId = +params.id);
+    this.route.params.subscribe((params: Params) => this.householdId = +params.householdId);
     this.getLocations();
   }
 
@@ -35,8 +35,8 @@ export class LocationComponent implements OnInit {
       this.dataSource = new MatTableDataSource<ProductsLocation>(data));
   }
 
-  removeLocation(location: ProductsLocation): void {
-
+  deleteLocation(location: ProductsLocation): void {
+    this.locationService.deleteLocation(location.id).subscribe(result => this.getLocations());
   }
 
   openDialog(): void {

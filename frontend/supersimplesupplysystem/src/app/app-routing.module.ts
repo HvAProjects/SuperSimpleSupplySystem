@@ -13,6 +13,7 @@ import {ChangePasswordComponent} from './pages/change-password/change-password.c
 import {ActivateAccountComponent} from './pages/activate-account/activate-account.component';
 import {ScannerComponent} from './pages/scanner/scanner.component';
 import {LocationComponent} from './pages/location/location.component';
+import {ProductComponent} from './pages/product/product.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -26,7 +27,8 @@ const routes: Routes = [
   { path: 'mod', component: BoardModeratorComponent },
   { path: 'admin', component: BoardAdminComponent },
   { path: 'household', component: HouseholdComponent},
-  { path: 'household/:id', component: LocationComponent},
+  { path: 'household/:householdId', component: LocationComponent},
+  { path: 'household/:householdId/:locationId', component: ProductComponent},
   { path: 'scanner', component: ScannerComponent},
   { path: '', redirectTo: 'home', pathMatch: 'full' }
 ];
