@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {Product} from '../../models/Product';
-import {MatDialogRef} from '@angular/material/dialog';
+import {MatDialog, MatDialogRef} from '@angular/material/dialog';
+import {ProductsLocation} from '../../models/ProductsLocation';
+import {ScannerDialogComponent} from '../scanner-dialog/scanner-dialog.component';
 
 @Component({
   selector: 'app-add-product-dialog',
@@ -9,9 +11,10 @@ import {MatDialogRef} from '@angular/material/dialog';
 })
 export class AddProductDialogComponent implements OnInit {
 
-  product: Product;
+  product = new Product();
 
   constructor(
+    private dialog: MatDialog,
     private dialogRef: MatDialogRef<AddProductDialogComponent>) { }
 
   ngOnInit(): void {
@@ -21,7 +24,20 @@ export class AddProductDialogComponent implements OnInit {
     this.dialogRef.close({event: 'close'});
   }
 
-  addLocation(): void {
+  addProduct(): void {
     this.dialogRef.close(this.product);
+  }
+
+  scanProduct(): void {
+    const dialogRef = this.dialog.open(ScannerDialogComponent, {
+      // width  : '380px',
+      disableClose: false
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result instanceof Product) {
+        // this.addLocation(result);
+      }
+    });
   }
 }

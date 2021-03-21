@@ -40,6 +40,7 @@ import { LocationComponent } from './pages/location/location.component';
 import { AddLocationDialogComponent } from './dialogs/add-location-dialog/add-location-dialog.component';
 import { ProductComponent } from './pages/product/product.component';
 import { AddProductDialogComponent } from './dialogs/add-product-dialog/add-product-dialog.component';
+import { ScannerDialogComponent } from './dialogs/scanner-dialog/scanner-dialog.component';
 
 
 @NgModule({
@@ -62,7 +63,8 @@ import { AddProductDialogComponent } from './dialogs/add-product-dialog/add-prod
     LocationComponent,
     AddLocationDialogComponent,
     ProductComponent,
-    AddProductDialogComponent
+    AddProductDialogComponent,
+    ScannerDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -84,7 +86,8 @@ import { AddProductDialogComponent } from './dialogs/add-product-dialog/add-prod
     MatDialogModule,
     MatSnackBarModule,
     MatSelectCountryModule.forRoot('en'),
-    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
+    // ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: true })
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS,

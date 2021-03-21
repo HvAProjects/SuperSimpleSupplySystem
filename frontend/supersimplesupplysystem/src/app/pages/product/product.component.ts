@@ -42,7 +42,7 @@ export class ProductComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      if (result instanceof ProductsLocation) {
+      if (result instanceof Product) {
         // this.addLocation(result);
       }
     });
