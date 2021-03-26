@@ -55,6 +55,9 @@ import {MatSelectModule} from '@angular/material/select';
 import {MatSortModule} from '@angular/material/sort';
 import {HouseholdSettingsComponent} from './pages/household-settings/household-settings.component';
 import {MatGridListModule} from '@angular/material/grid-list';
+import {DashboardComponent} from './pages/dashboard/dashboard.component';
+import {ItemsAboutToExpireComponent} from './components/items-about-to-expire/items-about-to-expire.component';
+import {MatPaginatorModule} from '@angular/material/paginator';
 
 @NgModule({
   declarations: [
@@ -87,6 +90,8 @@ import {MatGridListModule} from '@angular/material/grid-list';
     AddOrRemoveProductsDialogComponent,
     ScanAnotherProductPromptComponent,
     HouseholdSettingsComponent,
+    DashboardComponent,
+    ItemsAboutToExpireComponent,
 
   ],
   imports: [
@@ -117,7 +122,8 @@ import {MatGridListModule} from '@angular/material/grid-list';
     MatDialogModule,
     MatSelectModule,
     MatSortModule,
-    MatGridListModule
+    MatGridListModule,
+    MatPaginatorModule
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS,
@@ -126,7 +132,7 @@ import {MatGridListModule} from '@angular/material/grid-list';
   },
     {
       provide: SwRegistrationOptions,
-      useFactory: () => ({ enabled: environment.production }),
+      useFactory: () => ({enabled: environment.production}),
     }],
   bootstrap: [AppComponent]
 })
