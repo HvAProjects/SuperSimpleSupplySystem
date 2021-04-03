@@ -11,6 +11,7 @@ import nl.jed.supersimplesupplysystem.security.oauth2.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
 import org.springframework.http.converter.FormHttpMessageConverter;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -18,6 +19,7 @@ import org.springframework.security.config.BeanIds;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
@@ -35,10 +37,12 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
+import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 
 @Configuration
 @EnableWebSecurity
+@Import(SwaggerConfig.class)
 @AllArgsConstructor(onConstructor = @__({@Autowired}))
 @EnableGlobalMethodSecurity(prePostEnabled = true, securedEnabled = true, jsr250Enabled = true)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
@@ -76,7 +80,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
             .authenticationEntryPoint(new RestAuthenticationEntryPoint())
             .and()
             .authorizeRequests()
-            .antMatchers("/", "/error", "/api/all", "/api/auth/**", "/oauth2/**", "/h2-console/**").permitAll()
+            .antMatchers("/", "/error", "/api/all", "/api/auth/**", "/oauth2/**", "/h2-console/**", "/v2/api-docs/**").permitAll()
+            .antMatchers("/v2/api-docs", "/configuration/ui", "/swagger-resources",
+                "/configuration/security", "/swagger-ui.html", "/webjars/**", "/swagger-resources/configuration/ui",
+                "/swagger-ui.html", "/swagger-resources/configuration/security", "/swagger-ui/index.html").permitAll()
             .antMatchers("/api/household/**").authenticated()
             .antMatchers("/api/product/**").authenticated()
             .antMatchers("/api/location/**").authenticated()
@@ -99,6 +106,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
             .successHandler(oAuth2AuthenticationSuccessHandler)
             .failureHandler(oAuth2AuthenticationFailureHandler);
 
+
         http.headers().frameOptions().disable();
 
 
@@ -120,7 +128,15 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         return source;
     }
 
-
+    @Override
+    public void configure(WebSecurity web) throws Exception {
+        web.ignoring().antMatchers("/v2/api-docs",
+            "/configuration/ui",
+            "/swagger-resources/**",
+            "/configuration/security",
+            "/swagger-ui.html",
+            "/webjars/**");
+    }
 
     /*
      * By default, Spring OAuth2 uses
