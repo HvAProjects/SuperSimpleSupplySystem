@@ -38,10 +38,31 @@ public class ProductServiceImpl implements ProductService {
     public void addProduct(long locationId, Product product) throws Exception {
         val location = locationRepository.findById(locationId);
         if (location.isPresent()) {
-            product.setLocation(location.get());
-            productRepository.save(product);
+            val existingProduct = productRepository.findByBarcodeAndExpirationDate(product.getBarcode(), product.getExpirationDate());
+            if (existingProduct.isPresent()) {
+                existingProduct.get().setAmount(existingProduct.get().getAmount() + product.getAmount());
+                productRepository.save(existingProduct.get());
+            } else {
+                product.setLocation(location.get());
+                productRepository.save(product);
+            }
         } else {
             throw new Exception("Location not found");
+        }
+    }
+
+    @Override
+    public void deleteProducts(long productId, int amount) throws Exception {
+        val product = productRepository.findById(productId);
+        if (product.isPresent()) {
+            if (product.get().getAmount() <= amount) {
+                productRepository.delete(product.get());
+            } else {
+                product.get().setAmount(product.get().getAmount() - amount);
+                productRepository.save(product.get());
+            }
+        } else {
+            throw new Exception("Product not found");
         }
     }
 }

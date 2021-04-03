@@ -8,6 +8,7 @@ import {ProductService} from '../../services/product.service';
 import {Product} from '../../models/Product';
 import {AddLocationDialogComponent} from '../../dialogs/add-location-dialog/add-location-dialog.component';
 import {AddProductDialogComponent} from '../../dialogs/add-product-dialog/add-product-dialog.component';
+import {DeleteProductDialogComponent} from '../../dialogs/delete-product-dialog/delete-product-dialog.component';
 
 @Component({
   selector: 'app-product',
@@ -32,7 +33,22 @@ export class ProductComponent implements OnInit {
   }
 
   openDeleteProductDialog(product): void {
+    const dialogRef = this.dialog.open(DeleteProductDialogComponent, {
+      width  : '380px',
+      disableClose: false,
+      data: product
+    });
 
+    dialogRef.afterClosed().subscribe(result => {
+      if (result !== null) {
+        console.log(product);
+        this.productService.deleteProducts(product.id, result).subscribe(res => {
+          if (res.success) {
+            this.getProducts();
+          }
+        });
+      }
+    });
   }
 
   openAddProductDialog(): void {
@@ -60,6 +76,7 @@ export class ProductComponent implements OnInit {
       // Typescript maakt het nog vager, omdat je er daardoor vanuit gaat dat het wel een Date type is
       for (const item of data) {
         const product = new Product();
+        product.id = item.id;
         product.expirationDate = new Date(item.expirationDate);
         product.barcode = item.barcode;
         product.amount = item.amount;

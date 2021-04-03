@@ -2,6 +2,7 @@ package nl.jed.supersimplesupplysystem.controllers.product;
 
 import lombok.extern.slf4j.Slf4j;
 import nl.jed.supersimplesupplysystem.dto.ApiResponse;
+import nl.jed.supersimplesupplysystem.dto.DeleteProductsRequest;
 import nl.jed.supersimplesupplysystem.models.product.Product;
 import nl.jed.supersimplesupplysystem.models.product.ProductType;
 import nl.jed.supersimplesupplysystem.services.product.ProductService;
@@ -37,5 +38,11 @@ public class ProductController {
     public ResponseEntity<ApiResponse> addProduct(@PathVariable("locationId") long locationId, @RequestBody Product product) throws Exception {
         productService.addProduct(locationId, product);
         return ResponseEntity.ok(new ApiResponse(true, "Save product successful"));
+    }
+
+    @DeleteMapping("/{productId}")
+    public ResponseEntity<ApiResponse> deleteProducts(@PathVariable("productId") long productId, @RequestBody DeleteProductsRequest request) throws Exception {
+        productService.deleteProducts(productId, request.amount);
+        return ResponseEntity.ok(new ApiResponse(true, "Products deleted successful"));
     }
 }
