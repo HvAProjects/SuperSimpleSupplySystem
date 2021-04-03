@@ -16,7 +16,7 @@ import {AddProductDialogComponent} from '../../dialogs/add-product-dialog/add-pr
 })
 export class ProductComponent implements OnInit {
 
-  displayedColumns: string[] = ['id', 'name', 'quantity', 'action'];
+  displayedColumns: string[] = ['barcode', 'name', 'quantity', 'amount', 'expirationDate', 'action'];
   locationId;
   dataSource: MatTableDataSource<Product>;
 
@@ -42,14 +42,32 @@ export class ProductComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      if (result instanceof Product) {
-        // this.addLocation(result);
+      if (result !== null) {
+        this.productService.addProductToLocation(this.locationId, result).subscribe(res => {
+          if (res.success) {
+            this.getProducts();
+          }
+        });
       }
     });
   }
 
   private getProducts(): void {
-    this.productService.getProducts(this.locationId).subscribe((data: Product[]) =>
-      this.dataSource = new MatTableDataSource<Product>(data));
+    this.productService.getProducts(this.locationId).subscribe((data: Product[]) => {
+      const dataSource = [];
+      // Onderstaande code omdat de response niet automatisch naar een Product type vertaald wordt door javascript
+      // Daardoor wordt de date als string geïnterpreteerd. Jeeej javascript
+      // Typescript maakt het nog vager, omdat je er daardoor vanuit gaat dat het wel een Date type is
+      for (const item of data) {
+        const product = new Product();
+        product.expirationDate = new Date(item.expirationDate);
+        product.barcode = item.barcode;
+        product.amount = item.amount;
+        product.name = item.name;
+        product.quantity = item.quantity;
+        dataSource.push(product);
+      }
+      this.dataSource = new MatTableDataSource<Product>(dataSource);
+    });
   }
 }

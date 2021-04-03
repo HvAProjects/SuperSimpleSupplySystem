@@ -25,10 +25,29 @@
              type="text"
              required>
     </mat-form-field>
+    <mat-form-field [style.width.px]=300 appearance="outline">
+      <mat-label>Amount</mat-label>
+      <input
+        matInput
+        [(ngModel)]="product.amount"
+        name="amountInput"
+        type="number"
+        min="0"
+        required>
+    </mat-form-field>
+    <mat-form-field [style.width.px]=300 appearance="outline">
+      <mat-label>Expiration Date</mat-label>
+      <input
+        matInput
+        [(ngModel)]="product.expirationDate"
+        name="expirationDateInput"
+        type="date"
+        required>
+    </mat-form-field>
   </p>
 
   <mat-dialog-actions style="justify-content: center">
-    <button [disabled]="!addForm.form.valid" mat-raised-button mat-dialog-close color="primary" type="submit">Save Location</button>
+    <button [disabled]="!addForm.form.valid" mat-raised-button mat-dialog-close color="primary" type="submit">Save Product</button>
     <button (click)="closeDialog()" color="accent" mat-raised-button mat-dialog-close>Cancel
     </button>
   </mat-dialog-actions>

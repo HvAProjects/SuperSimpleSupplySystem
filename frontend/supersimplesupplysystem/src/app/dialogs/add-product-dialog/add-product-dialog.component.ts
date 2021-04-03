@@ -1,27 +1,42 @@
-import { Component, OnInit } from '@angular/core';
+import {AfterViewInit, Component, OnInit} from '@angular/core';
 import {Product} from '../../models/Product';
 import {MatDialog, MatDialogRef} from '@angular/material/dialog';
 import {ProductsLocation} from '../../models/ProductsLocation';
 import {ScannerDialogComponent} from '../scanner-dialog/scanner-dialog.component';
+import {ProductService} from '../../services/product.service';
+import {MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition} from '@angular/material/snack-bar';
+import Quagga from '@ericblade/quagga2';
 
 @Component({
   selector: 'app-add-product-dialog',
   templateUrl: './add-product-dialog.component.html',
   styleUrls: ['./add-product-dialog.component.css']
 })
-export class AddProductDialogComponent implements OnInit {
+export class AddProductDialogComponent implements OnInit, AfterViewInit {
 
   product = new Product();
+  horizontalPosition: MatSnackBarHorizontalPosition = 'end';
+  verticalPosition: MatSnackBarVerticalPosition = 'bottom';
 
   constructor(
+    private productService: ProductService,
+    private snackBar: MatSnackBar,
     private dialog: MatDialog,
     private dialogRef: MatDialogRef<AddProductDialogComponent>) { }
 
   ngOnInit(): void {
+    this.product = new Product();
+  }
+
+  ngAfterViewInit(): void {
+    this.dialogRef.beforeClosed().subscribe(() => {
+      this.dialogRef.close(null);
+    });
   }
 
   closeDialog(): void {
-    this.dialogRef.close({event: 'close'});
+    this.product = null;
+    this.dialogRef.close(null);
   }
 
   addProduct(): void {
@@ -35,9 +50,28 @@ export class AddProductDialogComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      if (result instanceof Product) {
-        // this.addLocation(result);
+      if (typeof result === 'string') {
+        this.productService.getProductByEAN(result).subscribe(
+          (res: Product) => {
+            if (res !== null) {
+              this.product = res;
+            } else {
+              this.openSnackBar('Product not found!', '');
+            }
+          },
+          (error => {
+            this.openSnackBar(error, '');
+          })
+        );
       }
+    });
+  }
+
+  public openSnackBar(message: string, action: string): void {
+    this.snackBar.open(message, action, {
+      duration: 2000,
+      horizontalPosition: this.horizontalPosition,
+      verticalPosition: this.verticalPosition,
     });
   }
 }

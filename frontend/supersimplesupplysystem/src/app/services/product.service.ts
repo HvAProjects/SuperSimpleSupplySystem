@@ -19,4 +19,8 @@ export class ProductService {
   getProducts(locationId: number): Observable<Product[]> {
     return this.http.get<Product[]>(AppConstants.API_URL + `product/${locationId}`);
   }
+
+  addProductToLocation(locationId: number, product: Product): Observable<any>{
+    return this.http.post(AppConstants.API_URL + `product/${locationId}`, product);
+  }
 }

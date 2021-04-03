@@ -3,4 +3,5 @@ export class Product {
   name: string;
   quantity: string;
   amount: number;
+  expirationDate: Date;
 }
