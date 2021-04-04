@@ -5,3 +5,5 @@
 <div id="interactive" class="viewport">
   <!-- QuaggaJS will populate this element -->
 </div>
+<button color="primary" style="width: 100%;" *ngIf="!environment.production" (click)="onBarcodeScanned('5000112545326')" mat-raised-button>Add COLA</button>
+<button color="primary" style="width: 100%;" *ngIf="!environment.production" (click)="onBarcodeScanned('3033710084913')" mat-raised-button>Add MAGGI</button>

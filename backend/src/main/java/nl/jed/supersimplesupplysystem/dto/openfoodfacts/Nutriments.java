@@ -17,16 +17,16 @@ public class Nutriments{
 	private Double proteinsServing;
 
 	@SerializedName("fat")
-	private Integer fat;
+	private Double fat;
 
 	@SerializedName("zinc")
 	private Double zinc;
 
 	@SerializedName("energy")
-	private Integer energy;
+	private Double energy;
 
 	@SerializedName("carbohydrates")
-	private Integer carbohydrates;
+	private Double carbohydrates;
 
 	@SerializedName("sugars_serving")
 	private Double sugarsServing;
@@ -41,7 +41,7 @@ public class Nutriments{
 	private Double sugars;
 
 	@SerializedName("energy_serving")
-	private Integer energyServing;
+	private Double energyServing;
 
 	@SerializedName("magnesium")
 	private Double magnesium;
@@ -65,13 +65,13 @@ public class Nutriments{
 	private Double polyunsaturatedFat100g;
 
 	@SerializedName("nova-group_100g")
-	private Integer novaGroup100g;
+	private Double novaGroup100g;
 
 	@SerializedName("magnesium_unit")
 	private String magnesiumUnit;
 
 	@SerializedName("carbohydrates_value")
-	private Integer carbohydratesValue;
+	private Double carbohydratesValue;
 
 	@SerializedName("fiber_100g")
 	private Double fiber100g;
@@ -89,10 +89,10 @@ public class Nutriments{
 	private Double energyKcalServing;
 
 	@SerializedName("phosphorus_value")
-	private Integer phosphorusValue;
+	private Double phosphorusValue;
 
 	@SerializedName("monounsaturated-fat_serving")
-	private Integer monounsaturatedFatServing;
+	private Double monounsaturatedFatServing;
 
 	@SerializedName("salt_value")
 	private Double saltValue;
@@ -104,13 +104,13 @@ public class Nutriments{
 	private String magnesiumLabel;
 
 	@SerializedName("energy-kj_serving")
-	private Integer energyKjServing;
+	private Double energyKjServing;
 
 	@SerializedName("proteins")
-	private Integer proteins;
+	private Double proteins;
 
 	@SerializedName("energy-kcal_value")
-	private Integer energyKcalValue;
+	private Double energyKcalValue;
 
 	@SerializedName("salt_unit")
 	private String saltUnit;
@@ -122,7 +122,7 @@ public class Nutriments{
 	private Double fiberServing;
 
 	@SerializedName("nutrition-score-fr")
-	private Integer nutritionScoreFr;
+	private Double nutritionScoreFr;
 
 	@SerializedName("saturated-fat_serving")
 	private Double saturatedFatServing;
@@ -134,7 +134,7 @@ public class Nutriments{
 	private Double saltServing;
 
 	@SerializedName("nova-group_serving")
-	private Integer novaGroupServing;
+	private Double novaGroupServing;
 
 	@SerializedName("energy-kcal_unit")
 	private String energyKcalUnit;
@@ -143,19 +143,19 @@ public class Nutriments{
 	private Double saturatedFat100g;
 
 	@SerializedName("nova-group")
-	private Integer novaGroup;
+	private Double novaGroup;
 
 	@SerializedName("fat_value")
-	private Integer fatValue;
+	private Double fatValue;
 
 	@SerializedName("energy-kcal_100g")
-	private Integer energyKcal100g;
+	private Double energyKcal100g;
 
 	@SerializedName("carbohydrates_unit")
 	private String carbohydratesUnit;
 
 	@SerializedName("energy-kcal")
-	private Integer energyKcal;
+	private Double energyKcal;
 
 	@SerializedName("vitamin-pp_value")
 	private Double vitaminPpValue;
@@ -164,13 +164,13 @@ public class Nutriments{
 	private Double magnesiumServing;
 
 	@SerializedName("carbohydrates_100g")
-	private Integer carbohydrates100g;
+	private Double carbohydrates100g;
 
 	@SerializedName("polyunsaturated-fat_serving")
 	private Double polyunsaturatedFatServing;
 
 	@SerializedName("monounsaturated-fat_100g")
-	private Integer monounsaturatedFat100g;
+	private Double monounsaturatedFat100g;
 
 	@SerializedName("phosphorus_serving")
 	private Double phosphorusServing;
@@ -182,16 +182,16 @@ public class Nutriments{
 	private Double vitaminPp;
 
 	@SerializedName("energy-kj_value")
-	private Integer energyKjValue;
+	private Double energyKjValue;
 
 	@SerializedName("energy_100g")
-	private Integer energy100g;
+	private Double energy100g;
 
 	@SerializedName("energy-kj_100g")
-	private Integer energyKj100g;
+	private Double energyKj100g;
 
 	@SerializedName("proteins_100g")
-	private Integer proteins100g;
+	private Double proteins100g;
 
 	@SerializedName("sodium_value")
 	private Double sodiumValue;
@@ -218,10 +218,10 @@ public class Nutriments{
 	private Double salt100g;
 
 	@SerializedName("monounsaturated-fat")
-	private Integer monounsaturatedFat;
+	private Double monounsaturatedFat;
 
 	@SerializedName("magnesium_value")
-	private Integer magnesiumValue;
+	private Double magnesiumValue;
 
 	@SerializedName("vitamin-pp_label")
 	private String vitaminPpLabel;
@@ -242,19 +242,19 @@ public class Nutriments{
 	private Double zincServing;
 
 	@SerializedName("monounsaturated-fat_value")
-	private Integer monounsaturatedFatValue;
+	private Double monounsaturatedFatValue;
 
 	@SerializedName("fat_100g")
-	private Integer fat100g;
+	private Double fat100g;
 
 	@SerializedName("proteins_unit")
 	private String proteinsUnit;
 
 	@SerializedName("energy-kj")
-	private Integer energyKj;
+	private Double energyKj;
 
 	@SerializedName("proteins_value")
-	private Integer proteinsValue;
+	private Double proteinsValue;
 
 	@SerializedName("fiber_value")
 	private Double fiberValue;
@@ -278,13 +278,13 @@ public class Nutriments{
 	private Double vitaminEValue;
 
 	@SerializedName("fruits-vegetables-nuts-estimate-from-ingredients_100g")
-	private Integer fruitsVegetablesNutsEstimateFromIngredients100g;
+	private Double fruitsVegetablesNutsEstimateFromIngredients100g;
 
 	@SerializedName("sugars_value")
 	private Double sugarsValue;
 
 	@SerializedName("nutrition-score-fr_100g")
-	private Integer nutritionScoreFr100g;
+	private Double nutritionScoreFr100g;
 
 	@SerializedName("vitamin-e_label")
 	private String vitaminELabel;
@@ -302,7 +302,7 @@ public class Nutriments{
 	private Double zinc100g;
 
 	@SerializedName("energy_value")
-	private Integer energyValue;
+	private Double energyValue;
 
 	@SerializedName("zinc_unit")
 	private String zincUnit;

@@ -3,6 +3,7 @@ import {MatDialogRef} from '@angular/material/dialog';
 import Quagga from '@ericblade/quagga2';
 import {UpdateService} from '../../services/update.service';
 import {MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition,} from '@angular/material/snack-bar';
+import {environment} from '../../../environments/environment';
 
 @Component({
   selector: 'app-scanner-dialog',
@@ -12,11 +13,9 @@ import {MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition,
 export class ScannerDialogComponent implements OnInit, AfterViewInit {
   errorMessage: string;
 
-  horizontalPosition: MatSnackBarHorizontalPosition = 'start';
-  verticalPosition: MatSnackBarVerticalPosition = 'bottom';
-
   private lastScannedCode: string;
   private lastScannedCodeDate: number;
+  public environment = environment;
 
   constructor(private changeDetectorRef: ChangeDetectorRef,
               private updateService: UpdateService,
@@ -70,16 +69,7 @@ export class ScannerDialogComponent implements OnInit, AfterViewInit {
   }
 
   public onBarcodeScanned(code: string): void {
-    console.log(code);
-    // Quagga.stop();
-    // this.dialogRef.close(code);
-  }
-
-  public openSnackBar(message: string, action: string) {
-    this.snackBar.open(message, action, {
-      duration: 2000,
-      horizontalPosition: this.horizontalPosition,
-      verticalPosition: this.verticalPosition,
-    });
+    Quagga.stop();
+    this.dialogRef.close(code);
   }
 }

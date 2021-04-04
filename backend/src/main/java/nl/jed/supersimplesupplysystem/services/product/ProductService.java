@@ -10,4 +10,8 @@ public interface ProductService {
     ProductType getProductType(String barcode) throws IOException;
 
     List<Product> getProducts(long locationId);
+
+    void addProduct(long locationId, Product product) throws Exception;
+
+    void deleteProducts(long productId, int amount) throws Exception;
 }

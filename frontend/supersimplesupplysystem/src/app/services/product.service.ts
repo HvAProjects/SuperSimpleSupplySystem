@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Household} from "../pages/household/household";
 import {AppConstants} from "../common/app.constants";
 import {Observable} from "rxjs";
@@ -18,5 +18,21 @@ export class ProductService {
 
   getProducts(locationId: number): Observable<Product[]> {
     return this.http.get<Product[]>(AppConstants.API_URL + `product/${locationId}`);
+  }
+
+  addProductToLocation(locationId: number, product: Product): Observable<any>{
+    return this.http.post(AppConstants.API_URL + `product/${locationId}`, product);
+  }
+
+  deleteProducts(id: number, amount: number): Observable<any> {
+    const options = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+      }),
+      body: {
+        amount
+      },
+    };
+    return this.http.delete(AppConstants.API_URL + `product/${id}`, options);
   }
 }
