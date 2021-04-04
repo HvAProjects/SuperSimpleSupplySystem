@@ -3,9 +3,9 @@
 <div class="table-container">
   <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 ss-table">
 
-    <ng-container matColumnDef="id">
-      <th mat-header-cell *matHeaderCellDef> ID</th>
-      <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+    <ng-container matColumnDef="barcode">
+      <th mat-header-cell *matHeaderCellDef>Barcode</th>
+      <td mat-cell *matCellDef="let element"> {{element.barcode}} </td>
     </ng-container>
 
     <ng-container matColumnDef="name">
@@ -14,13 +14,18 @@
     </ng-container>
 
     <ng-container matColumnDef="quantity">
-      <th mat-header-cell *matHeaderCellDef> Number Of Products</th>
+      <th mat-header-cell *matHeaderCellDef>Quantity</th>
       <td mat-cell *matCellDef="let element"> {{element.quantity}} </td>
     </ng-container>
 
     <ng-container matColumnDef="amount">
-      <th mat-header-cell *matHeaderCellDef> Number Of Products</th>
+      <th mat-header-cell *matHeaderCellDef>Amount</th>
       <td mat-cell *matCellDef="let element"> {{element.amount}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="expirationDate">
+      <th mat-header-cell *matHeaderCellDef>Expiration Date</th>
+      <td mat-cell *matCellDef="let element"> {{element.expirationDate?.toLocaleDateString()}} </td>
     </ng-container>
 
     <ng-container matColumnDef="action">

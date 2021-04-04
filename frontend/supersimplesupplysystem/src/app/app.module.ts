@@ -41,6 +41,7 @@ import { AddLocationDialogComponent } from './dialogs/add-location-dialog/add-lo
 import { ProductComponent } from './pages/product/product.component';
 import { AddProductDialogComponent } from './dialogs/add-product-dialog/add-product-dialog.component';
 import { ScannerDialogComponent } from './dialogs/scanner-dialog/scanner-dialog.component';
+import { DeleteProductDialogComponent } from './dialogs/delete-product-dialog/delete-product-dialog.component';
 
 
 @NgModule({
@@ -64,7 +65,8 @@ import { ScannerDialogComponent } from './dialogs/scanner-dialog/scanner-dialog.
     AddLocationDialogComponent,
     ProductComponent,
     AddProductDialogComponent,
-    ScannerDialogComponent
+    ScannerDialogComponent,
+    DeleteProductDialogComponent
   ],
   imports: [
     BrowserModule,

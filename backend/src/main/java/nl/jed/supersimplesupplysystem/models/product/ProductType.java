@@ -8,7 +8,12 @@ import javax.persistence.*;
 @Data
 @Entity
 public class ProductType {
+
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column
+    private Long id;
+
     @Column(name = "BARCODE")
     @ToString.Include
     private String barcode;
