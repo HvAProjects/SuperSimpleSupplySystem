@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ssss
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: ssss
+      app.kubernetes.io/instance: ssss-{version}
+  template:
+    spec:
+      securityContext:
+        fsGroup: 999
+      containers:
+        - name: ssss
+          securityContext:
+            {}
+          image: "ghcr.io/hvaprojects/ssss_backend:8ac64d8"
+          imagePullPolicy: IfNotPresent
+          ports:
+            - name: http
+              containerPort: 8080
+              protocol: TCP
+          resources:
+            limits:
+              cpu: 200m
+              memory: 200Mi
+            requests:
+              cpu: 200m
+              memory: 200Mi
