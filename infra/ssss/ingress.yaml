@@ -1,0 +1,13 @@
+kind: Ingress
+apiVersion: extensions/v1beta1
+metadata:
+  name: ssss
+spec:
+  rules:
+    - host: supply.davidsoff.nl
+      http:
+        paths:
+          - path: /
+            backend:
+              serviceName: ssss
+              servicePort: 8080
