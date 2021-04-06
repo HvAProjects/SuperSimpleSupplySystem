@@ -32,6 +32,8 @@ metadata:
   name: ssss
   namespace: flux-system
 spec:
+  dependsOn:
+  - name: sealed-secrets
   interval: 1m0s
   path: ./infra/ssss
   prune: true
@@ -39,3 +41,20 @@ spec:
     kind: GitRepository
     name: flux-system
   validation: client
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1beta1
+kind: Kustomization
+metadata:
+  name: sealed-secrets
+  namespace: flux-system
+spec:
+  dependsOn:
+  - name: sealed-secrets
+  interval: 10m0s
+  path: ./infra/sealed-secrets
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
+  validation: client
+
