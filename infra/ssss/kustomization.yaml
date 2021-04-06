@@ -3,8 +3,7 @@ kind: Kustomization
 
 commonLabels:
   app.kubernetes.io/name: ssss
-  app.kubernetes.io/instance: ssss-{version}
-  app.kubernetes.io/version: "{version}"
+  app.kubernetes.io/instance: ssss
   app.kubernetes.io/component: backend
 
 namespace: ssss
