@@ -7,7 +7,6 @@ spec:
   selector:
     matchLabels:
       app.kubernetes.io/name: ssss
-      app.kubernetes.io/instance: ssss-{version}
   template:
     spec:
       securityContext:
