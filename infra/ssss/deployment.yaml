@@ -11,6 +11,8 @@ spec:
     spec:
       securityContext:
         fsGroup: 999
+      imagePullSecrets:
+        - name: gh-registry
       containers:
         - name: ssss
           securityContext:
