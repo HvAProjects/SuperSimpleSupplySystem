@@ -4,8 +4,7 @@ metadata:
   name: ssss
 spec:
   rules:
-    - host: supply.davidsoff.nl
-      http:
+    - http:
         paths:
           - path: /
             backend:
