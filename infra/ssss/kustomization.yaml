@@ -9,6 +9,7 @@ commonLabels:
 namespace: ssss
 
 resources:
+- secrets.yaml
 - namespace.yaml
 - deployment.yaml
 - service.yaml
