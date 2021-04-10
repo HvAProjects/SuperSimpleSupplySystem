@@ -2,11 +2,19 @@ kind: Ingress
 apiVersion: extensions/v1beta1
 metadata:
   name: ssss
+  annotations:
+    kubernetes.io/ingress.class: traefik
+    cert-manager.io/cluster-issuer: letsencrypt-prod
 spec:
+  tls:
+    - secretName: supply-apps-soffware-nl-tls
+      hosts:
+        - supply.apps.soffware.nl
   rules:
-    - http:
+    - host: supply.apps.soffware.nl
+      http:
         paths:
-          - path: /
+          - path: /api
             backend:
               serviceName: ssss
               servicePort: 8080

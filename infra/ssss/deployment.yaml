@@ -30,6 +30,13 @@ spec:
             requests:
               cpu: 200m
               memory: 200Mi
+          env:
+          - name: BASEURLS_FRONTEND
+            value: http://localhost:4200
+          - name: BASEURLS_BACKEND
+            value: http://supply.apps.soffware.nl
+          - name: SERVER_SERVLET_CONTEXTPATH
+            value: "/"
           volumeMounts:
           - name: secrets
             mountPath: "/app/resources/secrets"

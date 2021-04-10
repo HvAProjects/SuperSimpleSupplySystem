@@ -29,7 +29,7 @@ import java.net.PasswordAuthentication;
 
 @Slf4j
 @RestController
-@RequestMapping("/api/auth")
+@RequestMapping("/auth")
 public class AuthController {
 
     @Autowired
