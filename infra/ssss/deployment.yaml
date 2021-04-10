@@ -32,7 +32,7 @@ spec:
               memory: 200Mi
           volumeMounts:
           - name: secrets
-            mountPath: "/app/resources"
+            mountPath: "/app/resources/secrets"
             readOnly: true
       volumes:
       - name: secrets
