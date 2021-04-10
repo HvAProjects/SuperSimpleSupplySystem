@@ -51,6 +51,8 @@
 
 8. Commit changes to the repo
 
+Alternatively you can use the provided convenience script using: `./refresh-secrets.sh`
+
 ## Making changes
 
 The Flux daemon will automatically watch the container images and the infra folder for changes. If it detects a change it will try to make the cluster state match the state in git. This means that to change the settings in the cluste, all you have to do is make a change in the infra folder OR push a new version of the container images. Flux will detect this and update the repo and/or cluster accordingly.
