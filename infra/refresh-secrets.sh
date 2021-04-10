@@ -4,6 +4,7 @@
 cd "$(dirname "$(readlink -f "$0")")"
 
 kubectl create secret generic ssss-secrets-properties \
+--namespace ssss \
 --from-file=../backend/src/main/resources/secrets.properties \
 --dry-run=client \
 -o yaml > secrets.yaml
