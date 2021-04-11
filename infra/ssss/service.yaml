@@ -4,8 +4,6 @@ kind: Service
 metadata:
   name: ssss
 spec:
-  selector:
-    app: ssss
   ports:
   - port: 8080
     name: ssss

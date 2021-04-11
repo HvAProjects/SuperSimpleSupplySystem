@@ -32,10 +32,9 @@ ext {
 		}
 		return stdout.toString().trim()
 	}
-}
-
-buildConfig {
-	buildConfigField "String", "GitHash", "${getGitHash()}"
+	ext.getTimestamp = { ->
+		return new Date().format('yyyyMMddHHmmssSSS')
+	}
 }
 
 buildConfig {
@@ -101,11 +100,6 @@ jacocoTestReport {
 	dependsOn test // tests are required to run before generating the report
 }
 
-tasks.register('ci'){
-	dependsOn tasks.build
-	dependsOn tasks.jib
-}
-
 jib {
 	to {
 		image = 'ghcr.io/hvaprojects/ssss_backend'
@@ -113,7 +107,7 @@ jib {
 			username = 'davidsoff'
 			password = file('key').text
 		}
-		tags = ["${getGitHash()}"]
+		tags = ["main-${getGitHash()}-${getTimestamp()}"]
 	}
 	container {
 		ports = ['8080']
