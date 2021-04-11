@@ -55,7 +55,7 @@ public class Household {
 
 
     @ManyToMany
-    @JsonIgnore
+    @JsonBackReference
 //    @JoinTable(name = "household_users", joinColumns = {@JoinColumn(name = "HOUSEHOLD_ID")}, inverseJoinColumns = {@JoinColumn(name = "USER_ID")})
     private Set<User> users;
 

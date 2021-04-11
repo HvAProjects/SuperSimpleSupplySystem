@@ -1,0 +1,7 @@
+<mat-dialog-content>
+Do you want to accept the household invitation of {{data.sender.name}}?
+</mat-dialog-content>
+<mat-dialog-actions class="actions">
+  <button (click)="closeDialog(false)" mat-stroked-button color="accent">Decline</button>
+  <button (click)="closeDialog(true)" mat-raised-button color="accent">Accept</button>
+</mat-dialog-actions>
