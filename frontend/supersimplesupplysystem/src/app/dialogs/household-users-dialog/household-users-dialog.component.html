@@ -1,0 +1,9 @@
+<div class="household-users-dialog">
+  <button [disabled]="!isSelectionValid()" class="remove-user-btn" mat-icon-button><fa-icon [icon]="faMinus"></fa-icon></button>
+  <button (click)="openAddUserDialog()" class="add-user-btn" mat-icon-button><fa-icon [icon]="faPlus"></fa-icon></button>
+  <mat-selection-list #userList [multiple]="false">
+    <mat-list-option *ngFor="let user of users" [value]="user">
+      {{user.name}}
+    </mat-list-option>
+  </mat-selection-list>
+</div>

@@ -24,8 +24,11 @@
         <button routerLink="/register" mat-menu-item>Register</button>
       </mat-menu>
     </div>
-    <div class="ss-welcome" *ngIf="isLoggedIn">Welcome {{username}} ! |
-      <span> <a (click)="logout()" href="#"> Logout</a> </span>
+    <div class="header-right">
+      <app-notification-list *ngIf="isLoggedIn"></app-notification-list>
+      <div class="ss-welcome" *ngIf="isLoggedIn">Welcome {{username}} ! |
+        <span> <a (click)="logout()" href="#"> Logout</a> </span>
+      </div>
     </div>
   </mat-toolbar>
 

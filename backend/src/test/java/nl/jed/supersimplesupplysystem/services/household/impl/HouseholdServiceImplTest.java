@@ -8,19 +8,13 @@ import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
-import org.springframework.http.ResponseEntity;
+
 import java.util.List;
 import static org.mockito.Mockito.*;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 
-import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
@@ -94,16 +88,26 @@ class HouseholdServiceImplTest {
     }
 
     @Test
-    void removeHousehold() {
+    void leaveHousehold() {
+        String username = "joe.vrolijk@ssss.com";
+
+        User user1 = new User();
+        user1.setId(123L);
+        user1.setProviderUserId("TestProviderUserId");
+        user1.setDisplayName("Joe");
+        user1.setEmail("joe.vrolijk@ssss.com");
+
         Household household1 = new Household();
         household1.setId(1L);
         household1.setName("MijnHuis");
         household1.setAddress("Dam 1");
         household1.setPostalCode("1111AB");
         household1.setCountry("Zambia");
+        household1.addUser(user1);
 
-        householdService.removeHousehold(1L);
-        verify(householdRepositoryMock, times(1)).deleteById(1L);
+        householdService.leaveHousehold(1L, user1);
+
+        assertThat(household1.getUsers().contains(user1), is(false));
     }
 
     @Test

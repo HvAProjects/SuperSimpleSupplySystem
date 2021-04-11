@@ -1,6 +1,7 @@
 package nl.jed.supersimplesupplysystem.models.household;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -54,8 +55,8 @@ public class Household {
 
 
     @ManyToMany
-    @JsonBackReference
-    @JoinTable(name = "household_users", joinColumns = {@JoinColumn(name = "HOUSEHOLD_ID")}, inverseJoinColumns = {@JoinColumn(name = "USER_ID")})
+    @JsonIgnore
+//    @JoinTable(name = "household_users", joinColumns = {@JoinColumn(name = "HOUSEHOLD_ID")}, inverseJoinColumns = {@JoinColumn(name = "USER_ID")})
     private Set<User> users;
 
 
@@ -68,6 +69,8 @@ public class Household {
         return false;
     }
 
-
+    public void addUser(User user) {
+        this.users.add(user);
+    }
 
 }
