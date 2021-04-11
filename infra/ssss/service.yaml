@@ -4,9 +4,6 @@ kind: Service
 metadata:
   name: ssss
 spec:
-  selector:
-    matchLabels:
-      app.kubernetes.io/name: ssss
   ports:
   - port: 8080
     name: ssss
