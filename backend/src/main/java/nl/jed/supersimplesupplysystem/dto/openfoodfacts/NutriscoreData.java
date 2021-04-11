@@ -32,7 +32,7 @@ public class NutriscoreData{
 	private Double saturatedFatValue;
 
 	@SerializedName("fruits_vegetables_nuts_colza_walnut_olive_oils_value")
-	private Integer fruitsVegetablesNutsColzaWalnutOliveOilsValue;
+	private Double fruitsVegetablesNutsColzaWalnutOliveOilsValue;
 
 	@SerializedName("saturated_fat_points")
 	private Integer saturatedFatPoints;
@@ -80,7 +80,7 @@ public class NutriscoreData{
 	private Double saturatedFat;
 
 	@SerializedName("fruits_vegetables_nuts_colza_walnut_olive_oils")
-	private Integer fruitsVegetablesNutsColzaWalnutOliveOils;
+	private Double fruitsVegetablesNutsColzaWalnutOliveOils;
 
 	@SerializedName("sodium")
 	private Integer sodium;
