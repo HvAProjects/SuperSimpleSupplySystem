@@ -38,10 +38,6 @@ buildConfig {
 	buildConfigField "String", "GitHash", "${getGitHash()}"
 }
 
-buildConfig {
-	buildConfigField "String", "GitHash", "${getGitHash()}"
-}
-
 sourceSets.main.java.srcDirs += "build/gen/buildconfig/src/main"
 
 dependencies {
