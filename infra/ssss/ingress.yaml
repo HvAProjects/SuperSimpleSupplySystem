@@ -15,7 +15,8 @@ spec:
     - host: supply.apps.soffware.nl
       http:
         paths:
-          - path: /api
+          - pathType: Prefix
+            path: "/api"
             backend:
               serviceName: ssss
               servicePort: 8080
