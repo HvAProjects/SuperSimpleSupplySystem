@@ -422,7 +422,7 @@ public class Product{
 	private String tracesFromUser;
 
 	@SerializedName("nutrition_score_warning_fruits_vegetables_nuts_estimate_from_ingredients_value")
-	private Integer nutritionScoreWarningFruitsVegetablesNutsEstimateFromIngredientsValue;
+	private Double nutritionScoreWarningFruitsVegetablesNutsEstimateFromIngredientsValue;
 
 	@SerializedName("countries_tags")
 	private List<String> countriesTags;
