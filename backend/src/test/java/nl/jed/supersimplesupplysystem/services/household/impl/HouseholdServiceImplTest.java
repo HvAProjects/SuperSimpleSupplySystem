@@ -9,6 +9,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
+import java.util.HashSet;
 import java.util.List;
 import static org.mockito.Mockito.*;
 import static org.hamcrest.CoreMatchers.is;
@@ -103,10 +104,12 @@ class HouseholdServiceImplTest {
         household1.setAddress("Dam 1");
         household1.setPostalCode("1111AB");
         household1.setCountry("Zambia");
+        household1.setUsers(new HashSet<>());
         household1.addUser(user1);
 
+        when(householdRepositoryMock.findById(1l)).thenReturn(Optional.of(household1));
         householdService.leaveHousehold(1L, user1);
-
+        verify(householdRepositoryMock, times(1)).save(household1);
         assertThat(household1.getUsers().contains(user1), is(false));
     }
 

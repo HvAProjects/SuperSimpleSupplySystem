@@ -5,52 +5,52 @@ import com.google.gson.annotations.SerializedName;
 public class NutriscoreData{
 
 	@SerializedName("fiber_points")
-	private Integer fiberPoints;
+	private Double fiberPoints;
 
 	@SerializedName("saturated_fat_ratio")
 	private Double saturatedFatRatio;
 
 	@SerializedName("sugars_points")
-	private Integer sugarsPoints;
+	private Double sugarsPoints;
 
 	@SerializedName("proteins_value")
-	private Integer proteinsValue;
+	private Double proteinsValue;
 
 	@SerializedName("fiber_value")
 	private Double fiberValue;
 
 	@SerializedName("positive_points")
-	private Integer positivePoints;
+	private Double positivePoints;
 
 	@SerializedName("is_cheese")
-	private Integer isCheese;
+	private Double isCheese;
 
 	@SerializedName("score")
-	private Integer score;
+	private Double score;
 
 	@SerializedName("saturated_fat_value")
 	private Double saturatedFatValue;
 
 	@SerializedName("fruits_vegetables_nuts_colza_walnut_olive_oils_value")
-	private Integer fruitsVegetablesNutsColzaWalnutOliveOilsValue;
+	private Double fruitsVegetablesNutsColzaWalnutOliveOilsValue;
 
 	@SerializedName("saturated_fat_points")
-	private Integer saturatedFatPoints;
+	private Double saturatedFatPoints;
 
 	@SerializedName("proteins")
-	private Integer proteins;
+	private Double proteins;
 
 	@SerializedName("sodium_value")
-	private Integer sodiumValue;
+	private Double sodiumValue;
 
 	@SerializedName("saturated_fat_ratio_value")
 	private Double saturatedFatRatioValue;
 
 	@SerializedName("is_water")
-	private Integer isWater;
+	private Double isWater;
 
 	@SerializedName("energy")
-	private Integer energy;
+	private Double energy;
 
 	@SerializedName("fiber")
 	private Double fiber;
@@ -59,44 +59,44 @@ public class NutriscoreData{
 	private Double sugars;
 
 	@SerializedName("negative_points")
-	private Integer negativePoints;
+	private Double negativePoints;
 
 	@SerializedName("proteins_points")
-	private Integer proteinsPoints;
+	private Double proteinsPoints;
 
 	@SerializedName("fruits_vegetables_nuts_colza_walnut_olive_oils_points")
-	private Integer fruitsVegetablesNutsColzaWalnutOliveOilsPoints;
+	private Double fruitsVegetablesNutsColzaWalnutOliveOilsPoints;
 
 	@SerializedName("sugars_value")
 	private Double sugarsValue;
 
 	@SerializedName("is_fat")
-	private Integer isFat;
+	private Double isFat;
 
 	@SerializedName("is_beverage")
-	private Integer isBeverage;
+	private Double isBeverage;
 
 	@SerializedName("saturated_fat")
 	private Double saturatedFat;
 
 	@SerializedName("fruits_vegetables_nuts_colza_walnut_olive_oils")
-	private Integer fruitsVegetablesNutsColzaWalnutOliveOils;
+	private Double fruitsVegetablesNutsColzaWalnutOliveOils;
 
 	@SerializedName("sodium")
-	private Integer sodium;
+	private Double sodium;
 
 	@SerializedName("energy_points")
-	private Integer energyPoints;
+	private Double energyPoints;
 
 	@SerializedName("sodium_points")
-	private Integer sodiumPoints;
+	private Double sodiumPoints;
 
 	@SerializedName("grade")
 	private String grade;
 
 	@SerializedName("energy_value")
-	private Integer energyValue;
+	private Double energyValue;
 
 	@SerializedName("saturated_fat_ratio_points")
-	private Integer saturatedFatRatioPoints;
+	private Double saturatedFatRatioPoints;
 }
