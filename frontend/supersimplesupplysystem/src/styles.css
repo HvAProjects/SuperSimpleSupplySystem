@@ -1,13 +1,13 @@
 /* You can add global styles to this file, and also import other style files */
-@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+/*@import "~@angular/material/prebuilt-themes/indigo-pink.css";*/
 
-body, html {
-  background: #005AA7;  /* fallback for old browsers */
-  background: -webkit-linear-gradient(to bottom, #FFFDE4, #005AA7);  /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(to bottom, #FFFDE4, #005AA7); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-  background-repeat: no-repeat;
-  height: 100%
-}
+/*body, html {*/
+/*  background: #005AA7;  !* fallback for old browsers *!*/
+/*  background: -webkit-linear-gradient(to bottom, #FFFDE4, #005AA7);  !* Chrome 10-25, Safari 5.1-6 *!*/
+/*  background: linear-gradient(to bottom, #FFFDE4, #005AA7); !* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ *!*/
+/*  background-repeat: no-repeat;*/
+/*  height: 100%*/
+/*}*/
 
 /*Fonts:*/
 @font-face {
@@ -19,17 +19,34 @@ body, html {
   font-family: "Montserrat", sans-serif;
   font-weight: bolder;
   font-size: 28px !important;
-  color: #005AA7;
+  color: #f6f6f6;
+  text-align: center;
 }
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+/*html, body { height: 100%; }*/
+/*body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }*/
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+/*html, body { height: 100%; }*/
+/*body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }*/
+
+/*Link Colors*/
+a {
+  color: #86c0ff;
+  text-decoration: none;
+  background-color: transparent;
+}
+
+a:hover {
+  color: #da2222;
+  text-decoration: underline;
+}
 
 
-/* tables */
+tr.clickable-row:hover {
+  background: #585858;
+  cursor: pointer;
+}
+
 
 .ss-table{
   width: 80%;
@@ -68,7 +85,10 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 /* login */
 
 .ss-contain{
+  /*justify-content: center;*/
+  display: flex;
   justify-content: center;
+  align-items: center;
   width: 50%;
   margin: auto;
   border-radius: 20px;
@@ -76,11 +96,12 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 .ss-form{
   padding: 20px;
-  border: 0.5px solid lightgray ;
+  border: 0.5px solid #4a4a4a;
   width: 40rem ;
   margin: auto;
   border-radius: 5px;
-  background-color: whitesmoke;
+  background-color: #515151;
+  text-align: center;
 }
 
 .ss-input{

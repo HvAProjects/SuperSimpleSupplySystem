@@ -7,7 +7,6 @@ import nl.jed.supersimplesupplysystem.models.User;
 import nl.jed.supersimplesupplysystem.models.household.Household;
 import nl.jed.supersimplesupplysystem.models.location.Location;
 import nl.jed.supersimplesupplysystem.models.notification.HouseholdInvitationNotification;
-import nl.jed.supersimplesupplysystem.models.notification.Notification;
 import nl.jed.supersimplesupplysystem.models.notification.NotificationState;
 import nl.jed.supersimplesupplysystem.models.notification.NotificationType;
 import nl.jed.supersimplesupplysystem.repository.LocationRepository;
@@ -52,6 +51,7 @@ public class SetupDataLoader implements ApplicationListener<ContextRefreshedEven
     @Autowired
     private NotificationRepository notificationRepository;
 
+
     @Override
     @Transactional
     public void onApplicationEvent(final ContextRefreshedEvent event) {
@@ -63,11 +63,20 @@ public class SetupDataLoader implements ApplicationListener<ContextRefreshedEven
         Role adminRole = createRoleIfNotFound(Role.ROLE_ADMIN);
         Role modRole = createRoleIfNotFound(Role.ROLE_MODERATOR);
         createUserIfNotFound("admin@supersimplesupplysystem.com", Set.of(userRole, adminRole, modRole));
-        User joe = createUserIfNotFound("joe@ssss.com", Set.of(userRole, adminRole, modRole));
         User evan = createUserIfNotFound("evan@ssss.com", Set.of(userRole, adminRole, modRole));
+        User joe = createUserIfNotFound("joe@ssss.com", Set.of(userRole, adminRole, modRole));
         Household joeHousehold = createHousehold("TestHousehold", joe);
         Household household = createHousehold("TestHousehold", evan);
         Location location = createLocation("TestLocation", household);
+
+
+        Household household1 = createHousehold("Joe House", joe);
+        Household household2 = createHousehold("Dave Cave", joe);
+        Location location2 = createLocation("Fridge", household1);
+        Location location3 = createLocation("Cupboard-Left-1", household1);
+        Location location4 = createLocation("Closet1", household2);
+        Location location5 = createLocation("Cupboard-Left-2", household2);
+
         HouseholdInvitationNotification invitationNotification = createHouseholdInvitationNotification(evan, joe, joeHousehold);
         alreadySetup = true;
     }

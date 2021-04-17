@@ -1,5 +1,120 @@
-<app-header></app-header>
-<div class="custom-container">
-  <router-outlet></router-outlet>
-</div>
+<mat-toolbar class="mat-elevation-z8">
+
+  <button *ngIf="!isLoggedIn" mat-button routerLink="/">
+    <mat-icon>home</mat-icon>
+  </button>
+
+  <button (click)="sidenav.toggle()" *ngIf="sidenav.mode === 'over' && isLoggedIn " mat-icon-button>
+    <mat-icon *ngIf="!sidenav.opened">
+      menu
+    </mat-icon>
+    <mat-icon *ngIf="sidenav.opened">
+      close
+    </mat-icon>
+  </button>
+
+  <div class="logo-header">
+    <img alt="logo" class="logo" src="./assets/images/logo.png">
+  </div>
+
+  <app-notification-list *ngIf="isLoggedIn"></app-notification-list>
+
+
+  <!--  IF NOT LOGGED IN-->
+  <div *ngIf="!isLoggedIn" class="login">
+    <button [matMenuTriggerFor]="menu" mat-button>Login / Register</button>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item routerLink="/login">Login</button>
+      <button mat-menu-item routerLink="/register">Register</button>
+    </mat-menu>
+  </div>
+
+  <!--  IF LOGGED IN-->
+  <div *ngIf="isLoggedIn" class="avatar-header-container">
+    <img class="mat-elevation-z8 avatar-header"
+         src="https://images.unsplash.com/photo-1582266255765-fa5cf1a1d501?ixid=MXwxMjA3fDB8MHxzZWFyY2h8MXx8YW5vbnltb3VzfGVufDB8fDB8&ixlib=rb-1.2.1&w=1000&q=80"/>
+    <button [matMenuTriggerFor]="menuLoggedIn" mat-button>
+      <mat-icon>keyboard_arrow_down</mat-icon>
+    </button>
+    <mat-menu #menuLoggedIn="matMenu">
+      <button (click)="logout()" mat-menu-item>Logout</button>
+    </mat-menu>
+  </div>
+
+
+</mat-toolbar>
+
+<mat-sidenav-container>
+  <mat-sidenav #sidenav="matSidenav" class="mat-elevation-z8">
+
+    <img class="avatar mat-elevation-z8"
+         src="https://images.unsplash.com/photo-1582266255765-fa5cf1a1d501?ixid=MXwxMjA3fDB8MHxzZWFyY2h8MXx8YW5vbnltb3VzfGVufDB8fDB8&ixlib=rb-1.2.1&w=1000&q=80"/>
+
+    <h4 class="name">{{username}}</h4>
+    <p class="designation">
+      ROLE!
+    </p>
+
+    <mat-divider></mat-divider>
+
+    <button class="menu-button" mat-button routerLink="/">
+      <mat-icon>stars</mat-icon>
+      <span>Home</span>
+    </button>
+
+    <button class="menu-button" mat-button routerLink="/">
+      <mat-icon>dashboard</mat-icon>
+      <span>Dashboard</span>
+    </button>
+
+    <!--    <button routerLink="/household" mat-button class="menu-button">-->
+    <!--      <mat-icon>home</mat-icon>-->
+    <!--      <span>Households</span>-->
+    <!--    </button>-->
+
+    <button class="menu-button" mat-button>
+      <mat-icon>supervisor_account</mat-icon>
+      <span>Users</span>
+    </button>
+
+
+    <mat-divider></mat-divider>
+    <h3>Households:</h3>
+
+    <div *ngFor="let household of households">
+    <button class="menu-button" mat-button [routerLink]=[houseHoldLink,household.id]>
+      <mat-icon>home</mat-icon>
+      <span>{{household.name}}</span>
+      <button (click)="$event.stopPropagation()" [matMenuTriggerFor]="beforeMenu" class="tripleDotIconStyle" mat-button>
+        <mat-icon>more_vert</mat-icon>
+      </button>
+      <mat-menu #beforeMenu="matMenu" xPosition="before">
+        <button (click)="leaveHousehold(household)" class="menuItems" mat-menu-item><i class="stacktraceMenuIcon"></i>Leave
+        </button>
+        <button (click)="openUserDialog(household)"  class="menuItems" mat-menu-item><i class="stacktraceMenuIcon"></i>Users
+        </button>
+      </mat-menu>
+    </button>
+    </div>
+
+    <mat-divider></mat-divider>
+
+    <button class="menu-button" mat-button>
+      <mat-icon>settings</mat-icon>
+      <span>Settings</span>
+    </button>
+
+    <button class="menu-button" mat-button>
+      <mat-icon>person</mat-icon>
+      <span>Profile</span>
+    </button>
+
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <div class="content mat-elevation-z8">
+      <router-outlet></router-outlet>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>
+
 
