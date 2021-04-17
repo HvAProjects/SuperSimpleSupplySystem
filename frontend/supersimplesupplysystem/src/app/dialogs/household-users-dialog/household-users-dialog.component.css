@@ -1,0 +1,25 @@
+.household-users-dialog {
+  position: relative;
+  padding: 15px;
+}
+
+.action-btns {
+  width: 100%;
+}
+
+.action-btn {
+  width: 100%;
+  margin-top: 10px;
+}
+
+.add-user-btn {
+  position: absolute;
+  top: -22px;
+  right: -22px;
+}
+
+.remove-user-btn {
+  position: absolute;
+  top: -22px;
+  left: -22px;
+}

@@ -42,7 +42,13 @@ import { ProductComponent } from './pages/product/product.component';
 import { AddProductDialogComponent } from './dialogs/add-product-dialog/add-product-dialog.component';
 import { ScannerDialogComponent } from './dialogs/scanner-dialog/scanner-dialog.component';
 import { DeleteProductDialogComponent } from './dialogs/delete-product-dialog/delete-product-dialog.component';
-
+import { HouseholdUsersDialogComponent } from './dialogs/household-users-dialog/household-users-dialog.component';
+import {MatListModule} from '@angular/material/list';
+import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
+import { EmailAddressPromptComponent } from './dialogs/email-address-prompt/email-address-prompt.component';
+import { NotificationComponent } from './components/notification/notification.component';
+import { AcceptHouseholdInvitationPromptComponent } from './dialogs/accept-household-invitation-prompt/accept-household-invitation-prompt.component';
+import { NotificationListComponent } from './components/notification-list/notification-list.component';
 
 @NgModule({
   declarations: [
@@ -66,7 +72,13 @@ import { DeleteProductDialogComponent } from './dialogs/delete-product-dialog/de
     ProductComponent,
     AddProductDialogComponent,
     ScannerDialogComponent,
-    DeleteProductDialogComponent
+    DeleteProductDialogComponent,
+    HouseholdUsersDialogComponent,
+    EmailAddressPromptComponent,
+    NotificationComponent,
+    AcceptHouseholdInvitationPromptComponent,
+    NotificationListComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -89,8 +101,11 @@ import { DeleteProductDialogComponent } from './dialogs/delete-product-dialog/de
     MatSnackBarModule,
     MatSelectCountryModule.forRoot('en'),
     // ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
-    ServiceWorkerModule.register('ngsw-worker.js')
+    ServiceWorkerModule.register('ngsw-worker.js'),
     // ServiceWorkerModule.register('ngsw-worker.js', { enabled: true })
+    MatListModule,
+    FontAwesomeModule,
+    MatDialogModule
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS,

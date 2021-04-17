@@ -1,0 +1,26 @@
+.notification-btn {
+  width: 100%;
+  margin: 2px 0;
+}
+
+.notification-wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.notification-text {
+  line-height: 20px;
+  height: 20px;
+}
+
+.notification-type {
+  font-weight: bold;
+}
+
+.notification-sender {
+  font-size: 10px;
+}
+
+.notification-action {
+  font-style: italic;
+}

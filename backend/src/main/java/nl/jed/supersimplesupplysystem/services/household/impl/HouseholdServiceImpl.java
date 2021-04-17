@@ -1,6 +1,7 @@
 package nl.jed.supersimplesupplysystem.services.household.impl;
 
 import lombok.val;
+import nl.jed.supersimplesupplysystem.models.User;
 import nl.jed.supersimplesupplysystem.models.household.Household;
 import nl.jed.supersimplesupplysystem.repository.household.HouseholdRepository;
 import nl.jed.supersimplesupplysystem.services.household.HouseholdService;
@@ -43,7 +44,9 @@ public class HouseholdServiceImpl implements HouseholdService {
     }
 
     @Override
-    public void removeHousehold(Long id) {
-        householdRepository.deleteById(id);
+    public void leaveHousehold(Long id, User user) {
+        Household household = householdRepository.findById(id).orElseThrow();
+        household.getUsers().remove(user);
+        householdRepository.save(household);
     }
 }
