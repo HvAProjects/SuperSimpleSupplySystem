@@ -1,10 +1,12 @@
 package nl.jed.supersimplesupplysystem.services;
 
 import nl.jed.supersimplesupplysystem.dto.LocalUser;
+import nl.jed.supersimplesupplysystem.dto.Mail;
 import nl.jed.supersimplesupplysystem.dto.SignUpRequest;
 import nl.jed.supersimplesupplysystem.dto.SocialProvider;
 import nl.jed.supersimplesupplysystem.exception.OAuth2AuthenticationProcessingException;
 import nl.jed.supersimplesupplysystem.exception.UserAlreadyExistAuthenticationException;
+import nl.jed.supersimplesupplysystem.mail.PasswordRecoveryMail;
 import nl.jed.supersimplesupplysystem.models.Role;
 import nl.jed.supersimplesupplysystem.models.User;
 import nl.jed.supersimplesupplysystem.repository.PasswordResetTokenRepository;
@@ -14,6 +16,7 @@ import nl.jed.supersimplesupplysystem.repository.UserRepository;
 import nl.jed.supersimplesupplysystem.services.mail.MailService;
 import nl.jed.supersimplesupplysystem.services.user.UserService;
 import nl.jed.supersimplesupplysystem.services.user.UserServiceImpl;
+import nl.jed.supersimplesupplysystem.util.MailFactory;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -62,6 +65,9 @@ class UserServiceImplTest {
     @Mock
     PasswordResetTokenRepository passwordResetTokenRepository;
 
+    @Mock
+    private MailFactory mailFactoryMock;
+
     @InjectMocks
     private UserServiceImpl userServiceImplUnderTest;
 
@@ -85,7 +91,9 @@ class UserServiceImplTest {
 //        when(mockPasswordEncoder.encode("password")).thenReturn("result");
         when(mockRoleRepository.findByName(ROLE_USER)).thenReturn(new Role(ROLE_USER));
         when(mockUserRepository.save(any())).thenReturn(expectedResult);
-        when(env.getProperty("properties.activateAccountUrl")).thenReturn("");
+//        when(env.getProperty("properties.activateAccountUrl")).thenReturn("");
+
+//        when(mailFactoryMock.getPasswordRecoveryMail(expectedResult, "token")).thenReturn(new PasswordRecoveryMail(expectedResult, "token", "url"));
 
         final SignUpRequest signUpRequest = new SignUpRequest(expectedResult.getId(), expectedResult.getProviderUserId(), expectedResult.getDisplayName(), expectedResult.getEmail(), provider, expectedResult.getPassword(), expectedResult.getPassword());
         // Run the test
