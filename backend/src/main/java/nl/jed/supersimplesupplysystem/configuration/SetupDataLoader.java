@@ -6,7 +6,12 @@ import nl.jed.supersimplesupplysystem.models.Role;
 import nl.jed.supersimplesupplysystem.models.User;
 import nl.jed.supersimplesupplysystem.models.household.Household;
 import nl.jed.supersimplesupplysystem.models.location.Location;
+import nl.jed.supersimplesupplysystem.models.notification.HouseholdInvitationNotification;
+import nl.jed.supersimplesupplysystem.models.notification.Notification;
+import nl.jed.supersimplesupplysystem.models.notification.NotificationState;
+import nl.jed.supersimplesupplysystem.models.notification.NotificationType;
 import nl.jed.supersimplesupplysystem.repository.LocationRepository;
+import nl.jed.supersimplesupplysystem.repository.NotificationRepository;
 import nl.jed.supersimplesupplysystem.repository.RoleRepository;
 import nl.jed.supersimplesupplysystem.repository.UserRepository;
 import nl.jed.supersimplesupplysystem.repository.household.HouseholdRepository;
@@ -44,6 +49,9 @@ public class SetupDataLoader implements ApplicationListener<ContextRefreshedEven
     @Autowired
     private LocationRepository locationRepository;
 
+    @Autowired
+    private NotificationRepository notificationRepository;
+
     @Override
     @Transactional
     public void onApplicationEvent(final ContextRefreshedEvent event) {
@@ -55,11 +63,26 @@ public class SetupDataLoader implements ApplicationListener<ContextRefreshedEven
         Role adminRole = createRoleIfNotFound(Role.ROLE_ADMIN);
         Role modRole = createRoleIfNotFound(Role.ROLE_MODERATOR);
         createUserIfNotFound("admin@supersimplesupplysystem.com", Set.of(userRole, adminRole, modRole));
-        createUserIfNotFound("joe@ssss.com", Set.of(userRole, adminRole, modRole));
+        User joe = createUserIfNotFound("joe@ssss.com", Set.of(userRole, adminRole, modRole));
         User evan = createUserIfNotFound("evan@ssss.com", Set.of(userRole, adminRole, modRole));
+        Household joeHousehold = createHousehold("TestHousehold", joe);
         Household household = createHousehold("TestHousehold", evan);
         Location location = createLocation("TestLocation", household);
+        HouseholdInvitationNotification invitationNotification = createHouseholdInvitationNotification(evan, joe, joeHousehold);
         alreadySetup = true;
+    }
+
+    @Transactional
+    public HouseholdInvitationNotification createHouseholdInvitationNotification(User to, User from, Household household) {
+        HouseholdInvitationNotification invitation = new HouseholdInvitationNotification();
+        invitation.setNotificationType(NotificationType.householdInvitation);
+        invitation.setDate(new Date());
+        invitation.setState(NotificationState.unseen);
+        invitation.setSender(from);
+        invitation.setUserEmail(to.getEmail());
+        invitation.setHousehold(household);
+        notificationRepository.save(invitation);
+        return invitation;
     }
 
     @Transactional

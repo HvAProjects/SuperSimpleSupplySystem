@@ -3,6 +3,7 @@ import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {Household} from '../pages/household/household';
 import {AppConstants} from '../common/app.constants';
+import {User} from '../pages/profile/user';
 
 @Injectable({
   providedIn: 'root'
@@ -15,8 +16,8 @@ export class HouseholdService {
     return this.http.get<Household[]>(AppConstants.API_URL + 'household/');
   }
 
-  public deleteHousehold(id: number) {
-    return this.http.delete<Household>(AppConstants.API_URL + `household/${id}`);
+  public leaveHousehold(id: number) {
+    return this.http.post<Household>(AppConstants.API_URL + `household/leaveHousehold/${id}`, {});
   }
 
   public addHousehold(household: Household){
@@ -24,4 +25,7 @@ export class HouseholdService {
   }
 
 
+  getUsersOfHousehold(id: number): Observable<User[]> {
+    return this.http.get<User[]>(AppConstants.API_URL + `household/householdUsers/${id}`);
+  }
 }

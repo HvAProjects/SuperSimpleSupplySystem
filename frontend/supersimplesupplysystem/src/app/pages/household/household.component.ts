@@ -5,6 +5,7 @@ import {finalize, tap} from 'rxjs/operators';
 import {MatTableDataSource} from '@angular/material/table';
 import {MatDialog} from '@angular/material/dialog';
 import {AddHouseholdDialogComponent} from '../../components/add-household-dialog/add-household-dialog.component';
+import {HouseholdUsersDialogComponent} from '../../dialogs/household-users-dialog/household-users-dialog.component';
 
 @Component({
   selector: 'app-household',
@@ -23,7 +24,7 @@ export class HouseholdComponent implements OnInit {
     this.getAllHouseholds();
   }
 
-  getAllHouseholds(){
+  getAllHouseholds(): void {
     this.householdService.getAllHouseholds().pipe(
       tap( households => {
         this.households = households;
@@ -34,16 +35,15 @@ export class HouseholdComponent implements OnInit {
     ).subscribe();
   }
 
-  removeHousehold(event){
-    this.householdService.deleteHousehold(event.id).pipe(
-      tap(()=> {
-        console.log('Household ' + event.name + ' was deleted!')
+  leaveHousehold(event): void {
+    this.householdService.leaveHousehold(event.id).pipe(
+      tap(() => {
+        console.log('Household ' + event.name + ' was deleted!');
       }),
-      finalize(()=>{
+      finalize(() =>{
         this.getAllHouseholds();
       })
-    ).subscribe()
-
+    ).subscribe();
   }
 
   openDialog() {
@@ -58,4 +58,15 @@ export class HouseholdComponent implements OnInit {
   }
 
 
+  openUserDialog(element): void {
+    const dialogRef = this.dialog.open(HouseholdUsersDialogComponent, {
+      width  : '380px',
+      disableClose: false,
+      data: element
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+
+    });
+  }
 }

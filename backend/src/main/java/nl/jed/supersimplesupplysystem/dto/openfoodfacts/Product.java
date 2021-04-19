@@ -62,7 +62,7 @@ public class Product{
 	private String imageFrontSmallUrl;
 
 	@SerializedName("ingredients_from_or_that_may_be_from_palm_oil_n")
-	private Integer ingredientsFromOrThatMayBeFromPalmOilN;
+	private Double ingredientsFromOrThatMayBeFromPalmOilN;
 
 	@SerializedName("nutrition_grade_fr")
 	private String nutritionGradeFr;
@@ -179,13 +179,13 @@ public class Product{
 	private List<PackagingsItem> packagings;
 
 	@SerializedName("nova_group")
-	private Integer novaGroup;
+	private Double novaGroup;
 
 	@SerializedName("nutrition_data_prepared")
 	private String nutritionDataPrepared;
 
 	@SerializedName("nutriscore_score")
-	private Integer nutriscoreScore;
+	private Double nutriscoreScore;
 
 	@SerializedName("languages_tags")
 	private List<String> languagesTags;
@@ -200,7 +200,7 @@ public class Product{
 	private List<String> ingredientsIdsDebug;
 
 	@SerializedName("rev")
-	private Integer rev;
+	private Double rev;
 
 	@SerializedName("ecoscore_grade")
 	private String ecoscoreGrade;
@@ -239,7 +239,7 @@ public class Product{
 	private List<Object> unknownNutrientsTags;
 
 	@SerializedName("nutriscore_score_opposite")
-	private Integer nutriscoreScoreOpposite;
+	private Double nutriscoreScoreOpposite;
 
 	@SerializedName("states")
 	private String states;
@@ -281,7 +281,7 @@ public class Product{
 	private List<String> dataQualityInfoTags;
 
 	@SerializedName("last_modified_t")
-	private Integer lastModifiedT;
+	private Double lastModifiedT;
 
 	@SerializedName("packaging")
 	private String packaging;
@@ -302,7 +302,7 @@ public class Product{
 	private List<String> ingredientsAnalysisTags;
 
 	@SerializedName("additives_old_n")
-	private Integer additivesOldN;
+	private Double additivesOldN;
 
 	@SerializedName("data_sources_tags")
 	private List<String> dataSourcesTags;
@@ -311,7 +311,7 @@ public class Product{
 	private String maxImgid;
 
 	@SerializedName("ingredients_n")
-	private Integer ingredientsN;
+	private Double ingredientsN;
 
 	@SerializedName("stores_tags")
 	private List<String> storesTags;
@@ -335,7 +335,7 @@ public class Product{
 	private List<String> languagesHierarchy;
 
 	@SerializedName("unique_scans_n")
-	private Integer uniqueScansN;
+	private Double uniqueScansN;
 
 	@SerializedName("id")
 	private String id;
@@ -386,7 +386,7 @@ public class Product{
 	private String productQuantity;
 
 	@SerializedName("sortkey")
-	private Integer sortkey;
+	private Double sortkey;
 
 	@SerializedName("traces_from_ingredients")
 	private String tracesFromIngredients;
@@ -443,7 +443,7 @@ public class Product{
 	private String lc;
 
 	@SerializedName("created_t")
-	private Integer createdT;
+	private Double createdT;
 
 	@SerializedName("compared_to_category")
 	private String comparedToCategory;
@@ -461,7 +461,7 @@ public class Product{
 	private String pnnsGroups1;
 
 	@SerializedName("complete")
-	private Integer complete;
+	private Double complete;
 
 	@SerializedName("pnns_groups_2")
 	private String pnnsGroups2;
@@ -479,7 +479,7 @@ public class Product{
 	private String updateKey;
 
 	@SerializedName("known_ingredients_n")
-	private Integer knownIngredientsN;
+	private Double knownIngredientsN;
 
 	@SerializedName("minerals_prev_tags")
 	private List<Object> mineralsPrevTags;
@@ -512,7 +512,7 @@ public class Product{
 	private String traces;
 
 	@SerializedName("ingredients_that_may_be_from_palm_oil_n")
-	private Integer ingredientsThatMayBeFromPalmOilN;
+	private Double ingredientsThatMayBeFromPalmOilN;
 
 	@SerializedName("traces_hierarchy")
 	private List<Object> tracesHierarchy;
@@ -548,19 +548,19 @@ public class Product{
 	private String code;
 
 	@SerializedName("ingredients_from_palm_oil_n")
-	private Integer ingredientsFromPalmOilN;
+	private Double ingredientsFromPalmOilN;
 
 	@SerializedName("misc_tags")
 	private List<String> miscTags;
 
 	@SerializedName("ecoscore_score")
-	private Integer ecoscoreScore;
+	private Double ecoscoreScore;
 
 	@SerializedName("link")
 	private String link;
 
 	@SerializedName("additives_n")
-	private Integer additivesN;
+	private Double additivesN;
 
 	@SerializedName("environment_impact_level")
 	private String environmentImpactLevel;
@@ -569,10 +569,10 @@ public class Product{
 	private List<String> categoriesTags;
 
 	@SerializedName("unknown_ingredients_n")
-	private Integer unknownIngredientsN;
+	private Double unknownIngredientsN;
 
 	@SerializedName("nutrition_score_warning_fruits_vegetables_nuts_estimate_from_ingredients")
-	private Integer nutritionScoreWarningFruitsVegetablesNutsEstimateFromIngredients;
+	private Double nutritionScoreWarningFruitsVegetablesNutsEstimateFromIngredients;
 
 	@SerializedName("nutrition_data_per")
 	private String nutritionDataPer;
@@ -590,7 +590,7 @@ public class Product{
 	private String imageFrontUrl;
 
 	@SerializedName("scans_n")
-	private Integer scansN;
+	private Double scansN;
 
 	@SerializedName("countries_hierarchy")
 	private List<String> countriesHierarchy;
@@ -617,8 +617,8 @@ public class Product{
 	private NutriscoreData nutriscoreData;
 
 	@SerializedName("last_image_t")
-	private Integer lastImageT;
+	private Double lastImageT;
 
 	@SerializedName("nutrition_score_beverage")
-	private Integer nutritionScoreBeverage;
+	private Double nutritionScoreBeverage;
 }

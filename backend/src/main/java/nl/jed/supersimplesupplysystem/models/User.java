@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import nl.jed.supersimplesupplysystem.dto.UserDto;
 import nl.jed.supersimplesupplysystem.models.household.Household;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -91,5 +92,9 @@ public class User implements Serializable, UserDetails {
     @Override
     public boolean isCredentialsNonExpired() {
         return this.passwordExpired;
+    }
+
+    public UserDto toUserDto() {
+        return new UserDto(this.id, this.displayName);
     }
 }

@@ -4,6 +4,8 @@ import java.util.*;
 import nl.jed.supersimplesupplysystem.dto.*;
 import nl.jed.supersimplesupplysystem.exception.OAuth2AuthenticationProcessingException;
 import nl.jed.supersimplesupplysystem.exception.UserAlreadyExistAuthenticationException;
+import nl.jed.supersimplesupplysystem.mail.PasswordRecoveryMail;
+import nl.jed.supersimplesupplysystem.mail.UserActivationMail;
 import nl.jed.supersimplesupplysystem.models.PasswordResetToken;
 import nl.jed.supersimplesupplysystem.models.Role;
 import nl.jed.supersimplesupplysystem.models.User;
@@ -16,6 +18,7 @@ import nl.jed.supersimplesupplysystem.security.oauth2.user.OAuth2UserInfo;
 import nl.jed.supersimplesupplysystem.security.oauth2.user.OAuth2UserInfoFactory;
 import nl.jed.supersimplesupplysystem.services.mail.MailService;
 import nl.jed.supersimplesupplysystem.util.GeneralUtils;
+import nl.jed.supersimplesupplysystem.util.MailFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.security.access.prepost.PostFilter;
@@ -52,6 +55,9 @@ public class UserServiceImpl implements UserService {
     @Autowired
     UserActivationTokenRepository userActivationTokenRepository;
 
+    @Autowired
+    private MailFactory mailFactory;
+
     @Override
     @Transactional(value = "transactionManager")
     public User registerNewUser(final SignUpRequest signUpRequest) throws UserAlreadyExistAuthenticationException {
@@ -70,8 +76,7 @@ public class UserServiceImpl implements UserService {
         UserActivationToken token = generateUserActivationToken(user);
         userActivationTokenRepository.save(token);
         userActivationTokenRepository.flush();
-        mailService.sendEmail(generateUserActivationMail(user, token.getToken()));
-
+        mailService.sendEmail(mailFactory.getUserActivationMail(user, token.getToken()));
         return user;
     }
 
@@ -154,7 +159,7 @@ public class UserServiceImpl implements UserService {
         passwordResetToken.setUser(user);
         passwordResetToken.setToken(token);
         passwordResetTokenRepository.save(passwordResetToken);
-        mailService.sendEmail(generateRecoveryMail(user, token));
+        mailService.sendEmail(mailFactory.getPasswordRecoveryMail(user, token));
     }
 
     @Override
@@ -169,30 +174,5 @@ public class UserServiceImpl implements UserService {
         user.setEnabled(true);
         userRepository.save(user);
         userRepository.flush();
-    }
-
-    private Mail generateRecoveryMail(User user, String token) {
-        Mail mail = new Mail();
-        mail.setMailTo(user.getEmail());
-        mail.setMailSubject("Reset password");
-        StringBuilder contentSb = new StringBuilder();
-        contentSb.append("A request was made to reset your password. Click on the link to reset your password.").append(System.lineSeparator());
-        contentSb.append(env.getProperty("properties.forgotMailUrl")).append(token).append(System.lineSeparator());
-        contentSb.append("If it was not you who requested this, you can ignore this email.").append(System.lineSeparator());
-        mail.setMailContent(contentSb.toString());
-        return mail;
-    }
-
-    private Mail generateUserActivationMail(User user, String token) {
-        Mail mail = new Mail();
-        mail.setMailTo(user.getEmail());
-        mail.setMailSubject("Activate account");
-        StringBuilder contentSb = new StringBuilder();
-        contentSb.append("Dear " + user.getDisplayName() + ",").append(System.lineSeparator());
-        contentSb.append("A signup request was made. Click on the url to activate your account.").append(System.lineSeparator());
-        contentSb.append(env.getProperty("properties.activateAccountUrl")).append(token).append(System.lineSeparator());
-        contentSb.append("If it was not you who requested this, you can ignore this email.").append(System.lineSeparator());
-        mail.setMailContent(contentSb.toString());
-        return mail;
     }
 }

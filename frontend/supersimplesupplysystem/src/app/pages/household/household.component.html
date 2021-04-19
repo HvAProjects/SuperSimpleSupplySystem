@@ -44,7 +44,9 @@
           <i class="tripleMenuIcon"></i>
         </button>
         <mat-menu #beforeMenu="matMenu" xPosition="before">
-          <button (click)="removeHousehold(element)"  class="menuItems" mat-menu-item><i class="stacktraceMenuIcon"></i>Remove
+          <button (click)="leaveHousehold(element)" class="menuItems" mat-menu-item><i class="stacktraceMenuIcon"></i>Leave
+          </button>
+          <button (click)="openUserDialog(element)"  class="menuItems" mat-menu-item><i class="stacktraceMenuIcon"></i>Users
           </button>
         </mat-menu>
       </td>
