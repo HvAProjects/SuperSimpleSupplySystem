@@ -17,7 +17,7 @@ import java.util.stream.Collectors;
 @Slf4j
 @CrossOrigin(origins = "*")
 @RestController
-@RequestMapping("/api/notifications")
+@RequestMapping("/notifications")
 public class NotificationController {
 
     @Autowired
