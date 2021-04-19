@@ -14,3 +14,6 @@ resources:
 - deployment.yaml
 - service.yaml
 - ingress.yaml
+- imagePolicy.yaml
+- imageRepository.yaml
+- imageUpdateAutomation.yaml

@@ -1,10 +1,11 @@
 # This workflow will build a Java project with Gradle
 # For more information see: https://help.github.com/actions/language-and-framework-guides/building-and-testing-java-with-gradle
 
-name: Java CI with Gradle
+name: Container build with Gradle
 
 on:
-  pull_request:
+  workflow_dispatch:
+  push:
     branches: [ main ]
     paths:
     - 'backend/**'
@@ -43,13 +44,7 @@ jobs:
       env:
         SECRETS_PROPERTIES: ${{secrets.SECRETS_PROPERTIES}}
     - name: Build with Gradle
-      run: ./gradlew ci
-    - name: Publish Unit Test Results
-      uses: EnricoMi/publish-unit-test-result-action@v1
-      if: always()
-      with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-        files: backend/build/test-results/**/*.xml
+      run: ./gradlew build jib
     - name: Cleanup Gradle Cache
       # Remove some files from the Gradle cache, so they aren't cached by GitHub Actions.
       # Restoring these files from a GitHub Actions cache might cause problems for future builds.

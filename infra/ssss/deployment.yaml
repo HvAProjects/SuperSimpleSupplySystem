@@ -17,7 +17,7 @@ spec:
         - name: ssss
           securityContext:
             {}
-          image: "ghcr.io/hvaprojects/ssss_backend:bacb3f8"
+          image: "ghcr.io/hvaprojects/ssss_backend:bacb3f8" # {"$imagepolicy": "flux-system:ssss_backend"}
           imagePullPolicy: IfNotPresent
           ports:
             - name: http
@@ -34,7 +34,7 @@ spec:
           - name: BASEURLS_FRONTEND
             value: http://localhost:4200
           - name: BASEURLS_BACKEND
-            value: http://supply.apps.soffware.nl
+            value: https://supply.apps.soffware.nl
           - name: SERVER_SERVLET_CONTEXTPATH
             value: "/api"
           volumeMounts:
