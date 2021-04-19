@@ -1,7 +1,7 @@
 apiVersion: image.toolkit.fluxcd.io/v1alpha1
 kind: ImageRepository
 metadata:
-  name: ssss_backend
+  name: ssss-backend
   namespace: flux-system
 spec:
   image: ghcr.io/hvaprojects/ssss_backend

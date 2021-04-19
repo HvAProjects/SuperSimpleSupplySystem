@@ -1,11 +1,11 @@
 apiVersion: image.toolkit.fluxcd.io/v1alpha1
 kind: ImagePolicy
 metadata:
-  name: ssss_backend
+  name: ssss-backend
   namespace: flux-system
 spec:
   imageRepositoryRef:
-    name: ssss_backend
+    name: ssss-backend
   filterTags:
     pattern: '^main-[a-fA-F0-9]+-(?P<ts>.*)'
     extract: '$ts'
