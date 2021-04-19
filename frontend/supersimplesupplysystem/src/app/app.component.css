@@ -1,17 +1,16 @@
 
-.centered {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  text-align: center;
-  font-family: "Montserrat";
-  text-transform: capitalize;
-  letter-spacing: -2px;
+/*.centered {*/
+/*  display: flex;*/
+/*  flex-direction: column;*/
+/*  justify-content: center;*/
+/*  text-align: center;*/
+/*  font-family: "Montserrat";*/
+/*  text-transform: capitalize;*/
+/*  letter-spacing: -2px;*/
 
-}
+/*}*/
 
-.custom-container{
-  margin: 10px;
-  text-align: center;
-}
-
+/*.custom-container{*/
+/*  margin: 10px;*/
+/*  text-align: center;*/
+/*}*/
