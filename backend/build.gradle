@@ -3,10 +3,9 @@ plugins {
 	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
 	id 'java'
 	id 'jacoco'
-	id 'com.google.cloud.tools.jib' version '2.8.0'
+	id 'com.google.cloud.tools.jib' version '3.0.0'
 	id 'de.fuerstenau.buildconfig' version '1.1.8'
 	id 'idea'
-	id 'info.solidsoft.pitest' version '1.5.1'
 }
 
 group = 'nl.jed'
@@ -32,6 +31,9 @@ ext {
 			standardOutput = stdout
 		}
 		return stdout.toString().trim()
+	}
+	ext.getTimestamp = { ->
+		return new Date().format('yyyyMMddHHmmssSSS')
 	}
 }
 
@@ -98,11 +100,6 @@ jacocoTestReport {
 	dependsOn test // tests are required to run before generating the report
 }
 
-tasks.register('ci'){
-	dependsOn tasks.build
-	dependsOn tasks.jib
-}
-
 jib {
 	to {
 		image = 'ghcr.io/hvaprojects/ssss_backend'
@@ -110,7 +107,7 @@ jib {
 			username = 'davidsoff'
 			password = file('key').text
 		}
-		tags = ["${getGitHash()}"]
+		tags = ["main-${getGitHash()}-${getTimestamp()}"]
 	}
 	container {
 		ports = ['8080']

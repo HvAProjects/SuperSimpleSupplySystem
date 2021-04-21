@@ -15,4 +15,7 @@ public class CustomProperties {
 
     @Getter @Setter
     public String activateAccountUrl = null;
+
+    @Getter @Setter
+    public String signUpUrl = null;
 }

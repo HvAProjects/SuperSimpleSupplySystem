@@ -17,5 +17,11 @@
       "name": "properties.activateAccountUrl",
       "type": "java.lang.String",
       "description": "Description for properties.activateAccountUrl."
+    },
+    {
+      "name": "properties.signUpUrl",
+      "type": "java.lang.String",
+      "description": "Description for properties.signUpUrl.",
+      "sourceType": "nl.jed.supersimplesupplysystem.configuration.CustomProperties"
     }
   ] }

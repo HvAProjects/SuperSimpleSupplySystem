@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ssss
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: ssss
+  template:
+    spec:
+      securityContext:
+        fsGroup: 999
+      imagePullSecrets:
+      - name: gh-registry
+      containers:
+      - name: ssss
+        securityContext: {}
+        image: "ghcr.io/hvaprojects/ssss_backend:main-ffe5a91-20210419192149582" # {"$imagepolicy": "flux-system:ssss-backend"}
+        imagePullPolicy: IfNotPresent
+        ports:
+        - name: http
+          containerPort: 8080
+          protocol: TCP
+        resources:
+          limits:
+            cpu: 500m
+            memory: 500Mi
+          requests:
+            cpu: 200m
+            memory: 200Mi
+        env:
+        - name: BASEURLS_FRONTEND
+          value: http://localhost:4200
+        - name: BASEURLS_BACKEND
+          value: https://supply.apps.soffware.nl
+        - name: SERVER_SERVLET_CONTEXTPATH
+          value: "/api"
+        volumeMounts:
+        - name: secrets
+          mountPath: "/app/resources/secrets"
+          readOnly: true
+      volumes:
+      - name: secrets
+        secret:
+          secretName: ssss-secrets-properties
+          items:
+          - key: secrets.properties
+            path: secrets.properties

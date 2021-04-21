@@ -14,7 +14,7 @@ import java.util.List;
 @Slf4j
 @CrossOrigin(origins = "*")
 @RestController
-@RequestMapping("/api/location")
+@RequestMapping("/location")
 public class LocationController {
 
     @Autowired

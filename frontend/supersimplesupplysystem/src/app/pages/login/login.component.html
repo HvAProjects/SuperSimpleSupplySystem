@@ -1,7 +1,8 @@
 <div class="ss-contain">
 
-    <div class="h1">Login</div>
+
     <div class="ss-form">
+      <div class="h1">Login</div>
       <p *ngIf="!isLoggedIn">Login with your email address</p>
       <form class="ss-input"
             *ngIf="!isLoggedIn" name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
@@ -43,7 +44,7 @@
 
         </div>
         <div class="ss-horizontal">
-          <span style="margin-left: 10px">or</span>
+          <span style="margin-left: 10px; background-color: #515151">or</span>
         </div>
 
         <div>

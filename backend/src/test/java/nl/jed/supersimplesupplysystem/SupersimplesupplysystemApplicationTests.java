@@ -26,7 +26,6 @@ class SupersimplesupplysystemApplicationTests {
 
 	@Test
 	void TestValidPassword() {
-
 		SignUpRequest signUpRequest = SignUpRequest.builder()
 				.displayName("test")
 				.email("test@email.com")

@@ -2,13 +2,15 @@ package nl.jed.supersimplesupplysystem.controllers.household;
 
 import lombok.extern.slf4j.Slf4j;
 import nl.jed.supersimplesupplysystem.dto.ApiResponse;
+import nl.jed.supersimplesupplysystem.dto.LocalUser;
+import nl.jed.supersimplesupplysystem.dto.UserDto;
+import nl.jed.supersimplesupplysystem.models.User;
 import nl.jed.supersimplesupplysystem.models.household.Household;
 import nl.jed.supersimplesupplysystem.services.household.HouseholdService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -17,7 +19,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
+import java.security.Principal;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * @author joe.vrolijk
@@ -27,7 +32,7 @@ import java.util.List;
 @Slf4j
 @CrossOrigin(origins = "*")
 @RestController
-@RequestMapping("/api/household")
+@RequestMapping("/household")
 public class HouseholdController {
 
     @Autowired
@@ -43,10 +48,16 @@ public class HouseholdController {
         return householdService.getHousehold(id);
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<ApiResponse> deleteHousehold(@PathVariable("id") Long id){
-        householdService.removeHousehold(id);
-        return ResponseEntity.ok().body(new ApiResponse(true, "Household has been successfully removed."));
+    @GetMapping("householdUsers/{id}")
+    public Set<UserDto> getUsersOfHousehold(@PathVariable("id") Long id){
+        return householdService.getHousehold(id).getUsers().stream().map(User::toUserDto).collect(Collectors.toSet());
+    }
+
+    @PostMapping("/leaveHousehold/{id}")
+    public ResponseEntity<ApiResponse> leaveHousehold(@PathVariable("id") Long id, Principal principal){
+        LocalUser localUser = (LocalUser) ((UsernamePasswordAuthenticationToken)principal).getPrincipal();
+        householdService.leaveHousehold(id, localUser.getUser());
+        return ResponseEntity.ok().body(new ApiResponse(true, "You have left the household successfully."));
     }
 
     @PostMapping(path = "/")

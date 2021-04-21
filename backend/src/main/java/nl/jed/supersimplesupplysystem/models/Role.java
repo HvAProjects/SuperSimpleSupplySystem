@@ -1,5 +1,6 @@
 package nl.jed.supersimplesupplysystem.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 
@@ -36,6 +37,7 @@ public class Role implements Serializable, GrantedAuthority {
     private String name;
 
     // bi-directional many-to-many association to User
+    @JsonBackReference
     @ManyToMany(mappedBy = "roles")
     private Set<User> users;
 
