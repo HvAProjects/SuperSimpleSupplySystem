@@ -9,10 +9,8 @@ import nl.jed.supersimplesupplysystem.models.location.Location;
 import nl.jed.supersimplesupplysystem.models.notification.HouseholdInvitationNotification;
 import nl.jed.supersimplesupplysystem.models.notification.NotificationState;
 import nl.jed.supersimplesupplysystem.models.notification.NotificationType;
-import nl.jed.supersimplesupplysystem.repository.LocationRepository;
-import nl.jed.supersimplesupplysystem.repository.NotificationRepository;
-import nl.jed.supersimplesupplysystem.repository.RoleRepository;
-import nl.jed.supersimplesupplysystem.repository.UserRepository;
+import nl.jed.supersimplesupplysystem.models.product.Product;
+import nl.jed.supersimplesupplysystem.repository.*;
 import nl.jed.supersimplesupplysystem.repository.household.HouseholdRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
@@ -22,6 +20,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashSet;
@@ -51,6 +50,9 @@ public class SetupDataLoader implements ApplicationListener<ContextRefreshedEven
     @Autowired
     private NotificationRepository notificationRepository;
 
+    @Autowired
+    private ProductRepository productRepository;
+
 
     @Override
     @Transactional
@@ -68,6 +70,10 @@ public class SetupDataLoader implements ApplicationListener<ContextRefreshedEven
         Household joeHousehold = createHousehold("TestHousehold", joe);
         Household household = createHousehold("TestHousehold", evan);
         Location location = createLocation("TestLocation", household);
+
+        createProduct(10, location, "233423323", java.sql.Date.valueOf(LocalDate.now().plusDays(2)), "Pindakaas", "1kg");
+        createProduct(2, location, "323342323", java.sql.Date.valueOf(LocalDate.now().minusDays(1)), "Fanta", "33ml");
+        createProduct(5, location, "2322332323", java.sql.Date.valueOf(LocalDate.now().plusDays(20)), "Cola", "33ml");
 
 
         Household household1 = createHousehold("Joe House", joe);
@@ -140,5 +146,17 @@ public class SetupDataLoader implements ApplicationListener<ContextRefreshedEven
         location.setHousehold(household);
         locationRepository.save(location);
         return location;
+    }
+
+    public Product createProduct(long amount, Location location, String barcode, Date expirationDate, String name, String quantity) {
+        Product product = new Product();
+        product.setBarcode(barcode);
+        product.setAmount(amount);
+        product.setName(name);
+        product.setLocation(location);
+        product.setExpirationDate(expirationDate);
+        product.setQuantity(quantity);
+        productRepository.save(product);
+        return product;
     }
 }
