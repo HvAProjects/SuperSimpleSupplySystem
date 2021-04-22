@@ -1,12 +1,11 @@
 package nl.jed.supersimplesupplysystem.models.product;
 
 import lombok.Data;
+import nl.jed.supersimplesupplysystem.dto.ProductDto;
+import nl.jed.supersimplesupplysystem.dto.UserDto;
 import nl.jed.supersimplesupplysystem.models.location.Location;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.util.Date;
 
 @Data
@@ -18,6 +17,10 @@ public class Product extends ProductType {
     @Column
     private Date expirationDate;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Location location;
+
+    public ProductDto getProductDto() {
+        return new ProductDto(super.getId(), super.getName(), super.getQuantity(), this.amount, this.expirationDate);
+    }
 }

@@ -3,4 +3,7 @@
   <ng-container *ngFor="let notification of notifications">
     <app-notification (click)="onClick(notification)" [notification]="notification"></app-notification>
   </ng-container>
+  <div class="no-notifications" *ngIf="notifications.length === 0">
+    Nothing to see here
+  </div>
 </mat-menu>

@@ -1,11 +1,9 @@
-import {Component, Input, OnInit, Output, EventEmitter} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {Notification} from '../../models/Notification';
 import {NotificationType} from '../../models/NotificationType';
 import {NotificationState} from '../../models/NotificationState';
 import {NotificationService} from '../../services/notification.service';
-import {EmailAddressPromptComponent} from '../../dialogs/email-address-prompt/email-address-prompt.component';
 import {MatDialog} from '@angular/material/dialog';
-import {AcceptHouseholdInvitationPromptComponent} from '../../dialogs/accept-household-invitation-prompt/accept-household-invitation-prompt.component';
 
 @Component({
   selector: 'app-notification',
@@ -34,6 +32,16 @@ export class NotificationComponent implements OnInit {
 
   onClick(): void {
     // this.click.emit();
+  }
+
+  getContent(): string {
+    switch (this.notification.notificationType) {
+      case NotificationType.getName(NotificationType.householdInvitation):
+        return `Sender: ${this.notification.sender.name}`;
+      case NotificationType.getName(NotificationType.productExpired):
+      case NotificationType.getName(NotificationType.productAboutToExpire):
+        return `Product: ${this.notification.product.amount}x ${this.notification.product.name} ${this.notification.product.quantity}`;
+    }
   }
 
   getStyle(): string {
