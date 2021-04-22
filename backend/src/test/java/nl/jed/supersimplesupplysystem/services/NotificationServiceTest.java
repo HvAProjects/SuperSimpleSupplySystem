@@ -86,7 +86,7 @@ public class NotificationServiceTest {
         user.setEmail("test@email.com");
         List<Notification> notifications = new ArrayList<>();
         for (int i = 0; i < 5; i++) {
-            Notification notification = new Notification();
+            Notification notification = new HouseholdInvitationNotification();
             notification.setState(NotificationState.unseen);
             notification.setDate(new Date());
             notifications.add(notification);
