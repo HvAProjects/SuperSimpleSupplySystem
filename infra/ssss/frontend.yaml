@@ -3,8 +3,6 @@ apiVersion: v1
 kind: Service
 metadata:
   name: ssss-frontend
-  labels:
-    app.kubernetes.io/component: frontend
 spec:
   selector:
     app: ssss
@@ -24,8 +22,7 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      app: ssss
-      name: frontend
+      app.kubernetes.io/component: frontend
   template:
     metadata:
       labels:

@@ -22,13 +22,8 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      app: ssss
-      name: backend
+      app.kubernetes.io/component: backend
   template:
-    metadata:
-      labels:
-        app: ssss
-        component: backend
     spec:
       securityContext:
         fsGroup: 999
