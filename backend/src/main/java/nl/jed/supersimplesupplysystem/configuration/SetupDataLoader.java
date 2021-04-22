@@ -64,11 +64,12 @@ public class SetupDataLoader implements ApplicationListener<ContextRefreshedEven
         Role userRole = createRoleIfNotFound(Role.ROLE_USER);
         Role adminRole = createRoleIfNotFound(Role.ROLE_ADMIN);
         Role modRole = createRoleIfNotFound(Role.ROLE_MODERATOR);
-        createUserIfNotFound("admin@supersimplesupplysystem.com", Set.of(userRole, adminRole, modRole));
-        User evan = createUserIfNotFound("evan@ssss.com", Set.of(userRole, adminRole, modRole));
-        User joe = createUserIfNotFound("joe@ssss.com", Set.of(userRole, adminRole, modRole));
-        Household joeHousehold = createHousehold("TestHousehold", joe);
-        Household household = createHousehold("TestHousehold", evan);
+        createUserIfNotFound("admin@supersimplesupplysystem.com", Set.of(userRole, adminRole, modRole), "Admin");
+        User evan = createUserIfNotFound("evan@ssss.com", Set.of(userRole, adminRole, modRole), "Evan");
+        User joe = createUserIfNotFound("joe@ssss.com", Set.of(userRole, adminRole, modRole), "Joe");
+        User david = createUserIfNotFound("david@ssss.com", Set.of(userRole, adminRole, modRole), "David");
+        Household joeHousehold = createHousehold("JoeHousehold", joe);
+        Household household = createHousehold("EvanHousehold", evan);
         Location location = createLocation("TestLocation", household);
 
         createProduct(10, location, "233423323", java.sql.Date.valueOf(LocalDate.now().plusDays(2)), "Pindakaas", "1kg");
@@ -77,7 +78,7 @@ public class SetupDataLoader implements ApplicationListener<ContextRefreshedEven
 
 
         Household household1 = createHousehold("Joe House", joe);
-        Household household2 = createHousehold("Dave Cave", joe);
+        Household household2 = createHousehold("Dave Cave", david);
         Location location2 = createLocation("Fridge", household1);
         Location location3 = createLocation("Cupboard-Left-1", household1);
         Location location4 = createLocation("Closet1", household2);
@@ -101,11 +102,11 @@ public class SetupDataLoader implements ApplicationListener<ContextRefreshedEven
     }
 
     @Transactional
-    public User createUserIfNotFound(final String email, Set<Role> roles) {
+    public User createUserIfNotFound(final String email, Set<Role> roles, String name) {
         User user = userRepository.findByEmail(email);
         if (user == null) {
             user = new User();
-            user.setDisplayName("Admin");
+            user.setDisplayName(name);
             user.setEmail(email);
             user.setPassword(passwordEncoder.encode("admin@"));
             user.setRoles(roles);
