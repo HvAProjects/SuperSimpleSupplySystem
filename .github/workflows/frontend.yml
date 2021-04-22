@@ -19,6 +19,7 @@ jobs:
       packages: write
       contents: read
     steps:
+      - uses: actions/checkout@v2
       - name: Prepare
         id: prep
         run: |
