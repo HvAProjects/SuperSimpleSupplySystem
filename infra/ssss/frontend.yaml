@@ -5,8 +5,7 @@ metadata:
   name: ssss-frontend
 spec:
   selector:
-    app: ssss
-    name: frontend
+    app.kubernetes.io/component: frontend
   ports:
   - port: 3000
     name: ssss-frontend
