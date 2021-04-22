@@ -25,8 +25,7 @@ spec:
   template:
     metadata:
       labels:
-        app: ssss
-        component: frontend
+        app.kubernetes.io/component: frontend
     spec:
       securityContext:
         fsGroup: 999
