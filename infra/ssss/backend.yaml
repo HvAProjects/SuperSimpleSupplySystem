@@ -6,6 +6,9 @@ metadata:
   labels:
     app.kubernetes.io/component: backend
 spec:
+  selector:
+    app: ssss
+    name: backend
   ports:
   - port: 8080
     name: ssss-backend
