@@ -19,6 +19,13 @@ spec:
             path: /api
             backend:
               service:
-                name: ssss
+                name: ssss-backend
                 port:
                   number: 8080
+          - pathType: Prefix
+            path: /
+            backend:
+              service:
+                name: ssss-frontend
+                port:
+                  number: 3000
