@@ -3,7 +3,6 @@ kind: Kustomization
 
 commonLabels:
   app.kubernetes.io/name: ssss
-  app.kubernetes.io/instance: ssss
 
 namespace: ssss
 
