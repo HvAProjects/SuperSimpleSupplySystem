@@ -12,9 +12,6 @@ env:
 jobs:
   build:
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: frontend/supersimplesupplysystem
     permissions:
       packages: write
       contents: read
@@ -54,6 +51,7 @@ jobs:
       - name: Build and push
         uses: docker/build-push-action@v2
         with:
+          context: ./frontend/supersimplesupplysystem
           builder: ${{ steps.buildx.outputs.name }}
           file: Dockerfile
           push: true
