@@ -52,7 +52,6 @@ jobs:
         with:
           context: ${{ steps.prep.outputs.cwd }}/frontend/supersimplesupplysystem
           builder: ${{ steps.buildx.outputs.name }}
-          file: Dockerfile
           push: true
           tags: ${{ steps.prep.outputs.tagged_image }}
           cache-from: type=local,src=/tmp/.buildx-cache
