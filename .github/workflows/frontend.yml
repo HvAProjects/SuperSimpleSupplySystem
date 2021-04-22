@@ -1,4 +1,4 @@
-name: Build and Deploy
+name: Frontend Container Build
 on:
   workflow_dispatch:
   push:
@@ -6,16 +6,58 @@ on:
       - master
     paths:
       - 'frontend/**'
+
+env:
+  IMAGE_NAME: ssss_frontend
 jobs:
-  deploy:
+  build:
     runs-on: ubuntu-latest
+    permissions:
+      packages: write
+      contents: read
     steps:
       - uses: actions/checkout@v2
-      - name: Deploy frontend to github pages
-        uses: AhsanAyaz/angular-deploy-gh-pages-actions@v1.3.1
+      - name: Prepare
+        id: prep
+        run: |
+          SHA=$(echo $GITHUB_SHA | head -c7)
+          IMAGE=ghcr.io/${{ github.repository_owner }}/$IMAGE_NAME
+          IMAGE=$(echo $IMAGE | tr '[A-Z]' '[a-z]')
+          TIMESTAMP=$(date +"%s")
+          TAG=main-$SHA-$TIMESTAMP
+          
+          echo ::set-output name=tagged_image::${IMAGE}:${TAG}
+          echo ::set-output name=tag::${TAG}
+          echo ::set-output name=cwd::$(pwd)
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
+      - name: Cache Docker layers
+        uses: actions/cache@v2
         with:
-          angular_project_dir: frontend/supersimplesupplysystem
-          build_configuration: production
-          base_href: /SuperSimpleSupplySystem/
-          deploy_branch: gh-pages
-          angular_dist_build_folder: docs
+          path: /tmp/.buildx-cache
+          key: ${{ runner.os }}-buildx-${{ github.sha }}
+          restore-keys: |
+            ${{ runner.os }}-buildx-
+            
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v1
+        with:
+          registry: ghcr.io
+          username: ${{ github.repository_owner }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+        
+      - name: Build and push
+        uses: docker/build-push-action@v2
+        with:
+          context: ${{ steps.prep.outputs.cwd }}/frontend/supersimplesupplysystem
+          builder: ${{ steps.buildx.outputs.name }}
+          push: true
+          tags: ${{ steps.prep.outputs.tagged_image }}
+          cache-from: type=local,src=/tmp/.buildx-cache
+          cache-to: type=local,dest=/tmp/.buildx-cache-new
+
+      - name: Move cache
+        run: |
+          rm -rf /tmp/.buildx-cache
+          mv /tmp/.buildx-cache-new /tmp/.buildx-cache

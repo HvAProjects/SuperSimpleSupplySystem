@@ -1,0 +1,42 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: ssss-frontend
+spec:
+  ports:
+  - port: 3000
+    name: ssss-frontend
+    targetPort: http
+---    
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ssss-frontend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: ssss-frontend
+  template:
+    spec:
+      securityContext:
+        fsGroup: 999
+      imagePullSecrets:
+      - name: gh-registry
+      containers:
+      - name: ssss
+        securityContext: {}
+        image: "ghcr.io/hvaprojects/ssss_frontend:main-2801d25-1619108626" # {"$imagepolicy": "flux-system:ssss-frontend"}
+        imagePullPolicy: IfNotPresent
+        ports:
+        - name: http
+          containerPort: 3000
+          protocol: TCP
+        resources:
+          limits:
+            cpu: 500m
+            memory: 500Mi
+          requests:
+            cpu: 200m
+            memory: 200Mi

@@ -11,9 +11,6 @@ namespace: ssss
 resources:
 - secrets.yaml
 - namespace.yaml
-- deployment.yaml
-- service.yaml
+- backend.yaml
+- frontend.yaml
 - ingress.yaml
-- imagePolicy.yaml
-- imageRepository.yaml
-- imageUpdateAutomation.yaml
