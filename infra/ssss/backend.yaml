@@ -3,7 +3,11 @@ apiVersion: v1
 kind: Service
 metadata:
   name: ssss-backend
+  labels:
+    app.kubernetes.io/component: backend
 spec:
+  selector:
+    app.kubernetes.io/component: backend
   ports:
   - port: 8080
     name: ssss-backend
@@ -17,15 +21,18 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      app.kubernetes.io/name: ssss
+      app.kubernetes.io/component: backend
   template:
+    metadata:
+      labels:
+        app.kubernetes.io/component: backend
     spec:
       securityContext:
         fsGroup: 999
       imagePullSecrets:
       - name: gh-registry
       containers:
-      - name: ssss
+      - name: backend
         securityContext: {}
         image: "ghcr.io/hvaprojects/ssss_backend:main-ffe5a91-20210419192149582" # {"$imagepolicy": "flux-system:ssss-backend"}
         imagePullPolicy: IfNotPresent

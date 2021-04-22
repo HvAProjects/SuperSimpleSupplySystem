@@ -4,6 +4,8 @@ kind: Service
 metadata:
   name: ssss-frontend
 spec:
+  selector:
+    app.kubernetes.io/component: frontend
   ports:
   - port: 3000
     name: ssss-frontend
@@ -13,12 +15,17 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: ssss-frontend
+  labels:
+    app.kubernetes.io/component: frontend
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app.kubernetes.io/name: ssss-frontend
+      app.kubernetes.io/component: frontend
   template:
+    metadata:
+      labels:
+        app.kubernetes.io/component: frontend
     spec:
       securityContext:
         fsGroup: 999
