@@ -35,15 +35,13 @@ jobs:
         restore-keys: |
           ${{ runner.os }}-gradle-
     - name: Set image pusher secret
-      run: echo ${WORKFLOW_IMAGE_PAT} > key
-      env:
-        WORKFLOW_IMAGE_PAT: ${{secrets.WORKFLOW_IMAGE_PAT}}
+      run: echo "key" > key
     - name: Set secrets.properties
       run: echo ${SECRETS_PROPERTIES} > src/main/resources/secrets.properties
       env:
         SECRETS_PROPERTIES: ${{secrets.SECRETS_PROPERTIES}}
     - name: Build with Gradle
-      run: ./gradlew ci
+      run: ./gradlew build
     - name: Publish Unit Test Results
       uses: EnricoMi/publish-unit-test-result-action@v1
       if: always()
