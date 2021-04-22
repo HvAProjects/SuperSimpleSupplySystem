@@ -1,3 +1,4 @@
+---
 apiVersion: image.toolkit.fluxcd.io/v1alpha1
 kind: ImageRepository
 metadata:
@@ -5,6 +6,17 @@ metadata:
   namespace: flux-system
 spec:
   image: ghcr.io/hvaprojects/ssss_backend
+  interval: 1m0s
+  secretRef:
+    name: gh-registry
+---
+apiVersion: image.toolkit.fluxcd.io/v1alpha1
+kind: ImageRepository
+metadata:
+  name: ssss-frontend
+  namespace: flux-system
+spec:
+  image: ghcr.io/hvaprojects/ssss_frontend
   interval: 1m0s
   secretRef:
     name: gh-registry
