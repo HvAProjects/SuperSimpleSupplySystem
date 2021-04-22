@@ -10,8 +10,11 @@ on:
 env:
   IMAGE_NAME: ssss_frontend
 jobs:
-  deploy:
+  build:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: frontend/supersimplesupplysystem
     permissions:
       packages: write
       contents: read
@@ -39,5 +42,6 @@ jobs:
           [ "$VERSION" == "master" ] && VERSION=latest
           echo IMAGE_ID=$IMAGE_ID
           echo VERSION=$VERSION
-          docker tag $IMAGE_NAME $IMAGE_ID:$VERSION
-          docker push $IMAGE_ID:$VERSION
+          echo TAG=$IMAGE_ID:$VERSION
+          # docker tag $IMAGE_NAME $IMAGE_ID:$VERSION
+          # docker push $IMAGE_ID:$VERSION
