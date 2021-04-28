@@ -49,6 +49,7 @@ import { EmailAddressPromptComponent } from './dialogs/email-address-prompt/emai
 import { NotificationComponent } from './components/notification/notification.component';
 import { AcceptHouseholdInvitationPromptComponent } from './dialogs/accept-household-invitation-prompt/accept-household-invitation-prompt.component';
 import { NotificationListComponent } from './components/notification-list/notification-list.component';
+import { AddOrRemoveProductsDialogComponent } from './dialogs/add-or-remove-products-dialog/add-or-remove-products-dialog.component';
 
 @NgModule({
   declarations: [
@@ -78,6 +79,7 @@ import { NotificationListComponent } from './components/notification-list/notifi
     NotificationComponent,
     AcceptHouseholdInvitationPromptComponent,
     NotificationListComponent,
+    AddOrRemoveProductsDialogComponent,
 
   ],
   imports: [
