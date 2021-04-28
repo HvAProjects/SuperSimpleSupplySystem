@@ -75,10 +75,10 @@ public class ProductServiceImpl implements ProductService {
         List<Product> products = new ArrayList<>();
         List<Location> locations = locationRepository.findByHouseholdId(householdId);
         for (Location location : locations) {
-            for (ProductType product : location.getProducts()) {
+            for (Product product : productRepository.findByLocationId(location.getId())) {
                 if (product.getBarcode().equals(barcode))
                 {
-                    products.add((Product) product);
+                    products.add(product);
                 }
             }
         }

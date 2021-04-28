@@ -17,7 +17,7 @@ public class Product extends ProductType {
     @Column
     private Date expirationDate;
 
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @ManyToOne(cascade = CascadeType.DETACH, fetch = FetchType.EAGER)
     private Location location;
 
     public ProductDto getProductDto() {

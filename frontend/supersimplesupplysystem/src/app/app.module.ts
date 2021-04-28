@@ -50,6 +50,7 @@ import { NotificationComponent } from './components/notification/notification.co
 import { AcceptHouseholdInvitationPromptComponent } from './dialogs/accept-household-invitation-prompt/accept-household-invitation-prompt.component';
 import { NotificationListComponent } from './components/notification-list/notification-list.component';
 import { AddOrRemoveProductsDialogComponent } from './dialogs/add-or-remove-products-dialog/add-or-remove-products-dialog.component';
+import { ScanAnotherProductPromptComponent } from './dialogs/scan-another-product-prompt/scan-another-product-prompt.component';
 
 @NgModule({
   declarations: [
@@ -80,6 +81,7 @@ import { AddOrRemoveProductsDialogComponent } from './dialogs/add-or-remove-prod
     AcceptHouseholdInvitationPromptComponent,
     NotificationListComponent,
     AddOrRemoveProductsDialogComponent,
+    ScanAnotherProductPromptComponent,
 
   ],
   imports: [
