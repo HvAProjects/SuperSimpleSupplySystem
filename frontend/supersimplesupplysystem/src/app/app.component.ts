@@ -8,6 +8,9 @@ import {MatTableDataSource} from '@angular/material/table';
 import {AddHouseholdDialogComponent} from './components/add-household-dialog/add-household-dialog.component';
 import {HouseholdUsersDialogComponent} from './dialogs/household-users-dialog/household-users-dialog.component';
 import {MatDialog} from '@angular/material/dialog';
+import {ScannerDialogComponent} from './dialogs/scanner-dialog/scanner-dialog.component';
+import {Product} from './models/Product';
+import {AddOrRemoveProductsDialogComponent} from './dialogs/add-or-remove-products-dialog/add-or-remove-products-dialog.component';
 
 @Component({
   selector: 'app-root',
@@ -25,13 +28,16 @@ export class AppComponent implements OnInit {
   houseHoldLink = '/household';
 
   constructor(private tokenStorageService: TokenStorageService, private householdService: HouseholdService, private dialog: MatDialog) {
+    // TIJDELIJK
+    console.warn('TIJDELIJKE CODE');
+    this.openAddOrRemoveProductsDialog('5000112545326', 2);
   }
 
   ngOnInit(): void {
     this.checkLoginStatus();
     this.getAllHouseholds();
 
-    console.log(this.households)
+    console.log(this.households);
 
   }
 
@@ -67,7 +73,7 @@ export class AppComponent implements OnInit {
       tap(() => {
         console.log('Household ' + event.name + ' was deleted!');
       }),
-      finalize(() =>{
+      finalize(() => {
         this.getAllHouseholds();
       })
     ).subscribe();
@@ -97,4 +103,27 @@ export class AppComponent implements OnInit {
     });
   }
 
+  openScanner(household: Household): void {
+    const dialogRef = this.dialog.open(ScannerDialogComponent, {
+      // width  : '380px',
+      disableClose: false
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (typeof result === 'string') {
+        this.openAddOrRemoveProductsDialog(result, household.id);
+      }
+    });
+  }
+
+  openAddOrRemoveProductsDialog(barcode: string, householdId: number): void {
+    const dialogRef = this.dialog.open(AddOrRemoveProductsDialogComponent, {
+      // width  : '380px',
+      disableClose: false,
+      data: {
+        barcode,
+        householdId
+      }
+    });
+  }
 }

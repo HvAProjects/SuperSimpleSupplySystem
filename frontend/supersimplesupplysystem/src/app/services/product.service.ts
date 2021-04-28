@@ -24,6 +24,10 @@ export class ProductService {
     return this.http.post(AppConstants.API_URL + `product/${locationId}`, product);
   }
 
+  getProductsWithBarcode(barcode: string, householdId: number): Observable<any> {
+    return this.http.get<Product[]>(AppConstants.API_URL + `product/${householdId}/${barcode}`);
+  }
+
   deleteProducts(id: number, amount: number): Observable<any> {
     const options = {
       headers: new HttpHeaders({

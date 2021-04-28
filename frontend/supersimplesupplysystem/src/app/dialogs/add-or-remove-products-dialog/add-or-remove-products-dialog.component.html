@@ -1,0 +1,16 @@
+<div class="add-or-remove-products-dialog">
+  <div class="found-products">
+    <h3>Found products</h3>
+    <span *ngIf="products?.length === 0">No products found</span>
+    <ng-container *ngIf="products?.length > 0">
+      <mat-list>
+        <mat-list-item *ngFor="let product of products">
+          {{product.name}}
+        </mat-list-item>
+      </mat-list>
+    </ng-container>
+  </div>
+  <div class="add-product">
+    <button style="width: 100%" color="warn" mat-raised-button>Add Product</button>
+  </div>
+</div>
