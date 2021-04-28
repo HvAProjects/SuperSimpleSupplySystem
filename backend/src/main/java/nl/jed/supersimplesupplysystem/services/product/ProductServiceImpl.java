@@ -2,16 +2,20 @@ package nl.jed.supersimplesupplysystem.services.product;
 
 import lombok.val;
 import nl.jed.supersimplesupplysystem.dto.openfoodfacts.GetProductResponse;
+import nl.jed.supersimplesupplysystem.models.location.Location;
 import nl.jed.supersimplesupplysystem.models.product.Product;
 import nl.jed.supersimplesupplysystem.models.product.ProductType;
 import nl.jed.supersimplesupplysystem.repository.LocationRepository;
 import nl.jed.supersimplesupplysystem.repository.OpenFoodFactsRepository;
 import nl.jed.supersimplesupplysystem.repository.ProductRepository;
+import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collector;
 
 @Service("productService")
 public class ProductServiceImpl implements ProductService {
@@ -64,5 +68,20 @@ public class ProductServiceImpl implements ProductService {
         } else {
             throw new Exception("Product not found");
         }
+    }
+
+    @Override
+    public List<Product> getProductsWithBarcode(String barcode, long householdId) {
+        List<Product> products = new ArrayList<>();
+        List<Location> locations = locationRepository.findByHouseholdId(householdId);
+        for (Location location : locations) {
+            for (Product product : productRepository.findByLocationId(location.getId())) {
+                if (product.getBarcode().equals(barcode))
+                {
+                    products.add(product);
+                }
+            }
+        }
+        return products;
     }
 }
