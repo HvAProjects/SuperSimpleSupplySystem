@@ -11,6 +11,7 @@ import {MatDialog} from '@angular/material/dialog';
 import {ScannerDialogComponent} from './dialogs/scanner-dialog/scanner-dialog.component';
 import {Product} from './models/Product';
 import {AddOrRemoveProductsDialogComponent} from './dialogs/add-or-remove-products-dialog/add-or-remove-products-dialog.component';
+import {ScanAnotherProductPromptComponent} from './dialogs/scan-another-product-prompt/scan-another-product-prompt.component';
 
 @Component({
   selector: 'app-root',
@@ -28,9 +29,7 @@ export class AppComponent implements OnInit {
   houseHoldLink = '/household';
 
   constructor(private tokenStorageService: TokenStorageService, private householdService: HouseholdService, private dialog: MatDialog) {
-    // TIJDELIJK
-    console.warn('TIJDELIJKE CODE');
-    this.openAddOrRemoveProductsDialog('5000112545326', 2);
+
   }
 
   ngOnInit(): void {
@@ -103,7 +102,7 @@ export class AppComponent implements OnInit {
     });
   }
 
-  openScanner(household: Household): void {
+  openScanner(householdId: number): void {
     const dialogRef = this.dialog.open(ScannerDialogComponent, {
       // width  : '380px',
       disableClose: false
@@ -111,7 +110,7 @@ export class AppComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       if (typeof result === 'string') {
-        this.openAddOrRemoveProductsDialog(result, household.id);
+        this.openAddOrRemoveProductsDialog(result, householdId);
       }
     });
   }
@@ -123,6 +122,25 @@ export class AppComponent implements OnInit {
       data: {
         barcode,
         householdId
+      }
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result === true) {
+        this.promptScanAnotherProduct(householdId);
+      }
+    });
+  }
+
+  promptScanAnotherProduct(householdId): void {
+    const dialogRef = this.dialog.open(ScanAnotherProductPromptComponent, {
+      // width  : '380px',
+      disableClose: true
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result === true) {
+        this.openScanner(householdId);
       }
     });
   }
