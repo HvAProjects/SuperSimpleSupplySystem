@@ -1,12 +1,16 @@
 export enum NotificationType {
-  householdInvitation
+  householdInvitation,
+  productAboutToExpire,
+  productExpired
 }
 
 // tslint:disable-next-line:no-namespace
 export namespace NotificationType {
 
   const values = {
-    [NotificationType.householdInvitation]: 'Household Invitation',
+    [NotificationType.householdInvitation]: 'Household invitation',
+    [NotificationType.productAboutToExpire]: 'Product about to expire',
+    [NotificationType.productExpired]: 'Product expired',
   };
 
   export function getStringValue(value: NotificationType | string): string {

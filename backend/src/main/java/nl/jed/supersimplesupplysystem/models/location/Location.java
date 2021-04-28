@@ -27,6 +27,6 @@ public class Location {
     @OneToMany
     private List<ProductType> products;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Household household;
 }

@@ -12,6 +12,4 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
     List<Product> findByLocationId(long locationId);
 
     Optional<Product> findByBarcodeAndExpirationDate(String barcode, Date expirationDate);
-
-    List<Product> findByBarcode(String barcode);
 }

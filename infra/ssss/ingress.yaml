@@ -1,5 +1,5 @@
 kind: Ingress
-apiVersion: extensions/v1beta1
+apiVersion: networking.k8s.io/v1
 metadata:
   name: ssss
   annotations:
@@ -16,7 +16,16 @@ spec:
       http:
         paths:
           - pathType: Prefix
-            path: "/api"
+            path: /api
             backend:
-              serviceName: ssss
-              servicePort: 8080
+              service:
+                name: ssss-backend
+                port:
+                  number: 8080
+          - pathType: Prefix
+            path: /
+            backend:
+              service:
+                name: ssss-frontend
+                port:
+                  number: 3000

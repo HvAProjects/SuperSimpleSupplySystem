@@ -3,14 +3,12 @@ kind: Kustomization
 
 commonLabels:
   app.kubernetes.io/name: ssss
-  app.kubernetes.io/instance: ssss
-  app.kubernetes.io/component: backend
 
 namespace: ssss
 
 resources:
 - secrets.yaml
 - namespace.yaml
-- deployment.yaml
-- service.yaml
+- backend.yaml
+- frontend.yaml
 - ingress.yaml

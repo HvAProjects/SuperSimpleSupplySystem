@@ -1,3 +1,8 @@
 #!/bin/bash
-kubectl apply -f bootstrap
-fluxctl identity --k8s-fwd-ns flux
+flux bootstrap github \
+  --components-extra=image-reflector-controller,image-automation-controller \
+  --owner=HvAProjects \
+  --repository=SuperSimpleSupplySystem \
+  --branch=k8s \
+  --path=./infra \
+  --read-write-key=true
