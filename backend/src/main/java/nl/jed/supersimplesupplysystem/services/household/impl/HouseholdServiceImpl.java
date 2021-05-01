@@ -49,4 +49,19 @@ public class HouseholdServiceImpl implements HouseholdService {
         household.getUsers().remove(user);
         householdRepository.save(household);
     }
+
+    @Override
+    public void editHousehold(Long id, Household household) {
+        val originalHousehold = getHousehold(id);
+        if (originalHousehold != null){
+            originalHousehold.setName(household.getName());
+            originalHousehold.setAddress(household.getAddress());
+            originalHousehold.setPostalCode(household.getPostalCode());
+            originalHousehold.setCity(household.getCity());
+            originalHousehold.setCountry(household.getCountry() == null ? originalHousehold.getCountry() : household.getCountry() );
+            householdRepository.save(originalHousehold);
+        }
+
+
+    }
 }

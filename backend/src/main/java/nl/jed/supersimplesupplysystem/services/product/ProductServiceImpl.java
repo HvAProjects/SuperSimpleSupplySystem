@@ -84,4 +84,9 @@ public class ProductServiceImpl implements ProductService {
         }
         return products;
     }
+
+    @Override
+    public List<Product> getProductsByHousehold(long householdId) {
+        return productRepository.findByLocation_Household_Id(householdId);
+    }
 }

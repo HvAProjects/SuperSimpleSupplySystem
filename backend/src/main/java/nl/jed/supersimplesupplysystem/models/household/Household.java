@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.val;
 import nl.jed.supersimplesupplysystem.models.User;
+import nl.jed.supersimplesupplysystem.models.location.Location;
 
 import javax.naming.Name;
 import javax.persistence.*;
@@ -48,6 +49,10 @@ public class Household {
     @JsonBackReference
 //    @JoinTable(name = "household_users", joinColumns = {@JoinColumn(name = "HOUSEHOLD_ID")}, inverseJoinColumns = {@JoinColumn(name = "USER_ID")})
     private Set<User> users;
+
+    @OneToMany
+    private List<Location> locations;
+
 
 
     public boolean hasAccess(String username){

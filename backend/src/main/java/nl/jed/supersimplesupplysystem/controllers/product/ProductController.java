@@ -37,6 +37,11 @@ public class ProductController {
         return productService.getProductsWithBarcode(barcode, householdId);
     }
 
+    @GetMapping("/household/{householdId}")
+    public List<Product> getProductsByHousehold(@PathVariable("householdId") long householdId) {
+        return productService.getProductsByHousehold(householdId);
+    }
+
     @GetMapping("/productType/{barcode}")
     public ProductType getProductType(@PathVariable("barcode") String barcode) throws IOException {
         return productService.getProductType(barcode);

@@ -1,15 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {TokenStorageService} from './services/token-storage.service';
 import {HouseholdService} from './services/household.service';
 import {Household} from './pages/household/household';
-import {finalize, tap} from 'rxjs/operators';
-import {log} from 'util';
-import {MatTableDataSource} from '@angular/material/table';
-import {AddHouseholdDialogComponent} from './components/add-household-dialog/add-household-dialog.component';
-import {HouseholdUsersDialogComponent} from './dialogs/household-users-dialog/household-users-dialog.component';
+import {tap} from 'rxjs/operators';
 import {MatDialog} from '@angular/material/dialog';
+import {Router} from '@angular/router';
 import {ScannerDialogComponent} from './dialogs/scanner-dialog/scanner-dialog.component';
-import {Product} from './models/Product';
 import {AddOrRemoveProductsDialogComponent} from './dialogs/add-or-remove-products-dialog/add-or-remove-products-dialog.component';
 import {ScanAnotherProductPromptComponent} from './dialogs/scan-another-product-prompt/scan-another-product-prompt.component';
 
@@ -26,10 +22,14 @@ export class AppComponent implements OnInit {
   showModeratorBoard = false;
   username: string;
   collapsed: any;
-  houseHoldLink = '/household';
+  houseHoldLink = '/household/';
+  householdSettingsLink = '/household-settings/';
 
-  constructor(private tokenStorageService: TokenStorageService, private householdService: HouseholdService, private dialog: MatDialog) {
-
+  constructor(private tokenStorageService: TokenStorageService, private householdService: HouseholdService, private dialog: MatDialog,
+              private router: Router) {
+    this.router.routeReuseStrategy.shouldReuseRoute = function() {
+      return false;
+    };
   }
 
   ngOnInit(): void {
@@ -64,42 +64,6 @@ export class AppComponent implements OnInit {
         this.households = households;
       })
     ).subscribe();
-  }
-
-
-  leaveHousehold(event): void {
-    this.householdService.leaveHousehold(event.id).pipe(
-      tap(() => {
-        console.log('Household ' + event.name + ' was deleted!');
-      }),
-      finalize(() => {
-        this.getAllHouseholds();
-      })
-    ).subscribe();
-  }
-
-  openDialog() {
-    const dialogRef = this.dialog.open(AddHouseholdDialogComponent, {
-      width  : '380px',
-      disableClose: true
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      this.getAllHouseholds();
-    });
-  }
-
-
-  openUserDialog(element): void {
-    const dialogRef = this.dialog.open(HouseholdUsersDialogComponent, {
-      width  : '380px',
-      disableClose: false,
-      data: element
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-
-    });
   }
 
   openScanner(householdId: number): void {

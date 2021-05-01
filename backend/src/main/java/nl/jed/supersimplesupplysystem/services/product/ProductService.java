@@ -3,12 +3,15 @@ package nl.jed.supersimplesupplysystem.services.product;
 import nl.jed.supersimplesupplysystem.models.product.Product;
 import nl.jed.supersimplesupplysystem.models.product.ProductType;
 import org.apache.catalina.User;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.io.IOException;
 import java.util.List;
 
 public interface ProductService {
     ProductType getProductType(String barcode) throws IOException;
+
+    List<Product> getProductsByHousehold(long householdId);
 
     List<Product> getProducts(long locationId);
 
