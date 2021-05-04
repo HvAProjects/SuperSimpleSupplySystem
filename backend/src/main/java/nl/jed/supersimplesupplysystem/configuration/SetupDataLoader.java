@@ -84,6 +84,10 @@ public class SetupDataLoader implements ApplicationListener<ContextRefreshedEven
         Location location4 = createLocation("Closet1", household2);
         Location location5 = createLocation("Cupboard-Left-2", household2);
 
+        createProduct(10, location2, "233423323", java.sql.Date.valueOf(LocalDate.now().plusDays(2)), "Pindakaas", "1kg");
+        createProduct(2, location2, "323342323", java.sql.Date.valueOf(LocalDate.now().minusDays(1)), "Fanta", "33ml");
+        createProduct(5, location2, "2322332323", java.sql.Date.valueOf(LocalDate.now().plusDays(20)), "Cola", "33ml");
+
         HouseholdInvitationNotification invitationNotification = createHouseholdInvitationNotification(evan, joe, joeHousehold);
         alreadySetup = true;
     }
@@ -134,6 +138,8 @@ public class SetupDataLoader implements ApplicationListener<ContextRefreshedEven
         household.setName(name);
         household.setAddress("TestAddress");
         household.setPostalCode("3535CZ");
+        household.setCity("Amsterdammm");
+        household.setCountry("Netherlands");
         HashSet<User> users = new HashSet<>();
         users.add(user);
         household.setUsers(users);

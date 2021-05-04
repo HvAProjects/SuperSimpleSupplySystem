@@ -1,5 +1,6 @@
 package nl.jed.supersimplesupplysystem.controllers.household;
 
+import io.swagger.annotations.Api;
 import lombok.extern.slf4j.Slf4j;
 import nl.jed.supersimplesupplysystem.dto.ApiResponse;
 import nl.jed.supersimplesupplysystem.dto.LocalUser;
@@ -14,9 +15,11 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import retrofit2.http.PUT;
 
 import javax.validation.Valid;
 import java.security.Principal;
@@ -64,5 +67,11 @@ public class HouseholdController {
     public ResponseEntity<ApiResponse> addHousehold(@Valid @RequestBody Household household){
         householdService.addHousehold(household);
         return ResponseEntity.ok().body(new ApiResponse(true, "Household has been created successfully."));
+    }
+
+    @PutMapping(path = "/{id}")
+    public ResponseEntity<ApiResponse> editHousehold(@PathVariable("id") Long id, @RequestBody Household household){
+        householdService.editHousehold(id, household);
+        return ResponseEntity.ok().body(new ApiResponse(true, "Household has been edited successfully."));
     }
 }

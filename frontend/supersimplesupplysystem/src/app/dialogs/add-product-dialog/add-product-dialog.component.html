@@ -44,7 +44,17 @@
         type="date"
         required>
     </mat-form-field>
+
+    <mat-form-field [style.width.px]=300 appearance="outline">
+      <mat-label>Save to location</mat-label>
+      <mat-select [(value)]="selectedLocation">
+        <mat-option *ngFor="let location of this.locationsHousehold" [value]="location" >{{location.name}}</mat-option>
+      </mat-select>
+    </mat-form-field>
   </p>
+
+
+
 
   <mat-dialog-actions style="justify-content: center">
     <button [disabled]="!addForm.form.valid" mat-raised-button mat-dialog-close color="primary" type="submit">Save Product</button>

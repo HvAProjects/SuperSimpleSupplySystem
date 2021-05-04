@@ -19,4 +19,6 @@ public interface HouseholdService {
 
     void leaveHousehold(Long id, User user);
 
+    void editHousehold(Long id, Household household);
+
 }
