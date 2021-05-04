@@ -24,9 +24,9 @@ public class Location {
     private long numberOfProducts = this.products == null ? 0 : this.products.size();
 
     @Column
-    @OneToMany
+    @OneToMany(cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
     private List<ProductType> products;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.DETACH, fetch = FetchType.EAGER)
     private Household household;
 }

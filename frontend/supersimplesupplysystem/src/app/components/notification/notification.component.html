@@ -1,7 +1,7 @@
 <button class="notification-btn" [style]="getStyle()" mat-button (click)="onClick()">
   <div class="notification-wrapper">
     <div class="notification-type notification-text">{{getNotificationType()}}</div>
-    <div class="notification-sender notification-text">Sender: {{notification.sender.name}}</div>
+    <div class="notification-sender notification-text">{{getContent()}}</div>
     <div *ngIf="getActionText() != ''" class="notification-action notification-text">{{getActionText()}}</div>
   </div>
 </button>

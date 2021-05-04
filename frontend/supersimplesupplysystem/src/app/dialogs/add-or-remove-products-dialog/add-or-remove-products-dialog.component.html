@@ -1,0 +1,16 @@
+<div class="add-or-remove-products-dialog">
+  <h2 style="margin: 0">Select product to remove</h2>
+  <div class="found-products">
+    <span *ngIf="products?.length === 0">No products found</span>
+    <ng-container *ngIf="products?.length > 0">
+      <mat-selection-list [multiple]="false">
+        <mat-list-option (click)="removeProduct(product)" *ngFor="let product of products">
+          {{product.name}} {{product.quantity}} {{prettyPrintDate(product.expirationDate)}}
+        </mat-list-option>
+      </mat-selection-list>
+    </ng-container>
+  </div>
+  <div class="add-product">
+    <button (click)="openAddProductDialog()" style="width: 100%" color="warn" mat-raised-button>Or Add Product</button>
+  </div>
+</div>

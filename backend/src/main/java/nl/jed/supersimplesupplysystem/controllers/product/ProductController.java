@@ -3,16 +3,19 @@ package nl.jed.supersimplesupplysystem.controllers.product;
 import lombok.extern.slf4j.Slf4j;
 import nl.jed.supersimplesupplysystem.dto.ApiResponse;
 import nl.jed.supersimplesupplysystem.dto.DeleteProductsRequest;
+import nl.jed.supersimplesupplysystem.dto.LocalUser;
 import nl.jed.supersimplesupplysystem.models.product.Product;
 import nl.jed.supersimplesupplysystem.models.product.ProductType;
 import nl.jed.supersimplesupplysystem.services.product.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.web.bind.annotation.*;
 import retrofit2.http.Body;
 import retrofit2.http.Path;
 
 import java.io.IOException;
+import java.security.Principal;
 import java.util.List;
 
 @Slf4j
@@ -27,6 +30,16 @@ public class ProductController {
     @GetMapping("/{locationId}")
     public List<Product> getProducts(@PathVariable("locationId") long locationId) {
         return productService.getProducts(locationId);
+    }
+
+    @GetMapping("/{householdId}/{barcode}")
+    public List<Product> getProductsOfUserWithBarcode(@PathVariable("householdId") long householdId, @PathVariable("barcode") String barcode, Principal principal) {
+        return productService.getProductsWithBarcode(barcode, householdId);
+    }
+
+    @GetMapping("/household/{householdId}")
+    public List<Product> getProductsByHousehold(@PathVariable("householdId") long householdId) {
+        return productService.getProductsByHousehold(householdId);
     }
 
     @GetMapping("/productType/{barcode}")

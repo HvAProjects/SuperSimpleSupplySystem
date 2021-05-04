@@ -67,11 +67,6 @@
       <span>Dashboard</span>
     </button>
 
-    <!--    <button routerLink="/household" mat-button class="menu-button">-->
-    <!--      <mat-icon>home</mat-icon>-->
-    <!--      <span>Households</span>-->
-    <!--    </button>-->
-
     <button class="menu-button" mat-button>
       <mat-icon>supervisor_account</mat-icon>
       <span>Users</span>
@@ -85,13 +80,17 @@
     <button class="menu-button" mat-button [routerLink]=[houseHoldLink,household.id]>
       <mat-icon>home</mat-icon>
       <span>{{household.name}}</span>
-      <button (click)="$event.stopPropagation()" [matMenuTriggerFor]="beforeMenu" class="tripleDotIconStyle" mat-button>
+      <button (click)="$event.stopPropagation()" [matMenuTriggerFor]="beforeMenu" mat-button class="tripleDotIconStyle">
         <mat-icon>more_vert</mat-icon>
       </button>
       <mat-menu #beforeMenu="matMenu" xPosition="before">
-        <button (click)="leaveHousehold(household)" class="menuItems" mat-menu-item><i class="stacktraceMenuIcon"></i>Leave
+        <button (click)="openScanner(household.id)" class="menuItems" mat-menu-item>
+          <mat-icon>center_focus_weak</mat-icon>
+          Scanner
         </button>
-        <button (click)="openUserDialog(household)"  class="menuItems" mat-menu-item><i class="stacktraceMenuIcon"></i>Users
+        <button [routerLink]=[householdSettingsLink,household.id] class="menuItems" mat-menu-item>
+          <mat-icon>settings</mat-icon>
+          Settings
         </button>
       </mat-menu>
     </button>

@@ -7,19 +7,10 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.val;
 import nl.jed.supersimplesupplysystem.models.User;
+import nl.jed.supersimplesupplysystem.models.location.Location;
 
 import javax.naming.Name;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.ForeignKey;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
-import javax.persistence.SecondaryTable;
+import javax.persistence.*;
 import java.security.Principal;
 import java.util.List;
 import java.util.Set;
@@ -54,10 +45,14 @@ public class Household {
     private String country;
 
 
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JsonBackReference
 //    @JoinTable(name = "household_users", joinColumns = {@JoinColumn(name = "HOUSEHOLD_ID")}, inverseJoinColumns = {@JoinColumn(name = "USER_ID")})
     private Set<User> users;
+
+    @OneToMany
+    private List<Location> locations;
+
 
 
     public boolean hasAccess(String username){
