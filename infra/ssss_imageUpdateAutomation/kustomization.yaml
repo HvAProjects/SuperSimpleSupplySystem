@@ -4,3 +4,6 @@ resources:
 - imagePolicy.yaml
 - imageRepository.yaml
 - imageUpdateAutomation.yaml
+- notificationProvider.yaml
+- notificationSecret.yaml
+- alert.yaml
