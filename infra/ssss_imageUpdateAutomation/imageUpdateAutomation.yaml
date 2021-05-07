@@ -5,7 +5,7 @@ metadata:
   namespace: flux-system
 spec:
   checkout:
-    branch: main
+    branch: images
     gitRepositoryRef:
       name: flux-system
   commit:
@@ -34,7 +34,7 @@ spec:
     authorName: flux
   interval: 1m0s
   push:
-    branch: main
+    branch: images
   update:
     path: ./infra/ssss
     strategy: Setters
