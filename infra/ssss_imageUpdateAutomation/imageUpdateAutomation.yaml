@@ -9,9 +9,6 @@ spec:
     kind: GitRepository
     name: flux-system
   git:
-    checkout:
-      ref:
-        branch: images    
     commit:
       author:
         email: flux@example.com
@@ -37,8 +34,5 @@ spec:
         {{ end -}}
 
         [skip ci]
-    push:
-      branch: images
   update:
-    path: ./infra/ssss
     strategy: Setters
