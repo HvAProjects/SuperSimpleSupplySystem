@@ -1,14 +1,14 @@
+---
 apiVersion: image.toolkit.fluxcd.io/v1alpha2
 kind: ImageUpdateAutomation
 metadata:
   name: ssss
   namespace: flux-system
 spec:
-  interval: 1m0s
-  sourceRef:
-    kind: GitRepository
-    name: flux-system
   git:
+    checkout:
+      ref:
+        branch: images
     commit:
       author:
         email: flux@example.com
@@ -34,5 +34,12 @@ spec:
         {{ end -}}
 
         [skip ci]
+    push:
+      branch: images
+  interval: 1m0s
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
   update:
+    path: ./infra
     strategy: Setters
