@@ -1,40 +1,44 @@
-apiVersion: image.toolkit.fluxcd.io/v1alpha1
+apiVersion: image.toolkit.fluxcd.io/v1alpha2
 kind: ImageUpdateAutomation
 metadata:
   name: ssss
   namespace: flux-system
 spec:
-  checkout:
-    branch: images
-    gitRepositoryRef:
-      name: flux-system
-  commit:
-    messageTemplate: |
-      Automated image update
-
-      Automation name: {{ .AutomationObject }}
-
-      Files:
-      {{ range $filename, $_ := .Updated.Files -}}
-      - {{ $filename }}
-      {{ end -}}
-
-      Objects:
-      {{ range $resource, $_ := .Updated.Objects -}}
-      - {{ $resource.Kind }} {{ $resource.Name }}
-      {{ end -}}
-
-      Images:
-      {{ range .Updated.Images -}}
-      - {{.}}
-      {{ end -}}
-
-      [skip ci]
-    authorEmail: flux@example.com
-    authorName: flux
   interval: 1m0s
-  push:
-    branch: images
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
+  git:
+    checkout:
+      ref:
+        branch: images    
+    commit:
+      author:
+        email: flux@example.com
+        name: flux
+      messageTemplate: |
+        Automated image update
+
+        Automation name: {{ .AutomationObject }}
+
+        Files:
+        {{ range $filename, $_ := .Updated.Files -}}
+        - {{ $filename }}
+        {{ end -}}
+
+        Objects:
+        {{ range $resource, $_ := .Updated.Objects -}}
+        - {{ $resource.Kind }} {{ $resource.Name }}
+        {{ end -}}
+
+        Images:
+        {{ range .Updated.Images -}}
+        - {{.}}
+        {{ end -}}
+
+        [skip ci]
+    push:
+      branch: images
   update:
     path: ./infra/ssss
     strategy: Setters
