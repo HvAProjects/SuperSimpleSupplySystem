@@ -6,9 +6,6 @@ metadata:
   namespace: flux-system
 spec:
   git:
-    checkout:
-      ref:
-        branch: images
     commit:
       author:
         email: flux@example.com
@@ -34,8 +31,6 @@ spec:
         {{ end -}}
 
         [skip ci]
-    push:
-      branch: images
   interval: 1m0s
   sourceRef:
     kind: GitRepository
