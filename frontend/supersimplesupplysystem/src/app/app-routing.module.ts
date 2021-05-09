@@ -14,6 +14,7 @@ import {ActivateAccountComponent} from './pages/activate-account/activate-accoun
 import {ScannerComponent} from './pages/scanner/scanner.component';
 import {ProductComponent} from './pages/product/product.component';
 import {HouseholdSettingsComponent} from './pages/household-settings/household-settings.component';
+import {DashboardComponent} from './pages/dashboard/dashboard.component';
 
 const routes: Routes = [
   {path: 'home', component: HomeComponent},
@@ -30,6 +31,7 @@ const routes: Routes = [
   {path: 'household/:householdId', component: ProductComponent},
   {path: 'scanner', component: ScannerComponent},
   {path: 'household-settings/:householdId', component: HouseholdSettingsComponent},
+  {path: 'dashboard', component: DashboardComponent},
   {path: '', redirectTo: 'home', pathMatch: 'full'}
 ];
 
