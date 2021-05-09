@@ -41,5 +41,4 @@ spec:
     kind: GitRepository
     name: flux-system
   update:
-    path: infra/ssss
     strategy: Setters
