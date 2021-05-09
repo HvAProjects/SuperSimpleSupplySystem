@@ -58,4 +58,11 @@ public class ProductController {
         productService.deleteProducts(productId, request.amount);
         return ResponseEntity.ok(new ApiResponse(true, "Products deleted successful"));
     }
+
+    @GetMapping(value = "/", params = "households")
+    @ResponseBody
+    public List<Product> getAllProducts(@RequestParam List<Long> households) {
+        return productService.getAllProducts(households);
+    }
+
 }
