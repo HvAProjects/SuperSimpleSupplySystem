@@ -56,18 +56,17 @@ public class AuthenticationTests extends BaseSeleniumTests {
     private Environment env;
 
     @Test
-    @Order(1)
     public void registerNewUser() throws Exception {
-        String url = getBaseUrl() + "/home";
+        String url = getBaseUrl();
         driver.get(url);
 
         driver.manage().window().setSize(new Dimension(1936, 1056));
         driver.findElement(By.cssSelector("html")).click();
         driver.findElement(By.linkText("Register")).click();
         driver.findElement(By.id("mat-input-2")).click();
-        driver.findElement(By.id("mat-input-2")).sendKeys("TestUser");
+        driver.findElement(By.id("mat-input-2")).sendKeys("User");
         driver.findElement(By.id("mat-input-3")).click();
-        driver.findElement(By.id("mat-input-3")).sendKeys("newuser@gmail.com");
+        driver.findElement(By.id("mat-input-3")).sendKeys("test@gmail.com");
         driver.findElement(By.cssSelector(".ng-tns-c65-6 > .mat-form-field-infix")).click();
         driver.findElement(By.id("mat-input-4")).sendKeys("asdfasdf");
         driver.findElement(By.id("mat-input-5")).sendKeys("asdfasdf");
@@ -90,7 +89,7 @@ public class AuthenticationTests extends BaseSeleniumTests {
     public void LogoutUser() throws InterruptedException {
         User user = loginUser();
         Thread.sleep(2000);
-        driver.findElement(By.cssSelector(".mat-icon")).click();
+        driver.findElement(By.cssSelector(".avatar-header-container > button")).click();
         Thread.sleep(100);
         driver.findElement(By.cssSelector(".mat-menu-item")).click();
         Thread.sleep(2000);
