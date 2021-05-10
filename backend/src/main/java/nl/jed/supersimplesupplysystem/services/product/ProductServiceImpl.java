@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collector;
@@ -89,4 +90,15 @@ public class ProductServiceImpl implements ProductService {
     public List<Product> getProductsByHousehold(long householdId) {
         return productRepository.findByLocation_Household_Id(householdId);
     }
+
+    @Override
+    public List<Product> getAllProducts(List<Long> households) {
+        List<Product> allProducts = new ArrayList<>();
+        for (val household: households) {
+            val products = getProductsByHousehold(household);
+            allProducts.addAll(products);
+        }
+        return allProducts;
+    }
+
 }

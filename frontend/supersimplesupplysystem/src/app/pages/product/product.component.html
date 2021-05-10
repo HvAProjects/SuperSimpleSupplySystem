@@ -83,7 +83,6 @@
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr
       class="clickable-row"
-      [routerLink]="row.id"
       mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
   </table>
 </div>

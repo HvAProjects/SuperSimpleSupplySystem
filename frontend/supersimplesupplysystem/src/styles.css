@@ -187,3 +187,21 @@ tr.clickable-row:hover {
   margin: 10px;
   max-width: 50%;
 }
+
+
+.mat-paginator {
+  display: block;
+  width: 100%;
+  background-color: #424242;
+}
+
+.mat-toolbar-row, .mat-toolbar-single-row {
+  display: flex;
+  box-sizing: border-box;
+  padding: 0 16px;
+  width: 100%;
+  flex-direction: row;
+  align-items: center;
+  white-space: nowrap;
+  background-color: #424242;
+}
