@@ -29,7 +29,7 @@ jobs:
           backend/.gradle/caches
           backend/.gradle/wrapper
           frontend/supersimplesupplysystem/node_modules
-        key: ${{ runner.os }}-packages-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties', **/package-lock.json) }}
+        key: ${{ runner.os }}-packages-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties', '**/package-lock.json') }}
         restore-keys: |
           ${{ runner.os }}-packages-
     - name: Install Google Chrome
