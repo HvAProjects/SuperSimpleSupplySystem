@@ -22,16 +22,23 @@ jobs:
     - name: Grant execute permission for gradlew
       run: chmod +x gradlew
       working-directory: backend
-    - name: Cache packages
+    - name: Cache Gradle packages
       uses: actions/cache@v2
       with:
         path: |
-          backend/.gradle/caches
-          backend/.gradle/wrapper
-          frontend/supersimplesupplysystem/node_modules
-        key: ${{ runner.os }}-packages-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties', '**/package-lock.json') }}
+          .gradle/caches
+          .gradle/wrapper
+        key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
         restore-keys: |
-          ${{ runner.os }}-packages-
+          ${{ runner.os }}-gradle-
+    - name: Cache Node packages
+      uses: actions/cache@v2
+      with:
+        path: |
+          frontend/supersimplesupplysystem/node_modules
+        key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+        restore-keys: |
+          ${{ runner.os }}-node-
     - name: Install Google Chrome
       run: |
         chmod +x infra/install_chrome.sh
