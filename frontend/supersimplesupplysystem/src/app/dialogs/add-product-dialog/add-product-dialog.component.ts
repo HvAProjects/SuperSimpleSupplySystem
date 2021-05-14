@@ -6,6 +6,8 @@ import {ScannerDialogComponent} from '../scanner-dialog/scanner-dialog.component
 import {ProductService} from '../../services/product.service';
 import {MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition} from '@angular/material/snack-bar';
 import Quagga from '@ericblade/quagga2';
+import {LocationService} from '../../services/location.service';
+import {tap} from 'rxjs/operators';
 
 @Component({
   selector: 'app-add-product-dialog',
@@ -17,16 +19,21 @@ export class AddProductDialogComponent implements OnInit, AfterViewInit {
   product = new Product();
   horizontalPosition: MatSnackBarHorizontalPosition = 'end';
   verticalPosition: MatSnackBarVerticalPosition = 'bottom';
+  householdId: number;
+  locationsHousehold: ProductsLocation[];
+  selectedLocation: ProductsLocation;
 
   constructor(
     private productService: ProductService,
     private snackBar: MatSnackBar,
     private dialog: MatDialog,
     private dialogRef: MatDialogRef<AddProductDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: string) {
-    if (data !== null && typeof data !== 'undefined') {
-      this.getProductByEAN(data);
+    @Inject(MAT_DIALOG_DATA) public data: {barcode: string, householdId: number}, private locationService: LocationService) {
+    if (data !== null && typeof data.barcode !== 'undefined') {
+      this.getProductByEAN(data.barcode);
     }
+    this.householdId = this.data.householdId;
+    this.retrieveLocationsFromHousehold()
   }
 
   ngOnInit(): void {
@@ -45,12 +52,11 @@ export class AddProductDialogComponent implements OnInit, AfterViewInit {
   }
 
   addProduct(): void {
-    this.dialogRef.close(this.product);
+    this.dialogRef.close({product: this.product, locationId: this.selectedLocation.id});
   }
 
   scanProduct(): void {
     const dialogRef = this.dialog.open(ScannerDialogComponent, {
-      // width  : '380px',
       disableClose: false
     });
 
@@ -82,5 +88,14 @@ export class AddProductDialogComponent implements OnInit, AfterViewInit {
       horizontalPosition: this.horizontalPosition,
       verticalPosition: this.verticalPosition,
     });
+  }
+
+  public retrieveLocationsFromHousehold(){
+    this.locationService.getLocationsOfHousehold(this.householdId).pipe(
+      tap(locations => {
+        this.locationsHousehold = locations;
+      })
+    ).subscribe();
+
   }
 }

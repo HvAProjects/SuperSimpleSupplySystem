@@ -12,6 +12,7 @@ import {AddProductDialogComponent} from '../add-product-dialog/add-product-dialo
 export class AddOrRemoveProductsDialogComponent implements OnInit {
 
   products: Product[];
+  householdId: number;
 
   constructor(private productService: ProductService,
               private dialogRef: MatDialogRef<AddOrRemoveProductsDialogComponent>,
@@ -23,6 +24,7 @@ export class AddOrRemoveProductsDialogComponent implements OnInit {
     this.productService.getProductsWithBarcode(data.barcode, data.householdId).subscribe(res => {
       this.products = res;
     });
+    this.householdId = data.householdId;
   }
 
   ngOnInit(): void {
@@ -32,7 +34,7 @@ export class AddOrRemoveProductsDialogComponent implements OnInit {
     const dialogRef = this.dialog.open(AddProductDialogComponent, {
       width  : '380px',
       disableClose: false,
-      data: this.data.barcode
+      data: {barcode : this.data.barcode, householdId: this.data.householdId}
     });
 
     dialogRef.afterClosed().subscribe(result => {

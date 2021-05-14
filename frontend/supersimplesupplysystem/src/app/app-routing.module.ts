@@ -12,30 +12,32 @@ import {ForgotPasswordComponent} from './pages/forgot-password/forgot-password.c
 import {ChangePasswordComponent} from './pages/change-password/change-password.component';
 import {ActivateAccountComponent} from './pages/activate-account/activate-account.component';
 import {ScannerComponent} from './pages/scanner/scanner.component';
-import {LocationComponent} from './pages/location/location.component';
 import {ProductComponent} from './pages/product/product.component';
+import {HouseholdSettingsComponent} from './pages/household-settings/household-settings.component';
+import {DashboardComponent} from './pages/dashboard/dashboard.component';
 
 const routes: Routes = [
-  { path: 'home', component: HomeComponent },
-  { path: 'login', component: LoginComponent },
-  { path: 'forgot-password', component: ForgotPasswordComponent },
-  { path: 'change-password', component: ChangePasswordComponent },
-  { path: 'activate-account', component: ActivateAccountComponent },
-  { path: 'register', component: RegisterComponent },
-  { path: 'profile', component: ProfileComponent },
-  { path: 'user', component: BoardUserComponent },
-  { path: 'mod', component: BoardModeratorComponent },
-  { path: 'admin', component: BoardAdminComponent },
-  { path: 'household', component: HouseholdComponent},
-  { path: 'household/:householdId', component: LocationComponent},
-  { path: 'household/:householdId/:locationId', component: ProductComponent},
-  { path: 'scanner', component: ScannerComponent},
-  { path: '', redirectTo: 'home', pathMatch: 'full' }
+  {path: 'home', component: HomeComponent},
+  {path: 'login', component: LoginComponent},
+  {path: 'forgot-password', component: ForgotPasswordComponent},
+  {path: 'change-password', component: ChangePasswordComponent},
+  {path: 'activate-account', component: ActivateAccountComponent},
+  {path: 'register', component: RegisterComponent},
+  {path: 'profile', component: ProfileComponent},
+  {path: 'user', component: BoardUserComponent},
+  {path: 'mod', component: BoardModeratorComponent},
+  {path: 'admin', component: BoardAdminComponent},
+  {path: 'household', component: HouseholdComponent},
+  {path: 'household/:householdId', component: ProductComponent},
+  {path: 'scanner', component: ScannerComponent},
+  {path: 'household-settings/:householdId', component: HouseholdSettingsComponent},
+  {path: 'dashboard', component: DashboardComponent},
+  {path: '', redirectTo: 'home', pathMatch: 'full'}
 ];
 
 @NgModule({
   // imports: [RouterModule.forRoot(routes)],
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, {onSameUrlNavigation: 'reload'})],
   exports: [RouterModule]
 })
 export class AppRoutingModule {

@@ -1,0 +1,99 @@
+<h1> Settings - {{this.household.name}}</h1>
+
+<div style="display: flex;">
+  <mat-card class="hs-card">
+    <h2>Details </h2>
+
+    <div style="text-align: center">
+      <form #addForm="ngForm" (ngSubmit)="addForm.form.valid">
+        <p>
+          <mat-form-field [style.width.px]=500 appearance="outline">
+            <mat-label>Name Household</mat-label>
+            <input #nameInput [(ngModel)]="this.household.name"
+                   [disabled]="this.disabledFields"
+                   matInput
+                   name="nameInput"
+                   required
+                   type="text">
+          </mat-form-field>
+        </p>
+
+        <mat-form-field [style.width.px]=500 appearance="outline">
+          <mat-label>Address</mat-label>
+          <input #addressInput [(ngModel)]="this.household.address"
+                 [disabled]="this.disabledFields"
+                 matInput
+                 name="addressInput"
+                 required
+                 type="text">
+        </mat-form-field>
+
+        <mat-form-field [style.width.px]=500 appearance="outline">
+          <mat-label>Postal Code</mat-label>
+          <input #postalCodeInput [(ngModel)]="household.postalCode"
+                 [disabled]="this.disabledFields"
+                 matInput
+                 name="postalCodeInput"
+                 required
+                 type="text">
+        </mat-form-field>
+
+
+        <mat-form-field [style.width.px]=500 appearance="outline">
+          <mat-label>City</mat-label>
+          <input #cityInput [(ngModel)]="household.city"
+                 [disabled]="this.disabledFields"
+                 matInput
+                 name="cityInput"
+                 required
+                 type="text">
+        </mat-form-field>
+
+
+        <div style="width: 100%; float: right">
+          <mat-dialog-actions style="float: inherit;">
+            <button (click)="this.disabledFields = !this.disabledFields" [disabled]="this.disabledFields == false"
+                    mat-dialog-close mat-raised-button style="margin: 10px;" type="submit">
+              <mat-icon>edit</mat-icon>
+              Edit Household
+            </button>
+
+            <button (click)="saveEditedHousehold()" [disabled]="!addForm.form.valid" color="primary" mat-dialog-close
+                    mat-raised-button style="margin: 10px;" type="submit">
+              <mat-icon>save</mat-icon>
+              Save Household
+            </button>
+
+            <button (click)="disabledFields = true" *ngIf="this.disabledFields == false" color="accent" mat-dialog-close
+                    mat-raised-button>
+              <mat-icon>cancel</mat-icon>
+              Cancel
+            </button>
+
+          </mat-dialog-actions>
+        </div>
+      </form>
+    </div>
+  </mat-card>
+
+
+  <mat-card class="hs-card">
+    <h2>Users in household</h2>
+
+    <button [disabled]="!isSelectionValid()" class="remove-user-btn" mat-icon-button>
+      <mat-icon>remove_circle</mat-icon>
+    </button>
+    <button (click)="openAddUserDialog()" class="add-user-btn" mat-icon-button>
+      <mat-icon>add_circle</mat-icon>
+    </button>
+
+    <mat-selection-list #userList [multiple]="false">
+      <mat-list-option *ngFor="let user of users" [value]="user">
+        {{user.name}}
+      </mat-list-option>
+    </mat-selection-list>
+
+  </mat-card>
+
+
+</div>

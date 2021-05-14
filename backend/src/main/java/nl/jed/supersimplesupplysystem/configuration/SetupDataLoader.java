@@ -68,7 +68,7 @@ public class SetupDataLoader implements ApplicationListener<ContextRefreshedEven
         User evan = createUserIfNotFound("evan@ssss.com", Set.of(userRole, adminRole, modRole), "Evan");
         User joe = createUserIfNotFound("joe@ssss.com", Set.of(userRole, adminRole, modRole), "Joe");
         User david = createUserIfNotFound("david@ssss.com", Set.of(userRole, adminRole, modRole), "David");
-        Household joeHousehold = createHousehold("JoeHousehold", joe);
+        Household happyPlace = createHousehold("HappyPlace", joe);
         Household household = createHousehold("EvanHousehold", evan);
         Location location = createLocation("TestLocation", household);
 
@@ -83,8 +83,17 @@ public class SetupDataLoader implements ApplicationListener<ContextRefreshedEven
         Location location3 = createLocation("Cupboard-Left-1", household1);
         Location location4 = createLocation("Closet1", household2);
         Location location5 = createLocation("Cupboard-Left-2", household2);
+        Location locationHP1= createLocation("HappyCloset", happyPlace);
 
-        HouseholdInvitationNotification invitationNotification = createHouseholdInvitationNotification(evan, joe, joeHousehold);
+        createProduct(10, location2, "233423323", java.sql.Date.valueOf(LocalDate.now().plusDays(2)), "Pindakaas", "1kg");
+        createProduct(2, location2, "323342323", java.sql.Date.valueOf(LocalDate.now().minusDays(1)), "Fanta", "33ml");
+        createProduct(5, location2, "2322332323", java.sql.Date.valueOf(LocalDate.now().plusDays(20)), "Cola", "33ml");
+
+        createProduct(10, locationHP1, "123", java.sql.Date.valueOf(LocalDate.now().plusDays(2)), "CheeseCake", "1kg");
+        createProduct(2, locationHP1, "456", java.sql.Date.valueOf(LocalDate.now().minusDays(1)), "CheeseSticks", "33ml");
+        createProduct(5, locationHP1, "789", java.sql.Date.valueOf(LocalDate.now().plusDays(20)), "PindaCheese", "33ml");
+
+        HouseholdInvitationNotification invitationNotification = createHouseholdInvitationNotification(evan, joe, happyPlace);
         alreadySetup = true;
     }
 
@@ -134,6 +143,8 @@ public class SetupDataLoader implements ApplicationListener<ContextRefreshedEven
         household.setName(name);
         household.setAddress("TestAddress");
         household.setPostalCode("3535CZ");
+        household.setCity("Amsterdammm");
+        household.setCountry("Netherlands");
         HashSet<User> users = new HashSet<>();
         users.add(user);
         household.setUsers(users);

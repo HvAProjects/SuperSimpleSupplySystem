@@ -102,7 +102,6 @@ class UserServiceImplTest {
         expectedResult.setModifiedDate(result.getModifiedDate());
         // Verify the results
         assertEquals(expectedResult, result);
-        verify(mockUserRepository).flush();
     }
 
     @Test

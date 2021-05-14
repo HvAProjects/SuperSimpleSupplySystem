@@ -55,7 +55,8 @@ tr.clickable-row:hover {
 
 .table-container{
   display: flex;
-  justify-content: center
+  justify-content: center;
+  flex-wrap: wrap;
 }
 
 .th mat-header-cell{
@@ -128,4 +129,79 @@ tr.clickable-row:hover {
 
 .drawingBuffer {
   display: none;
+}
+
+/*----- Search bar -----*/
+/*!*Resize the wrap to see the search bar change!*!*/
+.wrap {
+  margin: 10px 0 12px 0;
+  width: 100%;
+  height: 36px;
+}
+
+.search {
+  width: 20vw;
+  position: relative;
+  display: flex;
+  float: left;
+}
+
+.searchTerm {
+  width: 100%;
+  border: 1px solid #C1C5CA;
+  border-right: none;
+  height: 36px;
+  border-radius: 5px 0 0 5px;
+  outline: none;
+  text-align: left;
+  font-size: 17px;
+  letter-spacing: 0px;
+  color: #C1C5CA;
+  opacity: 1;
+}
+
+.searchButton {
+  width: 36px;
+  height: 36px;
+  border: 1px solid #464646;
+  background: #0444ac;
+  text-align: center;
+  color: #fff;
+  border-radius: 0 4px 4px 0;
+  cursor: pointer;
+  font-size: 17px;
+}
+
+.locationsSearch {
+  display: inline-block;
+  position: relative;
+  text-align: left;
+  float: right;
+
+}
+
+/*----- Household settings Cards -----*/
+
+.hs-card {
+  flex: 1 1 auto;
+  margin: 10px;
+  max-width: 50%;
+}
+
+
+.mat-paginator {
+  display: block;
+  width: 100%;
+  background-color: #424242;
+}
+
+.mat-toolbar-row, .mat-toolbar-single-row {
+  display: flex;
+  box-sizing: border-box;
+  padding: 0 16px;
+  width: 100%;
+  flex-direction: row;
+  align-items: center;
+  white-space: nowrap;
+  background-color: #424242;
 }
