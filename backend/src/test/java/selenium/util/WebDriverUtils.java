@@ -17,6 +17,9 @@ public class WebDriverUtils {
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--no-sandbox"); // Bypass OS security model, MUST BE THE VERY FIRST OPTION
         options.addArguments("--headless");
+        options.addArguments("--use-fake-ui-for-media-stream");
+        options.addArguments("--use-fake-device-for-media-stream");
+        options.addArguments("--use-file-for-fake-video-capture=resources/barcode.mp4");
         options.setExperimentalOption("useAutomationExtension", false);
         options.addArguments("start-maximized"); // open Browser in maximized mode
         options.addArguments("--ignore-certificate-errors");

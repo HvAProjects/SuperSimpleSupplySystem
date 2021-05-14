@@ -5,8 +5,12 @@ import nl.jed.supersimplesupplysystem.configuration.*;
 import nl.jed.supersimplesupplysystem.dto.SocialProvider;
 import nl.jed.supersimplesupplysystem.models.Role;
 import nl.jed.supersimplesupplysystem.models.User;
+import nl.jed.supersimplesupplysystem.models.household.Household;
+import nl.jed.supersimplesupplysystem.models.location.Location;
+import nl.jed.supersimplesupplysystem.repository.LocationRepository;
 import nl.jed.supersimplesupplysystem.repository.RoleRepository;
 import nl.jed.supersimplesupplysystem.repository.UserRepository;
+import nl.jed.supersimplesupplysystem.repository.household.HouseholdRepository;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -47,6 +51,7 @@ import java.io.File;
 import java.net.URL;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Set;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -76,6 +81,12 @@ public abstract class BaseSeleniumTests {
 
     @Autowired
     private RoleRepository roleRepository;
+
+    @Autowired
+    private HouseholdRepository householdRepository;
+
+    @Autowired
+    private LocationRepository locationRepository;
 
     @Before
     public void setUp() {
@@ -145,5 +156,25 @@ public abstract class BaseSeleniumTests {
             role = roleRepository.save(new Role(name));
         }
         return role;
+    }
+
+    public Household createHousehold(String name, User user) {
+        Household household = new Household();
+        household.setName(name);
+        household.setAddress("TestAddress");
+        household.setPostalCode("3535CZ");
+        HashSet<User> users = new HashSet<>();
+        users.add(user);
+        household.setUsers(users);
+        householdRepository.save(household);
+        return household;
+    }
+
+    public Location createLocation(String name, Household household) {
+        Location location = new Location();
+        location.setName(name);
+        location.setHousehold(household);
+        locationRepository.save(location);
+        return location;
     }
 }

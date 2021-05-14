@@ -59,8 +59,6 @@ public class AuthenticationTests extends BaseSeleniumTests {
     public void registerNewUser() throws Exception {
         String url = getBaseUrl();
         driver.get(url);
-
-        driver.manage().window().setSize(new Dimension(1936, 1056));
         driver.findElement(By.cssSelector("html")).click();
         driver.findElement(By.linkText("Register")).click();
         driver.findElement(By.id("mat-input-2")).click();
@@ -77,7 +75,7 @@ public class AuthenticationTests extends BaseSeleniumTests {
 
     @Test
     @Order(2)
-    public void LoginUser() throws InterruptedException {
+    public void loginUserSuccess() throws InterruptedException {
         User user = loginUser();
         Thread.sleep(2000);
         String welcomeText = driver.findElement(By.cssSelector(".alert")).getText();
@@ -86,7 +84,7 @@ public class AuthenticationTests extends BaseSeleniumTests {
 
     @Test
     @Order(3)
-    public void LogoutUser() throws InterruptedException {
+    public void logoutUser() throws InterruptedException {
         User user = loginUser();
         Thread.sleep(2000);
         driver.findElement(By.cssSelector(".avatar-header-container > button")).click();
@@ -95,5 +93,34 @@ public class AuthenticationTests extends BaseSeleniumTests {
         Thread.sleep(2000);
         String text = driver.findElement(By.cssSelector(".mat-menu-trigger")).getText();
         assertEquals("Login / Register", text);
+    }
+
+    @Test
+    @Order(4)
+    public void loginUserTooFewCharacters() {
+        String email = "testuser@gmail.com";
+        String password = "123";
+        String userName = "TestUser";
+        driver.get(getBaseUrl());
+        driver.manage().window().setSize(new Dimension(1223, 824));
+        {
+            WebElement element = driver.findElement(By.cssSelector(".mat-menu-trigger"));
+            Actions builder = new Actions(driver);
+            builder.moveToElement(element).perform();
+        }
+        driver.findElement(By.cssSelector(".mat-menu-trigger")).click();
+        {
+            WebElement element = driver.findElement(By.tagName("body"));
+            Actions builder = new Actions(driver);
+            builder.moveToElement(element, 0, 0).perform();
+        }
+        driver.findElement(By.cssSelector(".cdk-focused")).click();
+        driver.findElement(By.id("mat-input-0")).click();
+        driver.findElement(By.id("mat-input-0")).sendKeys(email);
+        driver.findElement(By.id("mat-input-1")).sendKeys(password);
+        driver.findElement(By.id("mat-input-1")).sendKeys(Keys.ENTER);
+        driver.findElement(By.cssSelector(".content > .ng-star-inserted")).click();
+        String text = driver.findElement(By.cssSelector(".alert")).getText();
+        assertEquals("Password must be at least 6 characters", text);
     }
 }
