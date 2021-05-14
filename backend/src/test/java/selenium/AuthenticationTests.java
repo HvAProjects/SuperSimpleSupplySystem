@@ -115,10 +115,10 @@ public class AuthenticationTests extends BaseSeleniumTests {
             builder.moveToElement(element, 0, 0).perform();
         }
         driver.findElement(By.cssSelector(".cdk-focused")).click();
-        driver.findElement(By.id("mat-input-0")).click();
-        driver.findElement(By.id("mat-input-0")).sendKeys(email);
-        driver.findElement(By.id("mat-input-1")).sendKeys(password);
-        driver.findElement(By.id("mat-input-1")).sendKeys(Keys.ENTER);
+        driver.findElement(By.id("email")).click();
+        driver.findElement(By.id("email")).sendKeys(email);
+        driver.findElement(By.id("password")).sendKeys(password);
+        driver.findElement(By.id("password")).sendKeys(Keys.ENTER);
         driver.findElement(By.cssSelector(".content > .ng-star-inserted")).click();
         String text = driver.findElement(By.cssSelector(".alert")).getText();
         assertEquals("Password must be at least 6 characters", text);

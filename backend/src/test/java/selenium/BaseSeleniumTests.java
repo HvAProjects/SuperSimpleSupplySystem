@@ -88,10 +88,16 @@ public abstract class BaseSeleniumTests {
     @Autowired
     private LocationRepository locationRepository;
 
+    protected String email = "testuser@gmail.com";
+    protected String password = "password";
+    protected String userName = "TestUser";
+    protected User user;
+
     @Before
     public void setUp() {
         MockitoAnnotations.openMocks(this);
         this.driver = WebDriverUtils.createWebDriver();
+        user = createUserIfNotFound(email, Set.of(createRoleIfNotFound("TEST")), userName, password);
     }
 
     @After
@@ -106,28 +112,13 @@ public abstract class BaseSeleniumTests {
     }
 
     protected User loginUser() {
-        String email = "testuser@gmail.com";
-        String password = "password";
-        String userName = "TestUser";
-        User user = createUserIfNotFound(email, Set.of(createRoleIfNotFound("TEST")), userName, password);
         driver.get(getBaseUrl());
         driver.manage().window().setSize(new Dimension(1223, 824));
-        {
-            WebElement element = driver.findElement(By.cssSelector(".mat-menu-trigger"));
-            Actions builder = new Actions(driver);
-            builder.moveToElement(element).perform();
-        }
-        driver.findElement(By.cssSelector(".mat-menu-trigger")).click();
-        {
-            WebElement element = driver.findElement(By.tagName("body"));
-            Actions builder = new Actions(driver);
-            builder.moveToElement(element, 0, 0).perform();
-        }
-        driver.findElement(By.cssSelector(".cdk-focused")).click();
-        driver.findElement(By.id("mat-input-0")).click();
-        driver.findElement(By.id("mat-input-0")).sendKeys(email);
-        driver.findElement(By.id("mat-input-1")).sendKeys(password);
-        driver.findElement(By.id("mat-input-1")).sendKeys(Keys.ENTER);
+        driver.findElement(By.className("login")).click();
+        driver.findElement(By.cssSelector("*[ng-reflect-router-link='/login']")).click();
+        driver.findElement(By.id("email")).sendKeys(email);
+        driver.findElement(By.id("password")).sendKeys(password);
+        driver.findElement(By.id("password")).sendKeys(Keys.ENTER);
         driver.findElement(By.cssSelector(".content > .ng-star-inserted")).click();
         return user;
     }
