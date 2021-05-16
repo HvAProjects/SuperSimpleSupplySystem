@@ -11,7 +11,7 @@
         name="eanInput"
         type="text"
         required>
-      <button (click)="scanProduct()" mat-icon-button matSuffix>
+      <button id="open-scanner-btn" (click)="scanProduct()" mat-icon-button matSuffix>
         <mat-icon>camera_alt</mat-icon>
       </button>
     </mat-form-field>
@@ -28,6 +28,7 @@
     <mat-form-field [style.width.px]=300 appearance="outline">
       <mat-label>Amount</mat-label>
       <input
+        id="amount"
         matInput
         [(ngModel)]="product.amount"
         name="amountInput"
@@ -38,6 +39,7 @@
     <mat-form-field [style.width.px]=300 appearance="outline">
       <mat-label>Expiration Date</mat-label>
       <input
+        id="expiration-date"
         matInput
         [(ngModel)]="product.expirationDate"
         name="expirationDateInput"
@@ -47,7 +49,7 @@
 
     <mat-form-field [style.width.px]=300 appearance="outline">
       <mat-label>Save to location</mat-label>
-      <mat-select [(value)]="selectedLocation">
+      <mat-select id="location" [(value)]="selectedLocation">
         <mat-option *ngFor="let location of this.locationsHousehold" [value]="location" >{{location.name}}</mat-option>
       </mat-select>
     </mat-form-field>
@@ -57,7 +59,7 @@
 
 
   <mat-dialog-actions style="justify-content: center">
-    <button [disabled]="!addForm.form.valid" mat-raised-button mat-dialog-close color="primary" type="submit">Save Product</button>
+    <button id="add-product-btn" [disabled]="!addForm.form.valid" mat-raised-button mat-dialog-close color="primary" type="submit">Save Product</button>
     <button (click)="closeDialog()" color="accent" mat-raised-button mat-dialog-close>Cancel
     </button>
   </mat-dialog-actions>

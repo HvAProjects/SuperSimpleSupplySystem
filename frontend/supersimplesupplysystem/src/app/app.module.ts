@@ -91,8 +91,7 @@ import {MatPaginatorModule} from '@angular/material/paginator';
     ScanAnotherProductPromptComponent,
     HouseholdSettingsComponent,
     DashboardComponent,
-    ItemsAboutToExpireComponent,
-
+    ItemsAboutToExpireComponent
   ],
   imports: [
     BrowserModule,

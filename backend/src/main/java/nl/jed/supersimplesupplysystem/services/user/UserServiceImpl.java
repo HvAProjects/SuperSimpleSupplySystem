@@ -59,7 +59,7 @@ public class UserServiceImpl implements UserService {
     private MailFactory mailFactory;
 
     @Override
-    @Transactional(value = "transactionManager")
+//    @Transactional(value = "transactionManager")
     public User registerNewUser(final SignUpRequest signUpRequest) throws UserAlreadyExistAuthenticationException {
         if (signUpRequest.getUserID() != null && userRepository.existsById(signUpRequest.getUserID())) {
             throw new UserAlreadyExistAuthenticationException("User with User id " + signUpRequest.getUserID() + " already exist");
@@ -71,12 +71,15 @@ public class UserServiceImpl implements UserService {
         user.setCreatedDate(now);
         user.setModifiedDate(now);
         user = userRepository.save(user);
-        userRepository.flush();
 
-        UserActivationToken token = generateUserActivationToken(user);
-        userActivationTokenRepository.save(token);
-        userActivationTokenRepository.flush();
-        mailService.sendEmail(mailFactory.getUserActivationMail(user, token.getToken()));
+        User finalUser = user;
+        // Anders duurt het te lang
+        new Thread(() -> {
+            UserActivationToken token = generateUserActivationToken(finalUser);
+            userActivationTokenRepository.save(token);
+            mailService.sendEmail(mailFactory.getUserActivationMail(finalUser, token.getToken()));
+        }).start();
+
         return user;
     }
 

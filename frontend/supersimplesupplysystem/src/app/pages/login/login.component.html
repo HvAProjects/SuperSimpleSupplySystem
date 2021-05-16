@@ -9,7 +9,7 @@
 
         <mat-form-field appearance="outline">
           <mat-label>Email</mat-label>
-          <input [style.width.px]=500 type="email" matInput [formControl]="emailFormControl" name="username"
+          <input id="email" [style.width.px]=500 type="email" matInput [formControl]="emailFormControl" name="username"
                  [(ngModel)]="form.username" required >
           <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
             Please enter a valid email address
@@ -21,7 +21,7 @@
 
         <mat-form-field appearance="outline">
           <mat-label>Password</mat-label>
-          <input [style.width.px]=500 type="password" matInput name="password" [(ngModel)]="form.password" required minlength="6" #password="ngModel">
+          <input id="password" [style.width.px]=500 type="password" matInput name="password" [(ngModel)]="form.password" required minlength="6" #password="ngModel">
         </mat-form-field>
         <div class="alert alert-danger" role="alert" *ngIf="f.submitted && password.invalid">
           <div *ngIf="password.errors.required">Password is required</div>

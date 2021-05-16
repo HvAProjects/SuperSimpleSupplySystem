@@ -4,7 +4,7 @@
     <mat-icon>home</mat-icon>
   </button>
 
-  <button (click)="sidenav.toggle()" *ngIf="sidenav.mode === 'over' && isLoggedIn " mat-icon-button>
+  <button id="hamburger-menu" (click)="sidenav.toggle()" *ngIf="sidenav.mode === 'over' && isLoggedIn " mat-icon-button>
     <mat-icon *ngIf="!sidenav.opened">
       menu
     </mat-icon>
@@ -91,6 +91,8 @@
         <button [routerLink]=[householdSettingsLink,household.id] class="menuItems" mat-menu-item>
           <mat-icon>settings</mat-icon>
           Settings
+        </button>
+        <button (click)="openScanner(household.id)" class="menuItems" mat-menu-item><i class="stacktraceMenuIcon"></i>Scanner
         </button>
       </mat-menu>
     </button>
