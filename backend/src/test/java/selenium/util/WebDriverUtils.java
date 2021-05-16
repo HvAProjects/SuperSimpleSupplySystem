@@ -14,8 +14,8 @@ import java.util.Objects;
 public class WebDriverUtils {
 
     public static WebDriver createWebDriver() {
-        ClassLoader classLoader = WebDriverUtils.class.getClassLoader();
-        String fileUrl = Objects.requireNonNull(classLoader.getResource("barcode.y4m")).getFile();
+//        ClassLoader classLoader = WebDriverUtils.class.getClassLoader();
+//        String fileUrl = Objects.requireNonNull(classLoader.getResource("barcode.y4m")).getFile();
 
         WebDriverManager.chromedriver().setup();
         ChromeOptions options = new ChromeOptions();
