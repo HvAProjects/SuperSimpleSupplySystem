@@ -1,0 +1,41 @@
+<div class="table-container">
+
+  <table [dataSource]="dataSource" class="mat-elevation-z8" mat-table matSort matSortActive="expirationDate"
+         matSortDirection="asc" matSortDisableClear style="width: 100%;">
+
+
+    <ng-container matColumnDef="name">
+      <th *matHeaderCellDef mat-header-cell> Name</th>
+      <td *matCellDef="let element" mat-cell> {{element.name}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="location">
+      <th *matHeaderCellDef mat-header-cell> Location</th>
+      <td *matCellDef="let element" mat-cell> {{element.location.name}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="addedDateTime">
+      <th *matHeaderCellDef mat-header-cell mat-sort-header>Added</th>
+      <td *matCellDef="let element" mat-cell> {{element.addedDateTime | date: 'dd MMM yyyy' }} </td>
+    </ng-container>
+
+
+    <tr *matHeaderRowDef="displayedColumns" mat-header-row></tr>
+    <tr
+      *matRowDef="let row; columns: displayedColumns;"
+      class="clickable-row" mat-row></tr>
+  </table>
+
+  <mat-toolbar class="mat-elevation-z8">
+    <mat-toolbar-row>
+      <mat-paginator #paginator
+                     [length]="products.length"
+                     [pageSizeOptions]="[5,10,25]"
+                     [showFirstLastButtons]="true"
+                     pageSize="10">
+      </mat-paginator>
+    </mat-toolbar-row>
+  </mat-toolbar>
+
+
+</div>

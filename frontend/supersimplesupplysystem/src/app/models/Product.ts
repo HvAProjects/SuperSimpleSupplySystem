@@ -8,4 +8,5 @@ export class Product {
   amount: number;
   location: ProductsLocation;
   expirationDate: Date;
+  addedDateTime: Date;
 }

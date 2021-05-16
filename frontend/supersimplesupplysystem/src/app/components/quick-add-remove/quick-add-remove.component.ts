@@ -1,21 +1,21 @@
 import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
-import {MatTableDataSource} from '@angular/material/table';
 import {Product} from '../../models/Product';
+import {MatTableDataSource} from '@angular/material/table';
 import {Household} from '../../pages/household/household';
-import {tap} from 'rxjs/operators';
-import {HouseholdService} from '../../services/household.service';
-import {ProductService} from '../../services/product.service';
 import {MatSort} from '@angular/material/sort';
 import {MatPaginator} from '@angular/material/paginator';
+import {HouseholdService} from '../../services/household.service';
+import {ProductService} from '../../services/product.service';
+import {finalize, tap} from 'rxjs/operators';
 
 @Component({
-  selector: 'app-items-about-to-expire',
-  templateUrl: './items-about-to-expire.component.html',
-  styleUrls: ['./items-about-to-expire.component.css']
+  selector: 'app-quick-add-remove',
+  templateUrl: './quick-add-remove.component.html',
+  styleUrls: ['./quick-add-remove.component.css']
 })
-export class ItemsAboutToExpireComponent implements OnInit, AfterViewInit {
+export class QuickAddRemoveComponent implements OnInit, AfterViewInit {
 
-  displayedColumns: string[] = ['name', 'location', 'expirationDate'];
+  displayedColumns: string[] = ['name', 'location', 'amount', 'add', 'remove'];
   products: Product[] = [];
   dataSource: MatTableDataSource<Product>;
   households: Household[];
@@ -27,10 +27,8 @@ export class ItemsAboutToExpireComponent implements OnInit, AfterViewInit {
     this.getAllHouseholds();
   }
 
-
   ngOnInit(): void {
   }
-
 
   ngAfterViewInit() {
     this.paginator.page
@@ -72,5 +70,21 @@ export class ItemsAboutToExpireComponent implements OnInit, AfterViewInit {
     });
   }
 
+  quickAdd(event: Product) {
+    event.amount = 1;
+    this.productService.addProductToLocation(event.location.id, event).pipe(
+      finalize(() => {
+        this.getAllProducts();
+      })
+    ).subscribe();
+  }
+
+  quickRemove(event: Product) {
+    this.productService.deleteProducts(event.id, 1).pipe(
+      finalize(() => {
+        this.getAllProducts();
+      })
+    ).subscribe();
+  }
 
 }

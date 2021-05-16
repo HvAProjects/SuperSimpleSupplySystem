@@ -58,6 +58,10 @@ import {MatGridListModule} from '@angular/material/grid-list';
 import {DashboardComponent} from './pages/dashboard/dashboard.component';
 import {ItemsAboutToExpireComponent} from './components/items-about-to-expire/items-about-to-expire.component';
 import {MatPaginatorModule} from '@angular/material/paginator';
+import {RecentlyAddedProductsComponent} from './components/recently-added-products/recently-added-products.component';
+import {QuickAddRemoveComponent} from './components/quick-add-remove/quick-add-remove.component';
+import {YourHouseholdsComponent} from './components/your-households/your-households.component';
+import {YourLocationsComponent} from './components/your-locations/your-locations.component';
 
 @NgModule({
   declarations: [
@@ -91,7 +95,11 @@ import {MatPaginatorModule} from '@angular/material/paginator';
     ScanAnotherProductPromptComponent,
     HouseholdSettingsComponent,
     DashboardComponent,
-    ItemsAboutToExpireComponent
+    ItemsAboutToExpireComponent,
+    RecentlyAddedProductsComponent,
+    QuickAddRemoveComponent,
+    YourHouseholdsComponent,
+    YourLocationsComponent
   ],
   imports: [
     BrowserModule,

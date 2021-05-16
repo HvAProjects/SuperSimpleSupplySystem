@@ -1,0 +1,50 @@
+<div class="table-container">
+
+  <table [dataSource]="dataSource" class="mat-elevation-z8" mat-table matSort matSortActive="expirationDate"
+         matSortDirection="asc" matSortDisableClear style="width: 100%;">
+
+
+    <ng-container matColumnDef="id">
+      <th *matHeaderCellDef mat-header-cell> Id</th>
+      <td *matCellDef="let element" mat-cell> {{element.id}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="name">
+      <th *matHeaderCellDef mat-header-cell> Name</th>
+      <td *matCellDef="let element" mat-cell> {{element.name}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="address">
+      <th *matHeaderCellDef mat-header-cell mat-sort-header>Address</th>
+      <td *matCellDef="let element" mat-cell> {{element.address}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="leave">
+      <th *matHeaderCellDef mat-header-cell mat-sort-header>Leave Household</th>
+      <td *matCellDef="let element" mat-cell>
+        <mat-icon (click)="leaveHousehold(element)">remove_circle</mat-icon>
+      </td>
+    </ng-container>
+
+
+    <tr *matHeaderRowDef="displayedColumns" mat-header-row></tr>
+    <tr
+      *matRowDef="let row; columns: displayedColumns;"
+      class="clickable-row" mat-row></tr>
+  </table>
+
+  <mat-toolbar class="mat-elevation-z8">
+    <button (click)="addNewHousehold()" color="primary" mat-raised-button>Add new Household</button>
+
+    <mat-toolbar-row>
+      <mat-paginator #paginator
+                     [length]="households.length"
+                     [pageSizeOptions]="[5,10,25]"
+                     [showFirstLastButtons]="true"
+                     pageSize="10">
+      </mat-paginator>
+    </mat-toolbar-row>
+  </mat-toolbar>
+
+
+</div>

@@ -167,6 +167,7 @@ public class SetupDataLoader implements ApplicationListener<ContextRefreshedEven
         product.setName(name);
         product.setLocation(location);
         product.setExpirationDate(expirationDate);
+        product.setAddedDateTime(new Date());
         product.setQuantity(quantity);
         productRepository.save(product);
         return product;
