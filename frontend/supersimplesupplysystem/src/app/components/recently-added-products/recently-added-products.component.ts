@@ -1,21 +1,21 @@
 import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
-import {MatTableDataSource} from '@angular/material/table';
 import {Product} from '../../models/Product';
+import {MatTableDataSource} from '@angular/material/table';
 import {Household} from '../../pages/household/household';
-import {tap} from 'rxjs/operators';
-import {HouseholdService} from '../../services/household.service';
-import {ProductService} from '../../services/product.service';
 import {MatSort} from '@angular/material/sort';
 import {MatPaginator} from '@angular/material/paginator';
+import {HouseholdService} from '../../services/household.service';
+import {ProductService} from '../../services/product.service';
+import {tap} from 'rxjs/operators';
 
 @Component({
-  selector: 'app-items-about-to-expire',
-  templateUrl: './items-about-to-expire.component.html',
-  styleUrls: ['./items-about-to-expire.component.css']
+  selector: 'app-recently-added-products',
+  templateUrl: './recently-added-products.component.html',
+  styleUrls: ['./recently-added-products.component.css']
 })
-export class ItemsAboutToExpireComponent implements OnInit, AfterViewInit {
+export class RecentlyAddedProductsComponent implements OnInit, AfterViewInit {
 
-  displayedColumns: string[] = ['name', 'location', 'expirationDate'];
+  displayedColumns: string[] = ['name', 'location', 'addedDateTime'];
   products: Product[] = [];
   dataSource: MatTableDataSource<Product>;
   households: Household[];
@@ -24,13 +24,11 @@ export class ItemsAboutToExpireComponent implements OnInit, AfterViewInit {
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
 
   constructor(private householdService: HouseholdService, private productService: ProductService) {
-    this.getAllHouseholds();
   }
-
 
   ngOnInit(): void {
+    this.getAllHouseholds();
   }
-
 
   ngAfterViewInit() {
     this.paginator.page
@@ -71,6 +69,5 @@ export class ItemsAboutToExpireComponent implements OnInit, AfterViewInit {
       this.dataSource.sort = this.sort;
     });
   }
-
 
 }

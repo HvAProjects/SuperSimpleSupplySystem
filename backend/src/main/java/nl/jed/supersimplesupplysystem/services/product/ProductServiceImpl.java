@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 import java.io.IOException;
 import java.time.Instant;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collector;
 
@@ -46,9 +47,11 @@ public class ProductServiceImpl implements ProductService {
             val existingProduct = productRepository.findByBarcodeAndExpirationDate(product.getBarcode(), product.getExpirationDate());
             if (existingProduct.isPresent()) {
                 existingProduct.get().setAmount(existingProduct.get().getAmount() + product.getAmount());
+                existingProduct.get().setAddedDateTime(new Date());
                 productRepository.save(existingProduct.get());
             } else {
                 product.setLocation(location.get());
+                product.setAddedDateTime(new Date());
                 productRepository.save(product);
             }
         } else {

@@ -6,11 +6,10 @@ import {LocationService} from '../../services/location.service';
 import {MatDialog} from '@angular/material/dialog';
 import {ProductService} from '../../services/product.service';
 import {Product} from '../../models/Product';
-import {AddLocationDialogComponent} from '../../dialogs/add-location-dialog/add-location-dialog.component';
 import {AddProductDialogComponent} from '../../dialogs/add-product-dialog/add-product-dialog.component';
 import {DeleteProductDialogComponent} from '../../dialogs/delete-product-dialog/delete-product-dialog.component';
 import {FormControl, FormGroup} from '@angular/forms';
-import {finalize, tap} from 'rxjs/operators';
+import {tap} from 'rxjs/operators';
 import {MatSort} from '@angular/material/sort';
 
 @Component({
@@ -102,6 +101,7 @@ export class ProductComponent implements OnInit, AfterViewInit {
         product.name = item.name;
         product.quantity = item.quantity;
         product.location = item.location;
+        product.addedDateTime = new Date(item.addedDateTime);
         dataSource.push(product);
       }
       this.dataSource = new MatTableDataSource<Product>(dataSource);
