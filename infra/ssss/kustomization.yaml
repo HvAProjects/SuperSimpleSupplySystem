@@ -15,4 +15,4 @@ images:
   newTag: main-f3a3968-1620588878 # {"$imagepolicy": "flux-system:ssss-frontend:tag"}
 - name: ghcr.io/hvaprojects/ssss_backend
   newName: ghcr.io/hvaprojects/ssss_backend # {"$imagepolicy":"flux-system:ssss-backend:name"}
-  newTag: main-44439a0-20210516193915268 # {"$imagepolicy": "flux-system:ssss-backend:tag"}
+  newTag: main-e59b5ab-20210517044618054 # {"$imagepolicy": "flux-system:ssss-backend:tag"}
