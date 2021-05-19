@@ -10,9 +10,9 @@ resources:
 - frontend.yaml
 - ingress.yaml
 images:
-- name: ghcr.io/hvaprojects/ssss_frontend
-  newName: ghcr.io/hvaprojects/ssss_frontend # {"$imagepolicy":"flux-system:ssss-frontend:name"}
+- name: ghcr.io/Davidsoff/ssss_frontend
+  newName: ghcr.io/Davidsoff/ssss_frontend # {"$imagepolicy":"flux-system:ssss-frontend:name"}
   newTag: main-f3a3968-1620588878 # {"$imagepolicy": "flux-system:ssss-frontend:tag"}
-- name: ghcr.io/hvaprojects/ssss_backend
-  newName: ghcr.io/hvaprojects/ssss_backend # {"$imagepolicy":"flux-system:ssss-backend:name"}
+- name: ghcr.io/Davidsoff/ssss_backend
+  newName: ghcr.io/Davidsoff/ssss_backend # {"$imagepolicy":"flux-system:ssss-backend:name"}
   newTag: main-e59b5ab-20210517044618054 # {"$imagepolicy": "flux-system:ssss-backend:tag"}

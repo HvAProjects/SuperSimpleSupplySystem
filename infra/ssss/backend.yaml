@@ -34,7 +34,7 @@ spec:
       containers:
       - name: backend
         securityContext: {}
-        image: ghcr.io/hvaprojects/ssss_backend:main-ffe5a91-20210419192149582
+        image: ghcr.io/Davidsoff/ssss_backend:main-ffe5a91-20210419192149582
         imagePullPolicy: IfNotPresent
         ports:
         - name: http

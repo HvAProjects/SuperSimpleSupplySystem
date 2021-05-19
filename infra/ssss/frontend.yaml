@@ -34,7 +34,7 @@ spec:
       containers:
       - name: ssss
         securityContext: {}
-        image: ghcr.io/hvaprojects/ssss_frontend:main-a4e5f3d-1620138129
+        image: ghcr.io/Davidsoff/ssss_frontend:main-a4e5f3d-1620138129
         imagePullPolicy: IfNotPresent
         ports:
         - name: http

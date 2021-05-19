@@ -5,7 +5,7 @@ metadata:
   name: ssss-backend
   namespace: flux-system
 spec:
-  image: ghcr.io/hvaprojects/ssss_backend
+  image: ghcr.io/Davidsoff/ssss_backend
   interval: 1m0s
   secretRef:
     name: gh-registry
@@ -16,7 +16,7 @@ metadata:
   name: ssss-frontend
   namespace: flux-system
 spec:
-  image: ghcr.io/hvaprojects/ssss_frontend
+  image: ghcr.io/Davidsoff/ssss_frontend
   interval: 1m0s
   secretRef:
     name: gh-registry

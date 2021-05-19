@@ -105,7 +105,7 @@ jacocoTestReport {
 
 jib {
 	to {
-		image = 'ghcr.io/hvaprojects/ssss_backend'
+		image = 'ghcr.io/Davidsoff/ssss_backend'
 		auth {
 			username = 'davidsoff'
 			password = file('key').text
@@ -114,7 +114,7 @@ jib {
 	}
 	container {
 		ports = ['8080']
-		labels = ['org.opencontainers.image.source':'https://github.com/HvAProjects/SuperSimpleSupplySystem']
+		labels = ['org.opencontainers.image.source':'https://github.com/Davidsoff/supersimplesupplysystem']
 		format = 'OCI'
 	}
 }
