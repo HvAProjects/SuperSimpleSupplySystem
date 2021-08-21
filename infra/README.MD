@@ -2,7 +2,7 @@
 
 ## prerequisites
 
-- Ensure you have a kubernetes cluster running (for lical development you can use the docker built in or [microk8s](https://microk8s.io/))
+- Ensure you have a kubernetes cluster running (for local development you can use the docker built in or [microk8s](https://microk8s.io/))
 - Ensure you have [kubectl installed and setup](https://kubernetes.io/docs/tasks/tools/install-kubectl/)
 - Ensure you have [flux CLI](https://toolkit.fluxcd.io/get-started/) installed.
 
@@ -11,7 +11,11 @@
 1. Run `./setup.sh`
 2. Congratulations SSSS is being installed in the cluster and will automatically be kept up to date.
 
-## Updating the secrets.properties
+## Updating the secrets.properties using the convenience script
+
+You can use the provided convenience script using: `./refresh-secrets.sh`
+
+## Updating the secrets.properties manually
 
 1. Ensure secrets.properties is up to date on your local machine
 2. Ensure [kubeseal](https://github.com/bitnami-labs/sealed-secrets/releases/latest) is installed
@@ -51,7 +55,6 @@
 
 8. Commit changes to the repo
 
-Alternatively you can use the provided convenience script using: `./refresh-secrets.sh`
 
 ## Making changes
 

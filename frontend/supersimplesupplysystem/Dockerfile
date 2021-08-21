@@ -8,6 +8,7 @@ COPY . .
 RUN npm run build-prod 
 ### STAGE 2: Run ###
 FROM nginx:1.17.1-alpine
+LABEL "org.opencontainers.image.source"="https://github.com/HvAProjects/SuperSimpleSupplySystem"
 EXPOSE 3000
 COPY nginx.conf /etc/nginx/nginx.conf
 COPY --from=build /usr/src/app/dist/supersimplesupplysystem /usr/share/nginx/html
