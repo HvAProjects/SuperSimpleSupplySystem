@@ -9,16 +9,10 @@ kubectl create secret generic ssss-secrets-properties \
 --dry-run=client \
 -o yaml > secrets.yaml
 
-kubeseal --fetch-cert \
---controller-name=sealed-secrets \
---controller-namespace=flux-system \
-> pub-sealed-secrets.pem
-
-kubeseal --format=yaml --cert=pub-sealed-secrets.pem \
+kubeseal --format=yaml \
 < secrets.yaml > ssss/secrets.yaml
 
 rm -Rf secrets.yaml
-rm -Rf pub-sealed-secrets.pem
 
 cd ..
 git reset HEAD -- .
