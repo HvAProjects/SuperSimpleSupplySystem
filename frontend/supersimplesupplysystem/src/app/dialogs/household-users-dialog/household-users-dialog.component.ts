@@ -5,13 +5,13 @@ import {Product} from '../../models/Product';
 import {User} from '../../pages/profile/user';
 import {Household} from '../../pages/household/household';
 import {MatSelectionList} from '@angular/material/list';
-import {TokenStorageService} from '../../services/token-storage.service';
 import {faPlus} from '@fortawesome/free-solid-svg-icons/faPlus';
 import {faMinus} from '@fortawesome/free-solid-svg-icons';
 import {ScannerDialogComponent} from '../scanner-dialog/scanner-dialog.component';
 import {MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition} from '@angular/material/snack-bar';
 import {NotificationService} from '../../services/notification.service';
 import {EmailAddressPromptComponent} from '../email-address-prompt/email-address-prompt.component';
+import { AuthService } from '@auth0/auth0-angular';
 
 @Component({
   selector: 'app-household-users-dialog',
@@ -21,7 +21,7 @@ import {EmailAddressPromptComponent} from '../email-address-prompt/email-address
 export class HouseholdUsersDialogComponent implements OnInit {
 
   constructor(private householdService: HouseholdService,
-              private tokenStorageService: TokenStorageService,
+              private auth: AuthService,
               private snackBar: MatSnackBar,
               private notificationService: NotificationService,
               private dialog: MatDialog,
@@ -55,7 +55,7 @@ export class HouseholdUsersDialogComponent implements OnInit {
   }
 
   isSelectionValid(): boolean {
-    return this.userSelected && this.selectedUser?.id !== parseInt(this.tokenStorageService.getUser().id, 0);
+    return this.userSelected;
   }
 
   openAddUserDialog(): void {

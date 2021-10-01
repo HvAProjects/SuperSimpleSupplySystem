@@ -1,0 +1,38 @@
+baseUrls:
+  backend: http://localhost:${server.port}
+  frontend: https://localhost:4200
+logging:
+  level:
+    org:
+      springframework: TRACE
+server:
+  port: ${port:8080}
+auth0:
+  audience: https://ssss.backend
+spring:
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: https://supersimplesupplysystem.eu.auth0.com/
+  flyway:
+    locations:
+      - classpath:db/seed
+      - classpath:db/migration
+    baselineOnMigrate: true
+    clean-on-validation-error: true
+    schemas: ssss
+  jmx:
+    enabled: false
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: username
+    password: password
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+

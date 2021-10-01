@@ -1,9 +1,11 @@
-<button [mat-menu-trigger-for]="notificationsMenu" color="transparant" class="notifications" mat-button><mat-icon>notifications</mat-icon><ng-container *ngIf="countUnseenNotifications() > 0">{{countUnseenNotifications()}}</ng-container></button>
-<mat-menu (closed)="setNotificationsSeen()" #notificationsMenu="matMenu">
-  <ng-container *ngFor="let notification of notifications">
-    <app-notification (click)="onClick(notification)" [notification]="notification"></app-notification>
-  </ng-container>
-  <div class="no-notifications" *ngIf="notifications.length === 0">
-    Nothing to see here
-  </div>
-</mat-menu>
+<ng-container *ngIf="auth.isAuthenticated$ | async" >
+  <button [mat-menu-trigger-for]="notificationsMenu" color="transparant" class="notifications" mat-button><mat-icon>notifications</mat-icon><ng-container *ngIf="countUnseenNotifications() > 0">{{countUnseenNotifications()}}</ng-container></button>
+  <mat-menu (closed)="setNotificationsSeen()" #notificationsMenu="matMenu">
+    <ng-container *ngFor="let notification of notifications">
+      <app-notification (click)="onClick(notification)" [notification]="notification"></app-notification>
+    </ng-container>
+    <div class="no-notifications" *ngIf="notifications.length === 0">
+      Nothing to see here
+    </div>
+  </mat-menu>
+</ng-container>

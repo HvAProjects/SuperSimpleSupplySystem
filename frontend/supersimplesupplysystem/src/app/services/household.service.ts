@@ -22,7 +22,7 @@ export class HouseholdService {
   }
 
   public leaveHousehold(id: number) {
-    return this.http.post<Household>(AppConstants.API_URL + `household/leaveHousehold/${id}`, {});
+    return this.http.post<Household>(AppConstants.API_URL + `household/${id}/leave`, {});
   }
 
   public addHousehold(household: Household) {
@@ -31,7 +31,7 @@ export class HouseholdService {
 
 
   public getUsersOfHousehold(id: number): Observable<User[]> {
-    return this.http.get<User[]>(AppConstants.API_URL + `household/householdUsers/${id}`);
+    return this.http.get<User[]>(AppConstants.API_URL + `household/${id}/users`);
   }
 
   public editHousehold(id: number, household: Household) {

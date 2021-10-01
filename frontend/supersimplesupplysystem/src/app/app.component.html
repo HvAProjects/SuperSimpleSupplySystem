@@ -1,10 +1,10 @@
 <mat-toolbar class="mat-elevation-z8">
 
-  <button *ngIf="!isLoggedIn" mat-button routerLink="/">
+  <button *ngIf="!(auth.isAuthenticated$ | async)" mat-button routerLink="/">
     <mat-icon>home</mat-icon>
   </button>
 
-  <button id="hamburger-menu" (click)="sidenav.toggle()" *ngIf="sidenav.mode === 'over' && isLoggedIn " mat-icon-button>
+  <button id="hamburger-menu" (click)="sidenav.toggle()" *ngIf="sidenav.mode === 'over' && (auth.isAuthenticated$ | async) " mat-icon-button>
     <mat-icon *ngIf="!sidenav.opened">
       menu
     </mat-icon>
@@ -17,31 +17,12 @@
     <img alt="logo" class="logo" src="./assets/images/logo.png">
   </div>
 
-  <app-notification-list *ngIf="isLoggedIn"></app-notification-list>
+  <app-notification-list></app-notification-list>
 
-
-  <!--  IF NOT LOGGED IN-->
-  <div *ngIf="!isLoggedIn" class="login">
-    <button [matMenuTriggerFor]="menu" mat-button>Login / Register</button>
-    <mat-menu #menu="matMenu">
-      <button mat-menu-item routerLink="/login">Login</button>
-      <button mat-menu-item routerLink="/register">Register</button>
-    </mat-menu>
+  <div class="login">
+    <user-profile></user-profile>
+    <app-authentication-button></app-authentication-button>
   </div>
-
-  <!--  IF LOGGED IN-->
-  <div *ngIf="isLoggedIn" class="avatar-header-container">
-    <img class="mat-elevation-z8 avatar-header"
-         src="https://images.unsplash.com/photo-1582266255765-fa5cf1a1d501?ixid=MXwxMjA3fDB8MHxzZWFyY2h8MXx8YW5vbnltb3VzfGVufDB8fDB8&ixlib=rb-1.2.1&w=1000&q=80"/>
-    <button [matMenuTriggerFor]="menuLoggedIn" mat-button>
-      <mat-icon>keyboard_arrow_down</mat-icon>
-    </button>
-    <mat-menu #menuLoggedIn="matMenu">
-      <button (click)="logout()" mat-menu-item>Logout</button>
-    </mat-menu>
-  </div>
-
-
 </mat-toolbar>
 
 <mat-sidenav-container>

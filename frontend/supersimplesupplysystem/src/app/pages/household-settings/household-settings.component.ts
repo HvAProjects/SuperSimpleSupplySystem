@@ -11,7 +11,7 @@ import {FormControl, NgForm, Validators} from '@angular/forms';
 import {EmailAddressPromptComponent} from '../../dialogs/email-address-prompt/email-address-prompt.component';
 import {NotificationService} from '../../services/notification.service';
 import {MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition} from '@angular/material/snack-bar';
-import {TokenStorageService} from '../../services/token-storage.service';
+import { AuthService } from '@auth0/auth0-angular';
 
 @Component({
   selector: 'app-household-settings',
@@ -37,7 +37,7 @@ export class HouseholdSettingsComponent implements OnInit {
 
   constructor(private householdService: HouseholdService, private dialog: MatDialog, private route: ActivatedRoute,
               private notificationService: NotificationService, private snackBar: MatSnackBar,
-              private tokenStorageService: TokenStorageService) {
+              private auth: AuthService) {
     this.route.params.subscribe((params: Params) => this.householdId = +params.householdId);
     this.getHousehold(this.householdId);
 
@@ -130,7 +130,7 @@ export class HouseholdSettingsComponent implements OnInit {
   }
 
   isSelectionValid(): boolean {
-    return this.userSelected && this.selectedUser?.id !== parseInt(this.tokenStorageService.getUser().id, 0);
+    return this.userSelected;
   }
 
   private openSnackBar(message: string, action: string): void {

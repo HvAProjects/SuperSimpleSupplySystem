@@ -3,17 +3,13 @@ import {BrowserModule} from '@angular/platform-browser';
 
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
-import {RegisterComponent} from './pages/register/register.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
-import {LoginComponent} from './pages/login/login.component';
-import {ProfileComponent} from './pages/profile/profile.component';
 import {BoardAdminComponent} from './pages/board-admin/board-admin.component';
 import {HomeComponent} from './pages/home/home.component';
 import {BoardUserComponent} from './pages/board-user/board-user.component';
 import {BoardModeratorComponent} from './pages/board-moderator/board-moderator.component';
-import {AuthInterceptor} from './interceptors/auth.interceptor';
 import {HeaderComponent} from './components/header/header.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatToolbarModule} from '@angular/material/toolbar';
@@ -26,9 +22,6 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import {MatDividerModule} from '@angular/material/divider';
 import {HouseholdComponent} from './pages/household/household.component';
-import {ForgotPasswordComponent} from './pages/forgot-password/forgot-password.component';
-import {ChangePasswordComponent} from './pages/change-password/change-password.component';
-import {ActivateAccountComponent} from './pages/activate-account/activate-account.component';
 import {AddHouseholdDialogComponent} from './components/add-household-dialog/add-household-dialog.component';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatSelectCountryModule} from '@angular-material-extensions/select-country';
@@ -62,22 +55,23 @@ import {RecentlyAddedProductsComponent} from './components/recently-added-produc
 import {QuickAddRemoveComponent} from './components/quick-add-remove/quick-add-remove.component';
 import {YourHouseholdsComponent} from './components/your-households/your-households.component';
 import {YourLocationsComponent} from './components/your-locations/your-locations.component';
+import { AuthModule } from '@auth0/auth0-angular';
+import { UserProfileComponent } from './components/user-profile/user-profile.component';
+import { AuthHttpInterceptor } from '@auth0/auth0-angular';
+import { SignupButtonComponent } from './components/signup-button/signup-button.component';
+import { LogoutButtonComponent } from './components/logout-button/logout-button.component';
+import { LoginButtonComponent } from './components/login-button/login-button.component';
+import { AuthenticationButtonComponent } from './components/authentication-button/authentication-button.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    RegisterComponent,
-    LoginComponent,
-    ProfileComponent,
     BoardAdminComponent,
     HomeComponent,
     BoardUserComponent,
     BoardModeratorComponent,
     HeaderComponent,
     HouseholdComponent,
-    ForgotPasswordComponent,
-    ChangePasswordComponent,
-    ActivateAccountComponent,
     AddHouseholdDialogComponent,
     ScannerComponent,
     LocationComponent,
@@ -99,10 +93,22 @@ import {YourLocationsComponent} from './components/your-locations/your-locations
     RecentlyAddedProductsComponent,
     QuickAddRemoveComponent,
     YourHouseholdsComponent,
-    YourLocationsComponent
+    YourLocationsComponent,
+    UserProfileComponent,
+    SignupButtonComponent,
+    LogoutButtonComponent,
+    LoginButtonComponent,
+    AuthenticationButtonComponent
   ],
   imports: [
     BrowserModule,
+    AuthModule.forRoot({
+      ...environment.auth,
+      redirectUri: environment.frontend_url,
+      httpInterceptor: {
+        allowedList: [`${environment.backend_url}*`],
+      },
+    }),
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
@@ -133,10 +139,10 @@ import {YourLocationsComponent} from './components/your-locations/your-locations
     MatPaginatorModule
   ],
   providers: [{
-    provide: HTTP_INTERCEPTORS,
-    useClass: AuthInterceptor,
-    multi: true
-  },
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthHttpInterceptor,
+      multi: true
+    },
     {
       provide: SwRegistrationOptions,
       useFactory: () => ({enabled: environment.production}),

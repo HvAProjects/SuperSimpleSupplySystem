@@ -15,20 +15,11 @@
   <mat-toolbar class="nav-menu">
     <div>
       <button mat-button routerLink="/">Home</button>
-      <button *ngIf="isLoggedIn" mat-button routerLink="/household">Households</button>
-    </div>
-    <div class="login" *ngIf="!isLoggedIn">
-      <button mat-button [matMenuTriggerFor]="menu">Login / Register</button>
-      <mat-menu #menu="matMenu">
-        <button routerLink="/login" mat-menu-item>Login</button>
-        <button routerLink="/register" mat-menu-item>Register</button>
-      </mat-menu>
+      <button *ngIf="(auth.isAuthenticated$ | async)" mat-button routerLink="/household">Households</button>
     </div>
     <div class="header-right">
-      <app-notification-list *ngIf="isLoggedIn"></app-notification-list>
-      <div class="ss-welcome" *ngIf="isLoggedIn">Welcome {{username}} ! |
-        <span> <a (click)="logout()" href="#"> Logout</a> </span>
-      </div>
+      <app-notification-list></app-notification-list>
+      <app-authentication-button></app-authentication-button>
     </div>
   </mat-toolbar>
 

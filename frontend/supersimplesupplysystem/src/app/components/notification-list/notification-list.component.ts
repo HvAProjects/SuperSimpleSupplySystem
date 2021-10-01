@@ -6,6 +6,7 @@ import {Notification} from '../../models/Notification';
 import {faBell} from '@fortawesome/free-solid-svg-icons';
 import {NotificationService} from '../../services/notification.service';
 import {MatDialog} from '@angular/material/dialog';
+import { AuthService } from '@auth0/auth0-angular';
 
 @Component({
   selector: 'app-notification-list',
@@ -17,7 +18,8 @@ export class NotificationListComponent implements OnInit {
   faBell = faBell;
   notifications: Array<Notification> = [];
 
-  constructor(private notificationService: NotificationService,
+  constructor(public auth: AuthService,
+              private notificationService: NotificationService,
               private dialog: MatDialog) { }
 
   ngOnInit(): void {

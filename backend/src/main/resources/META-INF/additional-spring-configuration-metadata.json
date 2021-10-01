@@ -1,27 +1,59 @@
 {
-  "groups": [
-    {
-      "name": "properties",
-      "type": "nl.jed.supersimplesupplysystem.configuration.CustomProperties",
-      "sourceType": "nl.jed.supersimplesupplysystem.configuration.CustomProperties"
-    }
-  ],
+  "groups": [],
   "properties": [
     {
-      "name": "properties.forgotMailUrl",
+      "name": "db.driverClass",
       "type": "java.lang.String",
-      "description": "Description for properties.forgotMailUrl.",
-      "sourceType": "nl.jed.supersimplesupplysystem.configuration.CustomProperties"
+      "description": "Description for db.driverClass."
     },
     {
-      "name": "properties.activateAccountUrl",
+      "name": "db.dialect",
       "type": "java.lang.String",
-      "description": "Description for properties.activateAccountUrl."
+      "description": "Description for db.dialect."
     },
     {
-      "name": "properties.signUpUrl",
+      "name": "db.url",
       "type": "java.lang.String",
-      "description": "Description for properties.signUpUrl.",
-      "sourceType": "nl.jed.supersimplesupplysystem.configuration.CustomProperties"
+      "description": "Description for db.url."
+    },
+    {
+      "name": "db.username",
+      "type": "java.lang.String",
+      "description": "Description for db.username."
+    },
+    {
+      "name": "db.password",
+      "type": "java.lang.String",
+      "description": "Description for db.password."
+    },
+    {
+      "name": "auth0.audience",
+      "type": "java.lang.String",
+      "description": "Description for auth0.audience."
+    },
+    {
+      "name": "jdbc.url",
+      "type": "java.lang.String",
+      "description": "Description for jdbc.url."
+    },
+    {
+      "name": "baseUrls.backend",
+      "type": "java.lang.String",
+      "description": "Description for baseUrls.backend."
+    },
+    {
+      "name": "baseUrls.frontend",
+      "type": "java.lang.String",
+      "description": "Description for baseUrls.frontend."
+    },
+    {
+      "name": "hibernate.dialect",
+      "type": "java.lang.String",
+      "description": "Description for hibernate.dialect."
+    },
+    {
+      "name": "jdbc.driverClassName",
+      "type": "java.lang.String",
+      "description": "Description for jdbc.driverClassName."
     }
   ] }
