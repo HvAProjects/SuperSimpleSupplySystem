@@ -35,4 +35,8 @@ spring:
           auth: true
           starttls:
             enable: true
+  datasource:
+    url: jdbc:mariadb://localhost:3307/ssss
+    username: root
+    password: my-secret-pw
 

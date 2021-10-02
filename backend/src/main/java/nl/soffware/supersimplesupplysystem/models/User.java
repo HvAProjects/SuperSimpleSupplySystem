@@ -1,9 +1,11 @@
 package nl.soffware.supersimplesupplysystem.models;
 
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import org.hibernate.Hibernate;
 
 import javax.persistence.*;
+import java.io.Serializable;
+import java.util.Objects;
 import java.util.Set;
 
 /**
@@ -12,8 +14,10 @@ import java.util.Set;
  */
 @Entity
 @NoArgsConstructor
-@Data
-public class User {
+@Getter
+@Setter
+@ToString
+public class User implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "USER_ID")
@@ -24,9 +28,25 @@ public class User {
 
     private String email;
 
+    @ManyToMany
+    @ToString.Exclude
     private Set<Role> roles;
 
     public String getDisplayName() {
         return email;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+        User user = (User) o;
+
+        return Objects.equals(id, user.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return 562048007;
     }
 }

@@ -2,7 +2,6 @@ package nl.soffware.supersimplesupplysystem.controllers.notification;
 
 
 import lombok.extern.slf4j.Slf4j;
-import nl.jed.supersimplesupplysystem.dto.*;
 import nl.soffware.supersimplesupplysystem.models.notification.Notification;
 import nl.soffware.supersimplesupplysystem.services.notification.NotificationService;
 import nl.soffware.supersimplesupplysystem.dto.*;
@@ -26,27 +25,23 @@ public class NotificationController {
 
     @GetMapping("/householdInvitations")
     public List<NotificationDto> getNotifications(Principal principal) {
-        LocalUser localUser = (LocalUser) ((UsernamePasswordAuthenticationToken)principal).getPrincipal();
-        return notificationService.getNotifications(localUser.getUser().getEmail()).stream().map(Notification::getNotificationDto).collect(Collectors.toList());
+        return notificationService.getNotifications(principal.getName()).stream().map(Notification::getNotificationDto).collect(Collectors.toList());
     }
 
     @PostMapping("/inviteToHousehold")
-    public ResponseEntity<ApiResponse> inviteToHousehold(@RequestBody InviteUserToHouseholdRequest request, Principal principal) throws Exception {
-        LocalUser localUser = (LocalUser) ((UsernamePasswordAuthenticationToken)principal).getPrincipal();
-        notificationService.inviteUserToHousehold(request.getEmailAddress(), request.getHouseholdId(), localUser.getUser());
+    public ResponseEntity<ApiResponse> inviteToHousehold(@RequestBody InviteUserToHouseholdRequest request, Principal principal)  {
+        notificationService.inviteUserToHousehold(request.getEmailAddress(), request.getHouseholdId(), principal.getName());
         return ResponseEntity.ok(new ApiResponse(true, "An invitation was sent to the user"));
     }
 
     @PostMapping("/setNotificationsSeen")
     public List<NotificationDto> setNotificationsSeen(Principal principal) {
-        LocalUser localUser = (LocalUser) ((UsernamePasswordAuthenticationToken)principal).getPrincipal();
-        return notificationService.setNotificationsSeen(localUser.getUser()).stream().map(Notification::getNotificationDto).collect(Collectors.toList());
+        return notificationService.setNotificationsSeen(principal.getName()).stream().map(Notification::getNotificationDto).collect(Collectors.toList());
     }
 
     @PostMapping("/acceptOrDeclineHouseholdInvitation")
     public List<NotificationDto> acceptOrDeclineHouseholdInvitation(@RequestBody AcceptOrDeclineHouseholdInvitationRequest request, Principal principal) {
-        LocalUser localUser = (LocalUser) ((UsernamePasswordAuthenticationToken)principal).getPrincipal();
-        return notificationService.acceptOrDeclineHouseholdInvitation(request.getNotificationId(), localUser.getUser(), request.isAccept()).stream().map(Notification::getNotificationDto).collect(Collectors.toList());
+        return notificationService.acceptOrDeclineHouseholdInvitation(request.getNotificationId(), principal.getName(), request.isAccept()).stream().map(Notification::getNotificationDto).collect(Collectors.toList());
     }
 
 }

@@ -1,4 +1,4 @@
-package nl.soffware.supersimplesupplysystem.repository;
+package nl.soffware.supersimplesupplysystem.repositories;
 
 import nl.soffware.supersimplesupplysystem.models.User;
 import org.springframework.data.repository.CrudRepository;

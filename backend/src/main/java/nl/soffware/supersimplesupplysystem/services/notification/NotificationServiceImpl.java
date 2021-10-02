@@ -6,42 +6,52 @@ import nl.soffware.supersimplesupplysystem.models.notification.HouseholdInvitati
 import nl.soffware.supersimplesupplysystem.models.notification.Notification;
 import nl.soffware.supersimplesupplysystem.models.notification.NotificationState;
 import nl.soffware.supersimplesupplysystem.models.notification.NotificationType;
+import nl.soffware.supersimplesupplysystem.repositories.HouseholdRepository;
+import nl.soffware.supersimplesupplysystem.repositories.UserRepository;
 import nl.soffware.supersimplesupplysystem.repository.NotificationRepository;
-import nl.soffware.supersimplesupplysystem.repository.UserRepository;
-import nl.soffware.supersimplesupplysystem.repository.household.HouseholdRepository;
 import nl.soffware.supersimplesupplysystem.services.mail.MailService;
 import nl.soffware.supersimplesupplysystem.util.MailFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.webjars.NotFoundException;
 
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
+import java.util.Random;
 import java.util.stream.Collectors;
 
 @Service("notificationService")
 public class NotificationServiceImpl implements NotificationService {
 
-    @Autowired
-    private NotificationRepository notificationRepository;
+    private final NotificationRepository notificationRepository;
 
-    @Autowired
-    private HouseholdRepository householdRepository;
+    private final HouseholdRepository householdRepository;
 
-    @Autowired
-    private UserRepository userRepository;
+    private final UserRepository userRepository;
 
-    @Autowired
-    private MailService mailService;
+    private final MailService mailService;
 
-    @Autowired
-    private MailFactory mailFactory;
+    private final MailFactory mailFactory;
+    private final Random r = new Random();
+
+    public NotificationServiceImpl(NotificationRepository notificationRepository, HouseholdRepository householdRepository, UserRepository userRepository, MailService mailService, MailFactory mailFactory) {
+        this.notificationRepository = notificationRepository;
+        this.householdRepository = householdRepository;
+        this.userRepository = userRepository;
+        this.mailService = mailService;
+        this.mailFactory = mailFactory;
+    }
 
     @Override
-    public void inviteUserToHousehold(String emailAddress, long householdId, User sender) {
+    public void inviteUserToHousehold(String emailAddress, long householdId,  String principalName) {
         User user = userRepository.findByEmail(emailAddress);
-        Household household = householdRepository.findById(householdId).orElseThrow();
+        var sender = userRepository.findUserByProviderUserId(principalName);
+        Household household = householdRepository.findById(householdId).orElseThrow(() -> new NotFoundException("household not found"));
         boolean userExists = user != null;
+        var id = 1L;
+        while(notificationRepository.existsById(id)){
+            id = r.nextLong();
+        }
         HouseholdInvitationNotification notification = new HouseholdInvitationNotification();
         notification.setNotificationType(NotificationType.householdInvitation);
         notification.setUserEmail(emailAddress);
@@ -49,6 +59,7 @@ public class NotificationServiceImpl implements NotificationService {
         notification.setSender(sender);
         notification.setState(NotificationState.unseen);
         notification.setHousehold(household);
+        notification.setId(id);
         notificationRepository.save(notification);
 
         if (!userExists) {
@@ -64,7 +75,8 @@ public class NotificationServiceImpl implements NotificationService {
     }
 
     @Override
-    public List<Notification> setNotificationsSeen(User user) {
+    public List<Notification> setNotificationsSeen( String principalName) {
+        var user = userRepository.findUserByProviderUserId(principalName);
         List<Notification> notifications = getNotifications(user.getEmail());
         for (Notification notification : notifications.stream().filter(n -> n.getState() == NotificationState.unseen).collect(Collectors.toList())) {
             notification.setState(NotificationState.seen);
@@ -74,8 +86,9 @@ public class NotificationServiceImpl implements NotificationService {
     }
 
     @Override
-    public List<Notification> acceptOrDeclineHouseholdInvitation(long notificationId, User user, boolean accept) {
-        HouseholdInvitationNotification notification = (HouseholdInvitationNotification)notificationRepository.findById(notificationId).orElseThrow();
+    public List<Notification> acceptOrDeclineHouseholdInvitation(long notificationId,  String principalName, boolean accept) {
+        HouseholdInvitationNotification notification = (HouseholdInvitationNotification)notificationRepository.findById(notificationId).orElseThrow(() -> new NotFoundException("Notification not found"));
+        var user = userRepository.findUserByProviderUserId(principalName);
         if (notification.getUserEmail().equals(user.getEmail())) {
             NotificationState newState;
             if (accept) {

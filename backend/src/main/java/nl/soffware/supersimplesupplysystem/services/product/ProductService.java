@@ -9,15 +9,15 @@ import java.util.List;
 public interface ProductService {
     ProductType getProductType(String barcode) throws IOException;
 
-    List<Product> getProductsByHousehold(long householdId);
+    List<Product> getProductsByHousehold(Long householdId);
 
-    List<Product> getProducts(long locationId);
+    List<Product> getProducts(Long locationId);
 
-    void addProduct(long locationId, Product product) throws Exception;
+    void addProduct(Long locationId, Product product) throws Exception;
 
-    void deleteProducts(long productId, int amount) throws Exception;
+    void deleteProducts(Long productId, int amount) throws Exception;
 
-    List<Product> getProductsWithBarcode(String barcode, long householdId);
+    List<Product> getProductsWithBarcode(String barcode, Long householdId);
 
     List<Product> getAllProducts(List<Long> households);
 }

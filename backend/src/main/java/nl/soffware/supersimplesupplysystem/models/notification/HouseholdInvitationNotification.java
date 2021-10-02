@@ -3,6 +3,7 @@ package nl.soffware.supersimplesupplysystem.models.notification;
 import lombok.Data;
 import nl.soffware.supersimplesupplysystem.dto.HouseholdInvitationNotificationDto;
 import nl.soffware.supersimplesupplysystem.dto.NotificationDto;
+import nl.soffware.supersimplesupplysystem.dto.UserDto;
 import nl.soffware.supersimplesupplysystem.models.User;
 import nl.soffware.supersimplesupplysystem.models.household.Household;
 
@@ -23,7 +24,7 @@ public class HouseholdInvitationNotification extends Notification {
     public NotificationDto getNotificationDto() {
         HouseholdInvitationNotificationDto householdInvitationNotificationDto = new HouseholdInvitationNotificationDto();
         householdInvitationNotificationDto.setId(super.getId());
-        householdInvitationNotificationDto.setSender(this.sender.toUserDto());
+        householdInvitationNotificationDto.setSender(new UserDto(this.sender));
         householdInvitationNotificationDto.setDate(super.getDate());
         householdInvitationNotificationDto.setState(super.getState());
         householdInvitationNotificationDto.setNotificationType(super.getNotificationType());

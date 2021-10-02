@@ -1,40 +1,33 @@
 package nl.soffware.supersimplesupplysystem.services.location;
 
+import lombok.RequiredArgsConstructor;
 import nl.soffware.supersimplesupplysystem.models.location.Location;
-import nl.soffware.supersimplesupplysystem.repository.LocationRepository;
-import nl.soffware.supersimplesupplysystem.repository.household.HouseholdRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import nl.soffware.supersimplesupplysystem.repositories.LocationRepository;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.List;
 
-@Service("locationService")
-public class LocationServiceImpl implements LocationService {
+@Service
+@RequiredArgsConstructor
+public class LocationService {
 
     @PersistenceContext
     public EntityManager entityManager;
 
-    @Autowired
-    private LocationRepository locationRepository;
+    private final LocationRepository locationRepository;
 
-    @Autowired
-    private HouseholdRepository householdRepository;
-
-    @Override
-    public List<Location> getLocationsOfHousehold(long householdId) {
-        return locationRepository.findByHouseholdId(householdId);
+    public List<Location> getLocationsOfHousehold(Long householdId) {
+        return locationRepository.findByTenantId(householdId.toString());
     }
 
-    @Override
-    public void addLocationToHousehold(long householdId, Location location) {
+    public void addLocationToHousehold(Long householdId, Location location) {
         location.setTenantId(String.valueOf(householdId));
         locationRepository.save(location);
     }
 
-    @Override
-    public void deleteLocation(long locationId) {
+    public void deleteLocation(Long locationId) {
         locationRepository.deleteById(locationId);
     }
 }

@@ -49,23 +49,22 @@ sourceSets.main.java.srcDirs += "build/gen/buildconfig/src/main"
 
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-actuator'
-	implementation 'org.springframework.boot:spring-boot-starter-data-r2dbc'
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	implementation 'org.springframework.boot:spring-boot-starter-integration'
 	implementation 'org.springframework.boot:spring-boot-starter-mail'
 	implementation 'org.springframework.boot:spring-boot-starter-oauth2-resource-server'
 	implementation 'org.springframework.boot:spring-boot-starter-validation'
 	implementation 'org.springframework.boot:spring-boot-starter-security'
-	implementation 'org.springframework.boot:spring-boot-starter-webflux'
+	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'org.springframework.boot:spring-boot-configuration-processor'
 	implementation 'org.flywaydb:flyway-core'
 	implementation 'com.squareup.retrofit2:retrofit:2.4.0'
 	implementation 'com.squareup.retrofit2:converter-gson:2.4.0'
-	implementation 'org.hibernate.reactive:hibernate-reactive-core:1.0.0.CR9'
-	implementation 'org.hibernate:hibernate-jpamodelgen'
-	implementation 'org.springframework.data:spring-data-jpa'
-	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	implementation 'org.springframework.integration:spring-integration-jpa'
+	implementation 'org.springframework.integration:spring-integration-mail'
+	implementation 'org.springframework.integration:spring-integration-security'
 	implementation 'org.mariadb.jdbc:mariadb-java-client:2.7.4'
-	runtimeOnly 'io.vertx:vertx-mysql-client:4.1.4'
+	implementation 'com.mashape.unirest:unirest-java:1.4.9'
 
 	compileOnly 'org.projectlombok:lombok'
 
@@ -84,8 +83,8 @@ dependencies {
 	testImplementation group: 'org.seleniumhq.selenium', name: 'selenium-java', version: '3.141.59'
 
 //	swagger
-	implementation group: 'org.springdoc', name: 'springdoc-openapi-webflux-ui', version: "${springdocVersion}"
-	implementation group: 'org.springdoc', name: 'springdoc-openapi-webflux-core', version: "${springdocVersion}"
+	implementation group: 'org.springdoc', name: 'springdoc-openapi-ui', version: "${springdocVersion}"
+	implementation group: 'org.springdoc', name: 'springdoc-openapi-webmvc-core', version: "${springdocVersion}"
 	implementation group: 'org.springdoc', name: 'springdoc-openapi-security', version: "${springdocVersion}"
 
 

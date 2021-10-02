@@ -1,9 +1,9 @@
 package nl.soffware.supersimplesupplysystem.services.household;
 
 import lombok.val;
-import nl.soffware.supersimplesupplysystem.models.User;
 import nl.soffware.supersimplesupplysystem.models.household.Household;
-import nl.soffware.supersimplesupplysystem.repository.household.HouseholdRepository;
+import nl.soffware.supersimplesupplysystem.repositories.HouseholdRepository;
+import nl.soffware.supersimplesupplysystem.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.crossstore.ChangeSetPersister.NotFoundException;
 import org.springframework.security.access.prepost.PostFilter;
@@ -14,8 +14,14 @@ import java.util.List;
 @Service
 public class HouseholdService {
 
+    private final HouseholdRepository householdRepository;
+    private final UserRepository userRepository;
+
     @Autowired
-    private HouseholdRepository householdRepository;
+    public HouseholdService(HouseholdRepository householdRepository, UserRepository userRepository) {
+        this.householdRepository = householdRepository;
+        this.userRepository = userRepository;
+    }
 
 
     @PostFilter("filterObject.hasAccess(authentication.name)")
@@ -34,7 +40,8 @@ public class HouseholdService {
         householdRepository.save(household);
     }
 
-    public void leaveHousehold(Long id, User user) throws NotFoundException {
+    public void leaveHousehold(Long id, String principalName) throws NotFoundException {
+        var user = userRepository.findUserByProviderUserId(principalName);
         Household household = householdRepository.findById(id).orElseThrow(NotFoundException::new);
         household.getUsers().remove(user);
         householdRepository.save(household);

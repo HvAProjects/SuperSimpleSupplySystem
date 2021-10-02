@@ -1,44 +1,46 @@
 package nl.soffware.supersimplesupplysystem.services.product;
 
+import lombok.RequiredArgsConstructor;
 import lombok.val;
 import nl.soffware.supersimplesupplysystem.dto.openfoodfacts.GetProductResponse;
 import nl.soffware.supersimplesupplysystem.models.location.Location;
 import nl.soffware.supersimplesupplysystem.models.product.Product;
 import nl.soffware.supersimplesupplysystem.models.product.ProductType;
-import nl.soffware.supersimplesupplysystem.repository.LocationRepository;
-import nl.soffware.supersimplesupplysystem.repository.OpenFoodFactsRepository;
-import nl.soffware.supersimplesupplysystem.repository.ProductRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import nl.soffware.supersimplesupplysystem.repositories.HouseholdRepository;
+import nl.soffware.supersimplesupplysystem.repositories.LocationRepository;
+import nl.soffware.supersimplesupplysystem.repositories.OpenFoodFactsRepository;
+import nl.soffware.supersimplesupplysystem.repositories.ProductRepository;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
-@Service("productService")
+@Service
+@RequiredArgsConstructor
 public class ProductServiceImpl implements ProductService {
 
-    @Autowired
-    private OpenFoodFactsRepository openFoodFactsRepository;
+    private final OpenFoodFactsRepository openFoodFactsRepository;
 
-    @Autowired
-    private ProductRepository productRepository;
+    private final ProductRepository productRepository;
 
-    @Autowired
-    private LocationRepository locationRepository;
+    private final LocationRepository locationRepository;
+
+    private final HouseholdRepository householdRepository;
 
     public ProductType getProductType(String barcode) throws IOException {
         GetProductResponse response = openFoodFactsRepository.getProduct(barcode).execute().body();
         return response.toProductType();
     }
 
-    public List<Product> getProducts(long locationId) {
+    public List<Product> getProducts(Long locationId) {
         return productRepository.findByLocationId(locationId);
     }
 
     @Override
-    public void addProduct(long locationId, Product product) throws Exception {
+    public void addProduct(Long locationId, Product product) throws Exception {
         val location = locationRepository.findById(locationId);
         if (location.isPresent()) {
             val existingProduct = productRepository.findByBarcodeAndExpirationDate(product.getBarcode(), product.getExpirationDate());
@@ -57,7 +59,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public void deleteProducts(long productId, int amount) throws Exception {
+    public void deleteProducts(Long productId, int amount) throws Exception {
         val product = productRepository.findById(productId);
         if (product.isPresent()) {
             if (product.get().getAmount() <= amount) {
@@ -72,9 +74,9 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public List<Product> getProductsWithBarcode(String barcode, long householdId) {
+    public List<Product> getProductsWithBarcode(String barcode, Long householdId) {
         List<Product> products = new ArrayList<>();
-        List<Location> locations = locationRepository.findByHouseholdId(householdId);
+        List<Location> locations = locationRepository.findByTenantId(householdId.toString());
         for (Location location : locations) {
             for (Product product : productRepository.findByLocationId(location.getId())) {
                 if (product.getBarcode().equals(barcode))
@@ -87,8 +89,9 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public List<Product> getProductsByHousehold(long householdId) {
-        return productRepository.findByLocation_Household_Id(householdId);
+    public List<Product> getProductsByHousehold(Long householdId) {
+        var household = householdRepository.getOne(householdId);
+        return household.getLocations().stream().flatMap(loc -> productRepository.findByLocation(loc.getId()).stream()).collect(Collectors.toList());
     }
 
     @Override

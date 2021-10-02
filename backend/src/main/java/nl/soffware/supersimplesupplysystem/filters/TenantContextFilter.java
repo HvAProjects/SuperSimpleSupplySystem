@@ -1,6 +1,6 @@
 package nl.soffware.supersimplesupplysystem.filters;
 
-import nl.soffware.supersimplesupplysystem.security.household.TenantContext;
+import nl.soffware.supersimplesupplysystem.context.TenantContext;
 import org.springframework.http.MediaType;
 import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Component;

@@ -1,41 +1,26 @@
 package nl.soffware.supersimplesupplysystem.configuration;
 
-import lombok.AllArgsConstructor;
-import lombok.val;
-import org.springframework.beans.factory.annotation.Autowired;
+import nl.soffware.supersimplesupplysystem.validator.AudienceValidator;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Import;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
-import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.web.cors.CorsConfiguration;
-import org.springframework.web.cors.CorsConfigurationSource;
-import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+import org.springframework.security.oauth2.core.DelegatingOAuth2TokenValidator;
+import org.springframework.security.oauth2.core.OAuth2TokenValidator;
+import org.springframework.security.oauth2.jwt.*;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
-import java.util.Arrays;
-
-@Configuration
 @EnableWebSecurity
-@Import(DocumentationConfig.class)
-@AllArgsConstructor(onConstructor = @__({@Autowired}))
-@EnableGlobalMethodSecurity(prePostEnabled = true, securedEnabled = true, jsr250Enabled = true)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
-    private final UserDetailsService localUserDetailService;
+    @Value("${auth0.audience}")
+    private String audience;
 
-    private final PasswordEncoder passwordEncoder;
-
-    @Autowired
-    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(localUserDetailService).passwordEncoder(passwordEncoder);
-    }
+    @Value("${spring.security.oauth2.resourceserver.jwt.issuer-uri}")
+    private String issuer;
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -52,33 +37,42 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                     .antMatchers("/", "/error", "/all", "/auth/**", "/oauth2/**", "/h2-console/**", "/v2/api-docs/**").permitAll()
                     .antMatchers("/v2/api-docs", "/configuration/ui", "/swagger-resources",
                             "/configuration/security", "/swagger-ui.html", "/webjars/**", "/swagger-resources/configuration/ui",
-                            "/swagger-ui.html", "/swagger-resources/configuration/security", "/swagger-ui/index.html").permitAll()
+                             "/swagger-resources/configuration/security", "/swagger-ui/index.html").permitAll()
                     .antMatchers("/household/**").authenticated()
                     .antMatchers("/product/**").authenticated()
                     .antMatchers("/location/**").authenticated()
                     .anyRequest()
-                        .authenticated();
+                        .authenticated()
+                .and()
+                    .oauth2ResourceServer().jwt();
 
 
         http.headers().frameOptions().disable();
     }
 
     @Bean
-    CorsConfigurationSource corsConfigurationSource() {
-        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        val cors = new CorsConfiguration().applyPermitDefaultValues();
-        cors.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
-        source.registerCorsConfiguration("/**", cors );
-        return source;
+    JwtDecoder jwtDecoder() {
+        NimbusJwtDecoder jwtDecoder = (NimbusJwtDecoder)
+                JwtDecoders.fromOidcIssuerLocation(issuer);
+
+        OAuth2TokenValidator<Jwt> audienceValidator = new AudienceValidator(audience);
+        OAuth2TokenValidator<Jwt> withIssuer = JwtValidators.createDefaultWithIssuer(issuer);
+        OAuth2TokenValidator<Jwt> withAudience = new DelegatingOAuth2TokenValidator<>(withIssuer, audienceValidator);
+
+        jwtDecoder.setJwtValidator(withAudience);
+
+        return jwtDecoder;
     }
 
-    @Override
-    public void configure(WebSecurity web) throws Exception {
-        web.ignoring().antMatchers("/v2/api-docs",
-                "/configuration/ui",
-                "/swagger-resources/**",
-                "/configuration/security",
-                "/swagger-ui.html",
-                "/webjars/**");
+    @Bean
+    public WebMvcConfigurer corsConfigurer() {
+        return new WebMvcConfigurer() {
+            @Override
+            public void addCorsMappings(CorsRegistry registry) {
+                registry.addMapping("/**")
+                        .allowedOrigins("https://localhost:4200")
+                        .allowedMethods("OPRIONS", "GET", "PUT", "POST", "DELETE");
+            }
+        };
     }
 }
